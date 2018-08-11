@@ -29,6 +29,8 @@ case $1 in
 	network) #hardware
 		iconfig -a
 	;;
+	scan_net)
+		nmap -sn 129.168.0.0/24
 	*)
 		echo "net utils"
 	;;
