@@ -31,6 +31,7 @@ case $1 in
 	;;
 	scan_net)
 		nmap -sn 129.168.0.0/24
+		sudo netdiscover -r 192.168.1.0/24 -i wlan0
 	*)
 		echo "net utils"
 	;;
