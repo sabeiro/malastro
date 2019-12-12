@@ -1,0 +1,18 @@
+cd /ssh:cronon:~run-python /usr/bin/python3b
+Tramp failed to connect.  If this happens repe
+cd /ssh:cronon:~
+run-python /usr/bin/python3
+uname -a
+run-python /usr/bin/python3
+run-python /usr/bin/python3
+exit
+cd /ssh:cronon:~run-python /usr/bin/python3b
+run-python /usr/bin/python3\3
+run-python /usr/bin/python3\3
+run-python /usr/bin/python3
+ls
+run-python /usr/bin/python3
+ls
+run-python /usr/bin/python3
+run-python /usr/bin/pyspark
+exit

@@ -1,0 +1,11 @@
+--2019-10-07 14:11:45--  http://ec.europa.eu/eurostat/statistical-atlas/gis/viewer/?config=REF-GRID.json
+Resolving ec.europa.eu (ec.europa.eu)... 147.67.34.30, 147.67.210.30, 2a01:7080:24:100::666:30, ...
+Connecting to ec.europa.eu (ec.europa.eu)|147.67.34.30|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 2425 (2,4K) [text/html]
+Saving to: ‘index.html?config=REF-GRID.json’
+
+index.html?config=REF-GRID.json       0%[                                                                   ]       0  --.-KB/s               index.html?config=REF-GRID.json     100%[==================================================================>]   2,37K  --.-KB/s    in 0s      
+
+2019-10-07 14:11:45 (80,3 MB/s) - ‘index.html?config=REF-GRID.json’ saved [2425/2425]
+

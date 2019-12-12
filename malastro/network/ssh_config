@@ -1,0 +1,12 @@
+Host *
+User sabeiro
+
+HostName 46.252.150.140
+Host dauvi
+
+Host intertino.github.com
+  HostName github.com
+  User sabeiro
+  IdentityFile ~/.ssh/id_rsa.intertino
+
+
