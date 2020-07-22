@@ -9,6 +9,7 @@ case $1 in
 	port) #connect to port
 		telnet $hostA $port
 		netcat -p $port -w 5 $hostA 42
+		nc -zv $hostA $port
 	;;
 	proc) #process on port
 		lsof -i :$port
