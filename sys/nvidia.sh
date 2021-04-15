@@ -9,7 +9,7 @@ sudo mokutil --disable-validation ## disable secure boot
 sudo nvidia-uninstall
 #list cards
 sudo lspci
-lshw -numeric -C display
+sudo lshw -numeric -C display
 lspci -vnn | grep VGA
 ubuntu-drivers devices
 lsmod | grep nvidia

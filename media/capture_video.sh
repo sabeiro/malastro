@@ -8,8 +8,10 @@
 #alsasrc device="hw:1" ! queue ! audioconvert ! queue ! vorbisenc ! queue ! muxer.
 
 
-VIDEO_DEVICE=/dev/video0
+VIDEO_DEVICE=/dev/video2
 AUDIO_DEVICE="hw:0,0"
+STANDARD=PAL
+#STANDARD=NTSC
 
 # Enter the name of the file.
 # read -p "Enter file name: " filename
@@ -38,7 +40,7 @@ if ! [ -d $HOME/Videos ]; then mkdir $HOME/Videos; fi
 #timeout --foreground ${minutes}m cvlc v4l2://$VIDEO_DEVICE :input-slave=alsa://$AUDIO_DEVICE :v4l2-standard=PAL :live-caching=300 --sout '#transcode{vcodec=mp2v,acodec=mpga,ab=128,channels=2,samplerate=48000,fps=29.97,deinterlace}:std{access=file{no-access=file{overwrite}},mux=ts,dst='$HOME/Videos/$filename.ts'}'
 #ffmpeg -i $HOME/Videos/$filename.ts -s 720x480 -c:v libx264 -preset medium -crf 22 -acodec copy -metadata comment="$details" -threads 3 $HOME/Videos/$filename.mp4
 
-timeout --foreground ${minutes}m ffmpeg -f v4l2 -standard PAL -thread_queue_size 512 -i $VIDEO_DEVICE -f alsa -thread_queue_size 512 -i $AUDIO_DEVICE -vcodec libx264 -preset superfast -crf 25 -s 720x480 -r 25 -aspect 4:3 -acodec libmp3lame -b:a 128k -channels 2 -ar 48000 $filename.avi
+timeout --foreground ${minutes}m ffmpeg -f v4l2 -standard $STANDARD -thread_queue_size 512 -i $VIDEO_DEVICE -f alsa -thread_queue_size 512 -i $AUDIO_DEVICE -vcodec libx264 -preset superfast -crf 25 -s 720x480 -r 25 -aspect 4:3 -acodec libmp3lame -b:a 128k -channels 2 -ar 48000 $filename.avi
 
 
 
