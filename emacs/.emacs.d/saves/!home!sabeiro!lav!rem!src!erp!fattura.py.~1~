@@ -1,0 +1,14 @@
+import os, sys, gzip, random, json, datetime, re, io
+import pandas as pd
+import numpy as np
+from scipy import stats as st
+import scipy as sp
+import joypy
+import matplotlib.pyplot as plt
+import seaborn as sns
+import matplotlib.collections as mcoll
+import matplotlib.path as mpath
+
+dL = os.listdir(os.environ['LAV_DIR']+'/src/')
+sys.path = list(set(sys.path + [os.environ['LAV_DIR']+'/src/'+x for x in dL]))
+baseDir = os.environ['LAV_DIR']

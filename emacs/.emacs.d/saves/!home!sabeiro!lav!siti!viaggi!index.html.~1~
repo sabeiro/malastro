@@ -1,0 +1,608 @@
+<!DOCTYPE HTML>
+<!--
+     Hielo by TEMPLATED
+     templated.co @templatedco
+     Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+   -->
+<html>
+    <head>
+	<title>Geomadi</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="collection of travel pictures">
+	<meta name="keywords" content="travel, pictures">
+	<meta name="author" content="Giovanni Marelli">
+	<link rel="stylesheet" href="css/main.css" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+    </head>
+    <body>
+
+	<!-- Header -->
+	<header id="header" class="alt">
+	    <div class="logo"><a href="index.html">Geomadi <span>pics</span></a></div>
+	    <a href="#menu">Menu</a>
+	</header>
+
+	<!-- Nav -->
+	<nav id="menu">
+	    <ul class="links">
+		<li><a href="index.html">Home</a></li>
+		<!-- <li><a href="generic.html">Generic</a></li>
+		     <li><a href="elements.html">Elements</a></li> -->
+	    </ul>
+	</nav>
+
+	<!-- Banner -->
+	<section class="banner full">
+	    <article>
+		<img src="f/neve/neve_boario.JPG" alt="" />
+		<div class="inner">
+		    <header>
+			<p>collection of mountain pictures</p>
+			<h2>mountains</h2>
+		    </header>
+		</div>
+	    </article>
+	    <article>
+		<img src="f/natura/alveare.jpg" alt="" />
+		<div class="inner">
+		    <header>
+			<p>nature and animals pictures</p>
+			<h2>nature</h2>
+		    </header>
+		</div>
+	    </article>
+	    <article>
+		<img src="f/eventi/skalar_kraftwerk.jpg"  alt="" />
+		<div class="inner">
+		    <header>
+			<p>events and festivals</p>
+			<h2>events</h2>
+		    </header>
+		</div>
+	    </article>
+	    <article>
+		<img src="f/garda/baldo_tremosine.JPG"  alt="" />
+		<div class="inner">
+		    <header>
+			<p>Gardalake and landscapes</p>
+			<h2>Garda</h2>
+		    </header>
+		</div>
+	    </article>
+	    <article>
+		<img src="f/tanzania/pescetto_corallo.JPG"  alt="" />
+		<div class="inner">
+		    <header>
+			<p>long distance travels</p>
+			<h2>travels</h2>
+		    </header>
+		</div>
+	    </article>
+	</section>
+
+	<!-- One -->
+	<section id="travel" class="wrapper style2">
+	    <div class="inner">
+		<div class="grid-style">
+		    <div>
+			<div class="box">
+			    <div class="image fit">
+				<a href="p/ande.html">
+				    <img src="f/ande/car_desert2.jpg" alt="" />
+				</a>
+			    </div>
+			    <div class="content">
+				<header class="align-center">
+				    <p>ande 2017</p>
+				    <h2>ande</h2>
+				</header>
+			    </div>
+			</div>
+		    </div>
+
+		    <div>
+			<div class="box">
+			    <div class="image fit">
+				<a href="p/tanzania.html">
+				    <img src="f/tanzania/pescetto_corallo.JPG" alt="" />
+				</a>
+			    </div>
+			    <div class="content">
+				<header class="align-center">
+				    <p>tanzania 2013</p>
+				    <h2>tanzania</h2>
+				</header>
+			    </div>
+			</div>
+		    </div>
+
+
+		    <div>
+			<div class="box">
+			    <div class="image fit">
+				<a href="p/china.html">
+				    <img src="f/china/muraglia.JPG" alt="" />
+				</a>
+			    </div>
+			    <div class="content">
+				<header class="align-center">
+				    <p>china 2010</p>
+				    <h2>china</h2>
+				</header>
+			    </div>
+			</div>
+		    </div>
+
+		    <div>
+			<div class="box">
+			    <div class="image fit">
+				<a href="p/mexico.html">
+				    <img src="f/mexico/agua_azul.jpg" alt="" />
+				</a>
+			    </div>
+			    <div class="content">
+				<header class="align-center">
+				    <p>mexico 2018</p>
+				    <h2>mexico</h2>
+				</header>
+			    </div>
+			</div>
+		    </div>
+
+		    
+		</div>
+	    </div>
+	</section>
+
+	<!-- Two -->
+	<section id="two" class="wrapper style3">
+	    <div class="inner">
+		<header class="align-center">
+		    <p>No need to go far to see wonderful places</p>
+		    <h2>gardalake</h2>
+		</header>
+	    </div>
+	</section>
+
+	<!-- Three -->
+	<section id="gardalake" class="wrapper style2">
+	    <div class="inner">
+		<header class="align-center">
+		    <p class="special">nothing like home</p>
+		    <h2>Gardalake</h2>
+		</header>
+		<div class="gallery">
+		    <div>
+			<div class="image fit">
+			    <h3> garda</h3>
+			    <a href="p/garda.html"><img src="f/garda/baldo_tremosine.JPG" alt="garda" /></a>
+			</div>
+		    </div>
+		    <div>
+			<div class="image fit">
+			    <h3> renzano</h3>
+			    <a href="p/renzano.html"><img src="f/renzano/renzano_neve.jpg" alt="renzano" /></a>
+			</div>
+		    </div>
+		    <div>
+			<div class="image fit">
+			    <h3>Salò</h3>
+			    <a href="p/salo.html"><img src="f/salo/lungolago.jpg" alt="salò" /></a>
+			</div>
+		    </div>
+		    <div>
+			<div class="image fit">
+			    <h3>Pizzoccolo</h3>
+			    <a href="p/pizzoccolo.html"><img src="f/pizzoccolo/pizzoccolo_nuvole.jpg" alt="" /></a>
+			</div>
+		    </div>
+		    <div>
+			<div class="image fit">
+			    <h3>Comer</h3>
+			    <a href="p/comer.html"><img src="f/comer/comer_discesa1.jpg" alt="" /></a>
+			</div>
+		    </div>
+		    <div>
+			<div class="image fit">
+			    <h3>Gaino</h3>
+			    <a href="p/gaino.html"><img src="f/gaino/monte_castello.jpg" alt="" /></a>
+			</div>
+		    </div>
+
+		    <div>
+			<div class="image fit">
+			    <h3>Rivers</h3>
+			    <a href="p/fiume_chiese.html"><img src="f/fiume_chiese/ansa.JPG" alt="salò" /></a>
+			</div>
+		    </div>
+		    <div>
+			<div class="image fit">
+			    <h3>Lago maggiore</h3>
+			    <a href="p/lago_maggiore.html"><img src="f/lago_maggiore/pino.jpg" alt="salò" /></a>
+			</div>
+		    </div>
+		</div>
+	    </div>
+	</section>
+
+	<!-- Four -->
+	<section id="two" class="wrapper style4">
+	    <div class="inner">
+		<header class="align-center">
+		    <p>my best preference</p>
+		    <h2>mountains</h2>
+		</header>
+	    </div>
+	</section>
+
+
+	<!-- Five -->
+	<section id="mountain" class="wrapper style2">
+	    <div class="inner">
+		<header class="align-center">
+		    <p class="special">special attention for my favourite destination</p>
+		    <h2>Mountains</h2>
+		</header>
+		<div class="gallery">
+		    <div>
+			<div class="image fit">
+			    <h3>Gaver - maniva</h3>
+			    <a href="p/gaver.html"><img src="f/gaver/gaver.jpg" alt="garda" /></a>
+			</div>
+		    </div>
+		    <div>
+			<div class="image fit">
+			    <h3>Adamello</h3>
+			    <a href="p/adamello.html"><img src="f/adamello/adamello.jpg" alt="renzano" /></a>
+			</div>
+		    </div>
+		    <div>
+			<div class="image fit">
+			    <h3>Degagna</h3>
+			    <a href="p/degagna.html"><img src="f/degagna/degagna.JPG" alt="salò" /></a>
+			</div>
+		    </div>
+		    <div>
+			<div class="image fit">
+			    <h3>Dolomiti</h3>
+			    <a href="p/dolomiti.html"><img src="f/dolomiti/dolomiti_suoni.jpg" alt="" /></a>
+			</div>
+		    </div>
+		    <div>
+			<div class="image fit">
+			    <h3>Folgaria</h3>
+			    <a href="p/folgaria.html"><img src="f/folgaria/folgaria.JPG" alt="" /></a>
+			</div>
+		    </div>
+		    <div>
+			<div class="image fit">
+			    <h3>Marmere</h3>
+			    <a href="p/marmere.html"><img src="f/marmere/marmere.jpg" alt="" /></a>
+			</div>
+		    </div>
+		    <div>
+			<div class="image fit">
+			    <h3>Marmolada</h3>
+			    <a href="p/marmolada.html"><img src="f/marmolada/marmolada_ghiacciaio.jpg" alt="" /></a>
+			</div>
+		    </div>
+		    <div>
+			<div class="image fit">
+			    <h3>Scalate</h3>
+			    <a href="p/scalate.html"><img src="f/scalate/grotta_edera.jpg" alt="" /></a>
+			</div>
+		    </div>
+
+		    
+		</div>
+	    </div>
+	</section>
+
+
+
+	<!-- Four -->
+	<section id="two" class="wrapper style6">
+	    <div class="inner">
+		<header class="align-center">
+		    <p>places where to escape</p>
+		    <h2>nature</h2>
+		</header>
+	    </div>
+	</section>
+
+
+	<!-- Five -->
+	<section id="nature" class="wrapper style2">
+	    <div class="inner">
+		<header class="align-center">
+		    <p class="special">Places where to escape</p>
+		    <h2>Nature</h2>
+		</header>
+		<div class="gallery">
+		    <div>
+			<div class="image fit">
+			    <h3>natura</h3>
+			    <a href="p/natura.html"><img src="f/natura/arcobaleno.jpg" alt="garda" /></a>
+			</div>
+		    </div>
+		    <div>
+			<div class="image fit">
+			    <h3>neve</h3>
+			    <a href="p/neve.html"><img src="f/neve/neve_vetta.JPG" alt="renzano" /></a>
+			</div>
+		    </div>
+		    <div>
+			<div class="image fit">
+			    <h3>Macro</h3>
+			    <a href="p/macro.html"><img src="f/macro/macro_fiore.jpg" alt="salò" /></a>
+			</div>
+		    </div>
+		    <div>
+			<div class="image fit">
+			    <h3> renzano monte</h3>
+			    <a href="p/renzano_torrente.html"><img src="f/renzano_torrente/renzano_jungla.JPG" alt="renzano" /></a>
+			</div>
+		    </div>
+
+		</div>
+	    </div>
+	</section>
+
+
+	<!-- Two -->
+	<section id="two" class="wrapper style7">
+	    <div class="inner">
+		<header class="align-center">
+		    <p>Landscapes and countryside</p>
+		    <h2>landscapes</h2>
+		</header>
+	    </div>
+	</section>
+
+	<!-- Three -->
+	<section id="landscape" class="wrapper style2">
+	    <div class="inner">
+		<header class="align-center">
+		    <p class="special">landscapes</p>
+		    <h2>Countryside</h2>
+		</header>
+		<div class="gallery">
+		    <div>
+			<div class="image fit">
+			    <h3> sud italia</h3>
+			    <a href="p/sud_it.html"><img src="f/sud_it/aliano.jpg" alt="renzano" /></a>
+			</div>
+		    </div>
+		    <div>
+			<div class="image fit">
+			    <h3>Toscana</h3>
+			    <a href="p/toscana.html"><img src="f/toscana/saturnia.jpg" alt="salò" /></a>
+			</div>
+		    </div>
+		    <div>
+			<div class="image fit">
+			    <h3>mittel europa</h3>
+			    <a href="p/mittel_eu.html"><img src="f/mittel_eu/sylt.JPG" alt="salò" /></a>
+			</div>
+		    </div>
+		    <div>
+			<div class="image fit">
+			    <h3>brandeburg</h3>
+			    <a href="p/brandeburg.html"><img src="f/brandeburg/brandeburg.jpg" alt="salò" /></a>
+			</div>
+		    </div>
+		</div>
+	    </div>
+	    </div>
+	</section>
+
+	<!-- Two -->
+	<section id="two" class="wrapper style8">
+	    <div class="inner">
+		<header class="align-center">
+		    <p>City parks</p>
+		    <h2>parks and surroundings</h2>
+		</header>
+	    </div>
+	</section>
+
+	<!-- Three -->
+	<section id="park" class="wrapper style2">
+	    <div class="inner">
+		<header class="align-center">
+		    <p class="special">city parks</p>
+		    <h2>One day trip around a city</h2>
+		</header>
+		<div class="gallery">
+		    <div>
+			<div class="image fit">
+			    <h3>Berlin park</h3>
+			    <a href="p/ber_park.html"><img src="f/ber_park/ber_park.jpg" alt="berlin_park" /></a>
+			</div>
+		    </div>
+		    <div>
+			<div class="image fit">
+			    <h3>Berlin Seen</h3>
+			    <a href="p/ber_seen.html"><img src="f/ber_seen/ber_seen.jpg" alt="salò" /></a>
+			</div>
+		    </div>
+		    <div>
+			<div class="image fit">
+			    <h3>Berlin botanische Garten</h3>
+			    <a href="p/ber_botanische.html"><img src="f/ber_botanische/ber_botanische.jpg" alt="salò" /></a>
+			</div>
+		    </div>
+		    <div>
+			<div class="image fit">
+			    <h3>Berlin Gärten der Welt</h3>
+			    <a href="p/ber_garten_der_welt.html"><img src="f/ber_garten_der_welt/ber_garten_der_welt.jpg" alt="salò" /></a>
+			</div>
+		    </div>
+		    <div>
+			<div class="image fit">
+			    <h3>Britzer Gärten</h3>
+			    <a href="p/ber_britz.html"><img src="f/ber_britz/ber_britz.jpg" alt="berlin_park" /></a>
+			</div>
+		    </div>
+		    <div>
+			<div class="image fit">
+			    <h3>Berlin soviet</h3>
+			    <a href="p/soviet.html"><img src="f/soviet/soviet.jpg" alt="garda" /></a>
+			</div>
+		    </div>
+		    <div>
+			<div class="image fit">
+			    <h3>Berlin tiergarten</h3>
+			    <a href="p/ber_tiergarten.html"><img src="f/ber_tiergarten/ber_tiergarten.jpg" alt="berlin_tiergarten" /></a>
+			</div>
+		    </div>
+		</div>
+	    </div>
+	</section>
+
+	<!-- Four -->
+	<section id="two" class="wrapper style5">
+	    <div class="city">
+		<header class="align-center">
+		    <p>places to live</p>
+		    <h2>cities</h2>
+		</header>
+	    </div>
+	</section>
+
+
+	<!-- Five -->
+	<section id="three" class="wrapper style2">
+	    <div class="inner">
+		<header class="align-center">
+		    <p class="special">places to visit or to live in</p>
+		    <h2>Cities</h2>
+		</header>
+		<div class="gallery">
+		    <div>
+			<div class="image fit">
+			    <h3>Brescia</h3>
+			    <a href="p/brescia.html"><img src="f/brescia/piazza_loggia.jpg" alt="" /></a>
+			</div>
+		    </div>
+		    <div>
+			<div class="image fit">
+			    <h3>eu cities</h3>
+			    <a href="p/europa.html"><img src="f/europa/moskow.jpg" alt="garda" /></a>
+			</div>
+		    </div>
+		    <div>
+			<div class="image fit">
+			    <h3>it cities</h3>
+			    <a href="p/italian_cities.html"><img src="f/italian_cities/verzasca.jpg" alt="renzano" /></a>
+			</div>
+		    </div>
+		    <div>
+			<div class="image fit">
+			    <h3>Eventi</h3>
+			    <a href="p/eventi.html"><img src="f/eventi/artistania.jpg" alt="" /></a>
+			</div>
+		    </div>
+		    <div>
+			<div class="image fit">
+			    <h3>Rievocazioni</h3>
+			    <a href="p/rievocazioni.html"><img src="f/rievocazioni/quetza.JPG" alt="" /></a>
+			</div>
+		    </div>
+		    <div>
+			<div class="image fit">
+			    <h3>Constructions</h3>
+			    <a href="p/construction.html"><img src="f/construction/muratura.JPG" alt="" /></a>
+			</div>
+		    </div>
+		</div>
+	    </div>
+	</section>
+
+
+	
+	<!-- Two -->
+	<section id="two" class="wrapper style9">
+	    <div class="inner">
+		<header class="align-center">
+		    <p>Texture</p>
+		    <h2>background images</h2>
+		</header>
+	    </div>
+	</section>
+	<!-- Three -->
+	<section id="texture" class="wrapper style2">
+	    <div class="inner">
+		<header class="align-center">
+		    <p class="special">Texture</p>
+		    <h2>Background images</h2>
+		</header>
+		<div class="gallery">
+		    <div>
+			<div class="image fit">
+			    <h3>Acqua</h3>
+			    <a href="p/text_acqua.html"><img src="f/text_acqua/text_acqua.jpg" alt="garda" /></a>
+			</div>
+		    </div>
+		    <div>
+			<div class="image fit">
+			    <h3>Ghiaccio</h3>
+			    <a href="p/text_ghiaccio.html"><img src="f/text_ghiaccio/text_ghiaccio.jpg" alt="berlin_park" /></a>
+			</div>
+		    </div>
+		    <div>
+			<div class="image fit">
+			    <h3>Cielo</h3>
+			    <a href="p/text_cielo.html"><img src="f/text_cielo/text_cielo.jpg" alt="salò" /></a>
+			</div>
+		    </div>
+		    <div>
+			<div class="image fit">
+			    <h3>Neve</h3>
+			    <a href="p/text_neve.html"><img src="f/text_neve/text_neve.jpg" alt="salò" /></a>
+			</div>
+		    </div>
+		    <div>
+			<div class="image fit">
+			    <h3>Bolle</h3>
+			    <a href="p/text_bolle.html"><img src="f/text_bolle/text_bolle.jpg" alt="salò" /></a>
+			</div>
+		    </div>
+		    <div>
+			<div class="image fit">
+			    <h3>Sassi</h3>
+			    <a href="p/text_sassi.html"><img src="f/text_sassi/text_sassi.jpg" alt="salò" /></a>
+			</div>
+		    </div>
+		</div>
+	    </div>
+	</section>
+
+
+	
+	<!-- Footer -->
+	<footer id="footer">
+	    <div class="container">
+		<ul class="icons">
+		    <li><a href="https://viudi.it/" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+		    <li><a href="https://www.facebook.com/viudi.music/" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+		    <li><a href="https://www.instagram.com/geo.madi/" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+		    <li><a href="https://viudi.it/" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+		</ul>
+	    </div>
+	    <div class="copyright">
+		<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" class="fixed"></a>
+		Design: <a href="https://templated.co/">TEMPLATED</a>
+	    </div>
+	</footer>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+
+    </body>
+</html>

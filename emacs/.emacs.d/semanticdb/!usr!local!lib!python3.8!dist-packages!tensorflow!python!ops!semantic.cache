@@ -1,0 +1,1823 @@
+;; Object semanticdb-project-database-file
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "semanticdb-project-database-file"
+  :tables
+  (list
+    (semanticdb-table "semanticdb-table"
+      :major-mode python-mode
+      :tags 
+        '( ("\"\"\"Ops to use variables as resources.\"\"\"" code nil nil [690 730])
+            ("__future__" include nil nil [761 799])
+            ("__future__" include nil nil [800 831])
+            ("__future__" include nil nil [832 869])
+            ("contextlib" include nil nil [871 888])
+            ("functools" include nil nil [889 905])
+            ("weakref" include nil nil [906 920])
+            ("tensorflow.core.framework" include nil nil [922 974])
+            ("tensorflow.core.framework" include nil nil [975 1025])
+            ("tensorflow.python" include nil nil [1026 1069])
+            ("tensorflow.python.client" include nil nil [1070 1124])
+            ("tensorflow.python.eager" include nil nil [1125 1168])
+            ("tensorflow.python.eager" include nil nil [1169 1209])
+            ("tensorflow.python.framework" include nil nil [1210 1280])
+            ("tensorflow.python.framework" include nil nil [1281 1332])
+            ("tensorflow.python.framework" include nil nil [1333 1396])
+            ("tensorflow.python.framework" include nil nil [1397 1443])
+            ("tensorflow.python.framework" include nil nil [1444 1487])
+            ("tensorflow.python.framework" include nil nil [1488 1540])
+            ("tensorflow.python.framework" include nil nil [1541 1592])
+            ("tensorflow.python.ops" include nil nil [1593 1636])
+            ("tensorflow.python.ops" include nil nil [1637 1684])
+            ("tensorflow.python.ops" include nil nil [1685 1734])
+            ("tensorflow.python.ops" include nil nil [1735 1794])
+            ("tensorflow.python.ops" include nil nil [1795 1842])
+            ("tensorflow.python.ops" include nil nil [1843 1885])
+            ("tensorflow.python.ops" include nil nil [1886 1929])
+            ("tensorflow.python.ops" include nil nil [1930 1973])
+            ("tensorflow.python.ops.gen_resource_variable_ops" include nil nil [2032 2093])
+            ("tensorflow.python.training.tracking" include nil nil [2127 2192])
+            ("tensorflow.python.util" include nil nil [2193 2234])
+            ("tensorflow.python.util.deprecation" include nil nil [2235 2292])
+            ("tensorflow.python.util.deprecation" include nil nil [2293 2355])
+            ("acd" code nil nil [2358 2410])
+            ("acd" code nil nil [2411 2462])
+            ("acd" code nil nil [2463 2515])
+            ("acd" code nil nil [2516 2570])
+            ("acd" code nil nil [2571 2625])
+            ("get_resource_handle_data" function (:arguments 
+              ( ("graph_op" variable nil (reparse-symbol function_parameters) [2657 2665]))              ) nil [2628 3015])
+            ("get_eager_safe_handle_data" function
+               (:documentation "Get the data handle from the Tensor `handle`."
+                :arguments 
+                  ( ("handle" variable nil (reparse-symbol function_parameters) [3048 3054]))                  )
+                nil [3017 3313])
+            ("_set_handle_shapes_and_types" function
+               (:documentation "Sets the shape inference result HandleData on tensor.
+
+  Args:
+    tensor: A `Tensor` or `EagerTensor`.
+    handle_data: A `CppShapeInferenceResult.HandleData`.
+    graph_mode: A python bool.
+  "
+                :arguments 
+                  ( ("tensor" variable nil (reparse-symbol function_parameters) [3348 3354])
+                    ("handle_data" variable nil (reparse-symbol function_parameters) [3356 3367])
+                    ("graph_mode" variable nil (reparse-symbol function_parameters) [3369 3379]))                  )
+                nil [3315 4299])
+            ("_combine_handle_data" function
+               (:documentation "Concats HandleData from tensors `handle` and `initial_value`.
+
+  Args:
+    handle: A `Tensor` of dtype `resource`.
+    initial_value: A `Tensor`.
+
+  Returns:
+    A `CppShapeInferenceResult.HandleData`.  If `initial_value` has dtype
+    `variant`, the `HandleData` contains the concatenation of the shape_and_type
+    from both `handle` and `initial_value`.
+
+  Raises:
+    RuntimeError: If handle, which was returned by VarHandleOp, either has
+      no handle data, or its len(handle_data.shape_and_type) != 1.
+  "
+                :arguments 
+                  ( ("handle" variable nil (reparse-symbol function_parameters) [4326 4332])
+                    ("initial_value" variable nil (reparse-symbol function_parameters) [4334 4347]))                  )
+                nil [4301 5590])
+            ("_variable_handle_from_shape_and_dtype" function
+               (:documentation "Create a variable handle, copying in handle data from `initial_value`."
+                :arguments 
+                  ( ("shape" variable nil (reparse-symbol function_parameters) [5639 5644])
+                    ("dtype" variable nil (reparse-symbol function_parameters) [5646 5651])
+                    ("shared_name" variable nil (reparse-symbol function_parameters) [5653 5664])
+                    ("name" variable nil (reparse-symbol function_parameters) [5666 5670])
+                    ("graph_mode" variable nil (reparse-symbol function_parameters) [5672 5682])
+                    ("initial_value" variable nil (reparse-symbol function_parameters) [5684 5697]))                  )
+                nil [5592 8123])
+            ("eager_safe_variable_handle" function
+               (:documentation "Creates a variable handle with information to do shape inference.
+
+  The dtype is read from `initial_value` and stored in the returned
+  resource tensor's handle data.
+
+  If `initial_value.dtype == tf.variant`, we additionally extract the handle
+  data (if any) from `initial_value` and append it to the `handle_data`.
+  In this case, the returned tensor's handle data is in the form
+
+  ```
+  is_set: true
+  shape_and_type {
+    shape {
+      // initial_value.shape
+    }
+    dtype: DT_VARIANT
+  }
+  shape_and_type {
+    // handle_data(initial_value).shape_and_type[0]
+  }
+  shape_and_type {
+    // handle_data(initial_value).shape_and_type[1]
+  }
+  ...
+  ```
+
+  Ops that read from this tensor, such as `ReadVariableOp` and
+  `AssignVariableOp`, know that `handle_data(handle).shape_and_type[1:]`
+  correspond to the handle data of the variant(s) stored in the Variable.
+
+  Args:
+    initial_value: A `Tensor`.
+    shape: The shape of the handle data. Can be `TensorShape(None)`
+      (i.e. unknown shape).
+    shared_name: A string.
+    name: A string.
+    graph_mode: A python bool.
+
+  Returns:
+    The handle, a `Tensor` of type `resource`.
+  "
+                :arguments 
+                  ( ("initial_value" variable nil (reparse-symbol function_parameters) [8156 8169])
+                    ("shape" variable nil (reparse-symbol function_parameters) [8171 8176])
+                    ("shared_name" variable nil (reparse-symbol function_parameters) [8178 8189])
+                    ("name" variable nil (reparse-symbol function_parameters) [8191 8195])
+                    ("graph_mode" variable nil (reparse-symbol function_parameters) [8228 8238]))                  )
+                nil [8125 9551])
+            ("_handle_graph" function
+               (:decorators 
+                  ( ("contextlib.contextmanager" function (:type "decorator") nil nil))                  
+                :arguments 
+                  ( ("handle" variable nil (reparse-symbol function_parameters) [9598 9604]))                  )
+                nil [9553 9876])
+            ("EagerResourceDeleter" type
+               (:documentation "An object which cleans up a resource handle.
+
+  An alternative to defining a __del__ method on an object. The intended use is
+  that ResourceVariables or other objects with resource handles will maintain a
+  single reference to this object. When the parent object is collected, this
+  object will be too. Even if the parent object is part of a reference cycle,
+  the cycle will be collectable.
+  "
+                :superclasses ("object")
+                :members 
+                  ( ("__init__" function
+                       (:suite 
+                          ( ("if" code nil (reparse-symbol indented_block_body) [10369 10546])
+                            ("self" variable nil (reparse-symbol indented_block_body) [10550 10571])
+                            ("self" variable nil (reparse-symbol indented_block_body) [10576 10611])
+                            ("self" variable nil (reparse-symbol indented_block_body) [10786 10819]))                          
+                        :parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [10335 10339])
+                            ("handle" variable nil (reparse-symbol function_parameters) [10341 10347])
+                            ("handle_device" variable nil (reparse-symbol function_parameters) [10349 10362]))                          
+                        :constructor-flag t)
+                        (reparse-symbol indented_block_body) [10322 10820])
+                    ("__del__" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [10835 10839]))                          )
+                        (reparse-symbol indented_block_body) [10823 11989]))                  
+                :type "class")
+                nil [9878 11989])
+            ("shape_safe_assign_variable_handle" function
+               (:documentation "Helper that checks shape compatibility and assigns variable."
+                :arguments 
+                  ( ("handle" variable nil (reparse-symbol function_parameters) [12093 12099])
+                    ("shape" variable nil (reparse-symbol function_parameters) [12101 12106])
+                    ("value" variable nil (reparse-symbol function_parameters) [12108 12113])
+                    ("name" variable nil (reparse-symbol function_parameters) [12115 12119]))                  )
+                nil [12055 12523])
+            ("_maybe_set_handle_data" function (:arguments 
+              ( ("dtype" variable nil (reparse-symbol function_parameters) [12552 12557])
+                ("handle" variable nil (reparse-symbol function_parameters) [12559 12565])
+                ("tensor" variable nil (reparse-symbol function_parameters) [12567 12573]))              ) nil [12525 13064])
+            ("variable_accessed" function
+               (:documentation "Records that `variable` was accessed for the tape and FuncGraph."
+                :arguments 
+                  ( ("variable" variable nil (reparse-symbol function_parameters) [13088 13096]))                  )
+                nil [13066 13344])
+            ("BaseResourceVariable" type
+               (:documentation "A python variable from an existing handle."
+                :superclasses ("variables.VariableV1")
+                :members 
+                  ( ("" code nil (reparse-symbol indented_block_body) [13466 13562])
+                    ("__init__" function
+                       (:suite 
+                          ( ("\"\"\"Creates a variable from a handle.
+
+    Args:
+      trainable: If `True`, GradientTapes automatically watch uses of this
+        Variable.
+      shape: The variable's shape.
+      dtype: The variable's dtype.
+      handle: The variable's handle
+      constraint: An optional projection function to be applied to the variable
+        after being updated by an `Optimizer` (e.g. used to implement norm
+        constraints or value constraints for layer weights). The function must
+        take as input the unprojected Tensor representing the value of the
+        variable and return the Tensor for the projected value
+        (which must have the same shape). Constraints are not safe to
+        use when doing asynchronous distributed training.
+      synchronization: Indicates when a distributed a variable will be
+        aggregated. Accepted values are constants defined in the class
+        `tf.VariableSynchronization`. By default the synchronization is set to
+        `AUTO` and the current `DistributionStrategy` chooses
+        when to synchronize.
+      aggregation: Indicates how a distributed variable will be aggregated.
+        Accepted values are constants defined in the class
+        `tf.VariableAggregation`.
+      distribute_strategy: The distribution strategy this variable was created
+        under.
+      name: The name for this variable.
+      unique_id: Internal. Unique ID for this variable's handle.
+      handle_name: The name for the variable's handle.
+      graph_element: Optional, required only in session.run-mode. Pre-created
+        tensor which reads this variable's value.
+      initial_value: Optional. Variable's initial value.
+      initializer_op: Operation which assigns the variable's initial value.
+      is_initialized_op: Pre-created operation to check whether this variable
+        is initialized.
+      cached_value: Pre-created operation to read this variable in a specific
+        device.
+      save_slice_info: Metadata for variable partitioning.
+      handle_deleter: EagerResourceDeleter responsible for cleaning up the
+        handle.
+      caching_device: Optional device string or function describing where the
+        Variable should be cached for reading.  Defaults to the Variable's
+        device.  If not `None`, caches on another device.  Typical use is to
+        cache on the device where the Ops using the Variable reside, to
+        deduplicate copying through `Switch` and other conditional statements.
+    \"\"\"" code nil (reparse-symbol indented_block_body) [14123 16600])
+                            ("with" code nil (reparse-symbol indented_block_body) [16605 16688])
+                            ("synchronization, aggregation, trainable" code nil (reparse-symbol indented_block_body) [16692 16861])
+                            ("self" variable nil (reparse-symbol indented_block_body) [16866 16893])
+                            ("self" variable nil (reparse-symbol indented_block_body) [16898 16937])
+                            ("self" variable nil (reparse-symbol indented_block_body) [16942 16973])
+                            ("self" variable nil (reparse-symbol indented_block_body) [16978 17017])
+                            ("self" variable nil (reparse-symbol indented_block_body) [17022 17057])
+                            ("self" variable nil (reparse-symbol indented_block_body) [17062 17099])
+                            ("self" variable nil (reparse-symbol indented_block_body) [17104 17147])
+                            ("self" variable nil (reparse-symbol indented_block_body) [17152 17187])
+                            ("self" variable nil (reparse-symbol indented_block_body) [17192 17229])
+                            ("self" variable nil (reparse-symbol indented_block_body) [17234 17267])
+                            ("self" variable nil (reparse-symbol indented_block_body) [17272 17319])
+                            ("self" variable nil (reparse-symbol indented_block_body) [17473 17525])
+                            ("self" variable nil (reparse-symbol indented_block_body) [17566 17608])
+                            ("self" variable nil (reparse-symbol indented_block_body) [17613 17649])
+                            ("self" variable nil (reparse-symbol indented_block_body) [17654 17675])
+                            ("self" variable nil (reparse-symbol indented_block_body) [17680 17715])
+                            ("self" variable nil (reparse-symbol indented_block_body) [17720 17747])
+                            ("self" code nil (reparse-symbol indented_block_body) [17752 17790])
+                            ("self" variable nil (reparse-symbol indented_block_body) [17795 17824])
+                            ("if" code nil (reparse-symbol indented_block_body) [18166 18342])
+                            ("self" variable nil (reparse-symbol indented_block_body) [18346 18383])
+                            ("self" variable nil (reparse-symbol indented_block_body) [18388 18421]))                          
+                        :parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [13626 13630])
+                            ("trainable" variable nil (reparse-symbol function_parameters) [13638 13647])
+                            ("shape" variable nil (reparse-symbol function_parameters) [13660 13665])
+                            ("dtype" variable nil (reparse-symbol function_parameters) [13678 13683])
+                            ("handle" variable nil (reparse-symbol function_parameters) [13696 13702])
+                            ("constraint" variable nil (reparse-symbol function_parameters) [13715 13725])
+                            ("synchronization" variable nil (reparse-symbol function_parameters) [13738 13753])
+                            ("aggregation" variable nil (reparse-symbol function_parameters) [13766 13777])
+                            ("distribute_strategy" variable nil (reparse-symbol function_parameters) [13790 13809])
+                            ("name" variable nil (reparse-symbol function_parameters) [13822 13826])
+                            ("unique_id" variable nil (reparse-symbol function_parameters) [13839 13848])
+                            ("handle_name" variable nil (reparse-symbol function_parameters) [13861 13872])
+                            ("graph_element" variable nil (reparse-symbol function_parameters) [13885 13898])
+                            ("initial_value" variable nil (reparse-symbol function_parameters) [13911 13924])
+                            ("initializer_op" variable nil (reparse-symbol function_parameters) [13937 13951])
+                            ("is_initialized_op" variable nil (reparse-symbol function_parameters) [13964 13981])
+                            ("cached_value" variable nil (reparse-symbol function_parameters) [13994 14006])
+                            ("save_slice_info" variable nil (reparse-symbol function_parameters) [14019 14034])
+                            ("handle_deleter" variable nil (reparse-symbol function_parameters) [14047 14061])
+                            ("caching_device" variable nil (reparse-symbol function_parameters) [14074 14088])
+                            ("unused_kwargs" variable nil (reparse-symbol function_parameters) [14101 14116]))                          
+                        :documentation "Creates a variable from a handle.
+
+    Args:
+      trainable: If `True`, GradientTapes automatically watch uses of this
+        Variable.
+      shape: The variable's shape.
+      dtype: The variable's dtype.
+      handle: The variable's handle
+      constraint: An optional projection function to be applied to the variable
+        after being updated by an `Optimizer` (e.g. used to implement norm
+        constraints or value constraints for layer weights). The function must
+        take as input the unprojected Tensor representing the value of the
+        variable and return the Tensor for the projected value
+        (which must have the same shape). Constraints are not safe to
+        use when doing asynchronous distributed training.
+      synchronization: Indicates when a distributed a variable will be
+        aggregated. Accepted values are constants defined in the class
+        `tf.VariableSynchronization`. By default the synchronization is set to
+        `AUTO` and the current `DistributionStrategy` chooses
+        when to synchronize.
+      aggregation: Indicates how a distributed variable will be aggregated.
+        Accepted values are constants defined in the class
+        `tf.VariableAggregation`.
+      distribute_strategy: The distribution strategy this variable was created
+        under.
+      name: The name for this variable.
+      unique_id: Internal. Unique ID for this variable's handle.
+      handle_name: The name for the variable's handle.
+      graph_element: Optional, required only in session.run-mode. Pre-created
+        tensor which reads this variable's value.
+      initial_value: Optional. Variable's initial value.
+      initializer_op: Operation which assigns the variable's initial value.
+      is_initialized_op: Pre-created operation to check whether this variable
+        is initialized.
+      cached_value: Pre-created operation to read this variable in a specific
+        device.
+      save_slice_info: Metadata for variable partitioning.
+      handle_deleter: EagerResourceDeleter responsible for cleaning up the
+        handle.
+      caching_device: Optional device string or function describing where the
+        Variable should be cached for reading.  Defaults to the Variable's
+        device.  If not `None`, caches on another device.  Typical use is to
+        cache on the device where the Ops using the Variable reside, to
+        deduplicate copying through `Switch` and other conditional statements.
+    "
+                        :constructor-flag t)
+                        (reparse-symbol indented_block_body) [13565 18422])
+                    ("__repr__" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [18438 18442]))                          )
+                        (reparse-symbol indented_block_body) [18425 18812])
+                    ("_assign_dependencies" function
+                       (:parent "dummy"
+                        :decorators 
+                          ( ("contextlib.contextmanager" function (:type "decorator") nil nil))                          
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [18869 18873]))                          
+                        :documentation "Makes assignments depend on the cached value, if any.
+
+    This prevents undefined behavior with reads not ordered wrt writes.
+
+    Yields:
+      None.
+    ")
+                        (reparse-symbol indented_block_body) [18815 19177])
+                    ("__nonzero__" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [19196 19200]))                          )
+                        (reparse-symbol indented_block_body) [19180 19230])
+                    ("__bool__" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [19246 19250]))                          )
+                        (reparse-symbol indented_block_body) [19233 19288])
+                    ("__copy__" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [19304 19308]))                          )
+                        (reparse-symbol indented_block_body) [19291 19327])
+                    ("__deepcopy__" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [19347 19351])
+                            ("memo" variable nil (reparse-symbol function_parameters) [19353 19357]))                          )
+                        (reparse-symbol indented_block_body) [19330 19850])
+                    ("dtype" function
+                       (:parent "dummy"
+                        :decorators 
+                          ( ("property" function (:type "decorator") nil nil))                          
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [19875 19879]))                          
+                        :documentation "The dtype of this variable.")
+                        (reparse-symbol indented_block_body) [19853 19943])
+                    ("device" function
+                       (:parent "dummy"
+                        :decorators 
+                          ( ("property" function (:type "decorator") nil nil))                          
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [19969 19973]))                          
+                        :documentation "The device this variable is on.")
+                        (reparse-symbol indented_block_body) [19946 20049])
+                    ("graph" function
+                       (:parent "dummy"
+                        :decorators 
+                          ( ("property" function (:type "decorator") nil nil))                          
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [20074 20078]))                          
+                        :documentation "The `Graph` of this variable.")
+                        (reparse-symbol indented_block_body) [20052 20151])
+                    ("name" function
+                       (:parent "dummy"
+                        :decorators 
+                          ( ("property" function (:type "decorator") nil nil))                          
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [20175 20179]))                          
+                        :documentation "The name of the handle for this variable.")
+                        (reparse-symbol indented_block_body) [20154 20263])
+                    ("shape" function
+                       (:parent "dummy"
+                        :decorators 
+                          ( ("property" function (:type "decorator") nil nil))                          
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [20288 20292]))                          
+                        :documentation "The shape of this variable.")
+                        (reparse-symbol indented_block_body) [20266 20356])
+                    ("set_shape" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [20373 20377])
+                            ("shape" variable nil (reparse-symbol function_parameters) [20379 20384]))                          )
+                        (reparse-symbol indented_block_body) [20359 20435])
+                    ("_shape_as_list" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [20457 20461]))                          )
+                        (reparse-symbol indented_block_body) [20438 20565])
+                    ("_shape_tuple" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [20585 20589]))                          )
+                        (reparse-symbol indented_block_body) [20568 20690])
+                    ("create" function
+                       (:parent "dummy"
+                        :decorators 
+                          ( ("property" function (:type "decorator") nil nil))                          
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [20716 20720]))                          
+                        :documentation "The op responsible for initializing this variable.")
+                        (reparse-symbol indented_block_body) [20693 20969])
+                    ("handle" function
+                       (:parent "dummy"
+                        :decorators 
+                          ( ("property" function (:type "decorator") nil nil))                          
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [20995 20999]))                          
+                        :documentation "The handle by which this variable can be accessed.")
+                        (reparse-symbol indented_block_body) [20972 21087])
+                    ("value" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [21100 21104]))                          
+                        :documentation "A cached operation which reads the value of this variable.")
+                        (reparse-symbol indented_block_body) [21090 21341])
+                    ("_as_graph_element" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [21366 21370]))                          
+                        :documentation "Conversion function for Graph.as_graph_element().")
+                        (reparse-symbol indented_block_body) [21344 21464])
+                    ("initializer" function
+                       (:parent "dummy"
+                        :decorators 
+                          ( ("property" function (:type "decorator") nil nil))                          
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [21495 21499]))                          
+                        :documentation "The op responsible for initializing this variable.")
+                        (reparse-symbol indented_block_body) [21467 21595])
+                    ("initial_value" function
+                       (:parent "dummy"
+                        :decorators 
+                          ( ("property" function (:type "decorator") nil nil))                          
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [21628 21632]))                          
+                        :documentation "Returns the Tensor used as the initial value for the variable.")
+                        (reparse-symbol indented_block_body) [21598 21846])
+                    ("constraint" function
+                       (:parent "dummy"
+                        :decorators 
+                          ( ("property" function (:type "decorator") nil nil))                          
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [21876 21880]))                          
+                        :documentation "Returns the constraint function associated with this variable.
+
+    Returns:
+      The constraint function that was passed to the variable constructor.
+      Can be `None` if no constraint was passed.
+    ")
+                        (reparse-symbol indented_block_body) [21849 22127])
+                    ("op" function
+                       (:parent "dummy"
+                        :decorators 
+                          ( ("property" function (:type "decorator") nil nil))                          
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [22149 22153]))                          
+                        :documentation "The op for this variable.")
+                        (reparse-symbol indented_block_body) [22130 22219])
+                    ("trainable" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [22248 22252]))                          
+                        :decorators 
+                          ( ("property" function (:type "decorator") nil nil))                          )
+                        (reparse-symbol indented_block_body) [22222 22282])
+                    ("synchronization" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [22317 22321]))                          
+                        :decorators 
+                          ( ("property" function (:type "decorator") nil nil))                          )
+                        (reparse-symbol indented_block_body) [22285 22357])
+                    ("aggregation" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [22388 22392]))                          
+                        :decorators 
+                          ( ("property" function (:type "decorator") nil nil))                          )
+                        (reparse-symbol indented_block_body) [22360 22424])
+                    ("eval" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [22436 22440])
+                            ("session" variable nil (reparse-symbol function_parameters) [22442 22449]))                          
+                        :documentation "Evaluates and returns the value of this variable.")
+                        (reparse-symbol indented_block_body) [22427 22663])
+                    ("numpy" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [22676 22680]))                          )
+                        (reparse-symbol indented_block_body) [22666 22859])
+                    ("" code nil (reparse-symbol indented_block_body) [22873 22912])
+                    ("count_up_to" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [22931 22935])
+                            ("limit" variable nil (reparse-symbol function_parameters) [22937 22942]))                          
+                        :documentation "Increments this variable until it reaches `limit`.
+
+    When that Op is run it tries to increment the variable by `1`. If
+    incrementing the variable would bring it above `limit` then the Op raises
+    the exception `OutOfRangeError`.
+
+    If no error is raised, the Op outputs the value of the variable before
+    the increment.
+
+    This is essentially a shortcut for `count_up_to(self, limit)`.
+
+    Args:
+      limit: value at which incrementing the variable raises an error.
+
+    Returns:
+      A `Tensor` that will hold the variable value before the increment. If no
+      other Op modifies this variable, the values produced will all be
+      distinct.
+    ")
+                        (reparse-symbol indented_block_body) [22915 23754])
+                    ("_read_variable_op" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [23779 23783]))                          )
+                        (reparse-symbol indented_block_body) [23757 24697])
+                    ("read_value" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [24715 24719]))                          
+                        :documentation "Constructs an op which reads the value of this variable.
+
+    Should be used when there are multiple reads, or when it is desirable to
+    read the value only after some condition is true.
+
+    Returns:
+     the read operation.
+    ")
+                        (reparse-symbol indented_block_body) [24700 25212])
+                    ("sparse_read" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [25231 25235])
+                            ("indices" variable nil (reparse-symbol function_parameters) [25237 25244])
+                            ("name" variable nil (reparse-symbol function_parameters) [25246 25250]))                          
+                        :documentation "Reads the value of this variable sparsely, using `gather`.")
+                        (reparse-symbol indented_block_body) [25215 26120])
+                    ("gather_nd" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [26137 26141])
+                            ("indices" variable nil (reparse-symbol function_parameters) [26143 26150])
+                            ("name" variable nil (reparse-symbol function_parameters) [26152 26156]))                          
+                        :documentation "Reads the value of this variable sparsely, using `gather_nd`.")
+                        (reparse-symbol indented_block_body) [26123 26525])
+                    ("to_proto" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [26541 26545])
+                            ("export_scope" variable nil (reparse-symbol function_parameters) [26547 26559]))                          
+                        :documentation "Converts a `ResourceVariable` to a `VariableDef` protocol buffer.
+
+    Args:
+      export_scope: Optional `string`. Name scope to remove.
+
+    Raises:
+      RuntimeError: If run in EAGER mode.
+
+    Returns:
+      A `VariableDef` protocol buffer, or `None` if the `Variable` is not
+      in the specified name scope.
+    ")
+                        (reparse-symbol indented_block_body) [26528 28488])
+                    ("from_proto" function
+                       (:typemodifiers ("static")
+                        :arguments 
+                          ( ("variable_def" variable nil (reparse-symbol function_parameters) [28522 28534])
+                            ("import_scope" variable nil (reparse-symbol function_parameters) [28536 28548]))                          
+                        :decorators 
+                          ( ("staticmethod" function (:type "decorator") nil nil))                          )
+                        (reparse-symbol indented_block_body) [28491 28751])
+                    ("__array_priority__" variable nil (reparse-symbol indented_block_body) [28754 28778])
+                    ("is_initialized" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [28801 28805])
+                            ("name" variable nil (reparse-symbol function_parameters) [28807 28811]))                          
+                        :documentation "Checks whether a resource variable has been initialized.
+
+    Outputs boolean scalar indicating whether the tensor has been initialized.
+
+    Args:
+      name: A name for the operation (optional).
+
+    Returns:
+      A `Tensor` of type `bool`.
+    ")
+                        (reparse-symbol indented_block_body) [28782 29156])
+                    ("assign_sub" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [29174 29178])
+                            ("delta" variable nil (reparse-symbol function_parameters) [29180 29185])
+                            ("use_locking" variable nil (reparse-symbol function_parameters) [29187 29198])
+                            ("name" variable nil (reparse-symbol function_parameters) [29205 29209])
+                            ("read_value" variable nil (reparse-symbol function_parameters) [29216 29226]))                          
+                        :documentation "Subtracts a value from this variable.
+
+    Args:
+      delta: A `Tensor`. The value to subtract from this variable.
+      use_locking: If `True`, use locking during the operation.
+      name: The name to use for the operation.
+      read_value: A `bool`. Whether to read and return the new value of the
+          variable or not.
+
+    Returns:
+      If `read_value` is `True`, this method will return the new value of the
+      variable after the assignment has completed. Otherwise, when in graph mode
+      it will return the `Operation` that does the assignment, and when in eager
+      mode it will return `None`.
+    ")
+                        (reparse-symbol indented_block_body) [29159 30361])
+                    ("assign_add" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [30379 30383])
+                            ("delta" variable nil (reparse-symbol function_parameters) [30385 30390])
+                            ("use_locking" variable nil (reparse-symbol function_parameters) [30392 30403])
+                            ("name" variable nil (reparse-symbol function_parameters) [30410 30414])
+                            ("read_value" variable nil (reparse-symbol function_parameters) [30421 30431]))                          
+                        :documentation "Adds a value to this variable.
+
+    Args:
+      delta: A `Tensor`. The value to add to this variable.
+      use_locking: If `True`, use locking during the operation.
+      name: The name to use for the operation.
+      read_value: A `bool`. Whether to read and return the new value of the
+          variable or not.
+
+    Returns:
+      If `read_value` is `True`, this method will return the new value of the
+      variable after the assignment has completed. Otherwise, when in graph mode
+      it will return the `Operation` that does the assignment, and when in eager
+      mode it will return `None`.
+    ")
+                        (reparse-symbol indented_block_body) [30364 31376])
+                    ("_lazy_read" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [31394 31398])
+                            ("op" variable nil (reparse-symbol function_parameters) [31400 31402]))                          )
+                        (reparse-symbol indented_block_body) [31379 31694])
+                    ("assign" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [31708 31712])
+                            ("value" variable nil (reparse-symbol function_parameters) [31714 31719])
+                            ("use_locking" variable nil (reparse-symbol function_parameters) [31721 31732])
+                            ("name" variable nil (reparse-symbol function_parameters) [31739 31743])
+                            ("read_value" variable nil (reparse-symbol function_parameters) [31750 31760]))                          
+                        :documentation "Assigns a new value to this variable.
+
+    Args:
+      value: A `Tensor`. The new value for this variable.
+      use_locking: If `True`, use locking during the assignment.
+      name: The name to use for the assignment.
+      read_value: A `bool`. Whether to read and return the new value of the
+          variable or not.
+
+    Returns:
+      If `read_value` is `True`, this method will return the new value of the
+      variable after the assignment has completed. Otherwise, when in graph mode
+      it will return the `Operation` that does the assignment, and when in eager
+      mode it will return `None`.
+    ")
+                        (reparse-symbol indented_block_body) [31697 32867])
+                    ("__reduce__" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [32885 32889]))                          )
+                        (reparse-symbol indented_block_body) [32870 33226])
+                    ("scatter_sub" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [33245 33249])
+                            ("sparse_delta" variable nil (reparse-symbol function_parameters) [33251 33263])
+                            ("use_locking" variable nil (reparse-symbol function_parameters) [33265 33276])
+                            ("name" variable nil (reparse-symbol function_parameters) [33284 33288]))                          
+                        :documentation "Subtracts `tf.IndexedSlices` from this variable.
+
+    Args:
+      sparse_delta: `tf.IndexedSlices` to be subtracted from this variable.
+      use_locking: If `True`, use locking during the operation.
+      name: the name of the operation.
+
+    Returns:
+      The updated variable.
+
+    Raises:
+      TypeError: if `sparse_delta` is not an `IndexedSlices`.
+    ")
+                        (reparse-symbol indented_block_body) [33229 33995])
+                    ("scatter_add" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [34014 34018])
+                            ("sparse_delta" variable nil (reparse-symbol function_parameters) [34020 34032])
+                            ("use_locking" variable nil (reparse-symbol function_parameters) [34034 34045])
+                            ("name" variable nil (reparse-symbol function_parameters) [34053 34057]))                          
+                        :documentation "Adds `tf.IndexedSlices` to this variable.
+
+    Args:
+      sparse_delta: `tf.IndexedSlices` to be added to this variable.
+      use_locking: If `True`, use locking during the operation.
+      name: the name of the operation.
+
+    Returns:
+      The updated variable.
+
+    Raises:
+      TypeError: if `sparse_delta` is not an `IndexedSlices`.
+    ")
+                        (reparse-symbol indented_block_body) [33998 34750])
+                    ("scatter_max" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [34769 34773])
+                            ("sparse_delta" variable nil (reparse-symbol function_parameters) [34775 34787])
+                            ("use_locking" variable nil (reparse-symbol function_parameters) [34789 34800])
+                            ("name" variable nil (reparse-symbol function_parameters) [34808 34812]))                          
+                        :documentation "Updates this variable with the max of `tf.IndexedSlices` and itself.
+
+    Args:
+      sparse_delta: `tf.IndexedSlices` to use as an argument of max
+        with this variable.
+      use_locking: If `True`, use locking during the operation.
+      name: the name of the operation.
+
+    Returns:
+      The updated variable.
+
+    Raises:
+      TypeError: if `sparse_delta` is not an `IndexedSlices`.
+    ")
+                        (reparse-symbol indented_block_body) [34753 35559])
+                    ("scatter_min" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [35578 35582])
+                            ("sparse_delta" variable nil (reparse-symbol function_parameters) [35584 35596])
+                            ("use_locking" variable nil (reparse-symbol function_parameters) [35598 35609])
+                            ("name" variable nil (reparse-symbol function_parameters) [35617 35621]))                          
+                        :documentation "Updates this variable with the min of `tf.IndexedSlices` and itself.
+
+    Args:
+      sparse_delta: `tf.IndexedSlices` to use as an argument of min
+        with this variable.
+      use_locking: If `True`, use locking during the operation.
+      name: the name of the operation.
+
+    Returns:
+      The updated variable.
+
+    Raises:
+      TypeError: if `sparse_delta` is not an `IndexedSlices`.
+    ")
+                        (reparse-symbol indented_block_body) [35562 36368])
+                    ("scatter_mul" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [36387 36391])
+                            ("sparse_delta" variable nil (reparse-symbol function_parameters) [36393 36405])
+                            ("use_locking" variable nil (reparse-symbol function_parameters) [36407 36418])
+                            ("name" variable nil (reparse-symbol function_parameters) [36426 36430]))                          
+                        :documentation "Multiply this variable by `tf.IndexedSlices`.
+
+    Args:
+      sparse_delta: `tf.IndexedSlices` to multiply this variable by.
+      use_locking: If `True`, use locking during the operation.
+      name: the name of the operation.
+
+    Returns:
+      The updated variable.
+
+    Raises:
+      TypeError: if `sparse_delta` is not an `IndexedSlices`.
+    ")
+                        (reparse-symbol indented_block_body) [36371 37127])
+                    ("scatter_div" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [37146 37150])
+                            ("sparse_delta" variable nil (reparse-symbol function_parameters) [37152 37164])
+                            ("use_locking" variable nil (reparse-symbol function_parameters) [37166 37177])
+                            ("name" variable nil (reparse-symbol function_parameters) [37185 37189]))                          
+                        :documentation "Divide this variable by `tf.IndexedSlices`.
+
+    Args:
+      sparse_delta: `tf.IndexedSlices` to divide this variable by.
+      use_locking: If `True`, use locking during the operation.
+      name: the name of the operation.
+
+    Returns:
+      The updated variable.
+
+    Raises:
+      TypeError: if `sparse_delta` is not an `IndexedSlices`.
+    ")
+                        (reparse-symbol indented_block_body) [37130 37882])
+                    ("scatter_update" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [37904 37908])
+                            ("sparse_delta" variable nil (reparse-symbol function_parameters) [37910 37922])
+                            ("use_locking" variable nil (reparse-symbol function_parameters) [37924 37935])
+                            ("name" variable nil (reparse-symbol function_parameters) [37943 37947]))                          
+                        :documentation "Assigns `tf.IndexedSlices` to this variable.
+
+    Args:
+      sparse_delta: `tf.IndexedSlices` to be assigned to this variable.
+      use_locking: If `True`, use locking during the operation.
+      name: the name of the operation.
+
+    Returns:
+      The updated variable.
+
+    Raises:
+      TypeError: if `sparse_delta` is not an `IndexedSlices`.
+    ")
+                        (reparse-symbol indented_block_body) [37885 38649])
+                    ("batch_scatter_update" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [38677 38681])
+                            ("sparse_delta" variable nil (reparse-symbol function_parameters) [38683 38695])
+                            ("use_locking" variable nil (reparse-symbol function_parameters) [38697 38708])
+                            ("name" variable nil (reparse-symbol function_parameters) [38716 38720]))                          
+                        :documentation "Assigns `tf.IndexedSlices` to this variable batch-wise.
+
+    Analogous to `batch_gather`. This assumes that this variable and the
+    sparse_delta IndexedSlices have a series of leading dimensions that are the
+    same for all of them, and the updates are performed on the last dimension of
+    indices. In other words, the dimensions should be the following:
+
+    `num_prefix_dims = sparse_delta.indices.ndims - 1`
+    `batch_dim = num_prefix_dims + 1`
+    `sparse_delta.updates.shape = sparse_delta.indices.shape + var.shape[
+         batch_dim:]`
+
+    where
+
+    `sparse_delta.updates.shape[:num_prefix_dims]`
+    `== sparse_delta.indices.shape[:num_prefix_dims]`
+    `== var.shape[:num_prefix_dims]`
+
+    And the operation performed can be expressed as:
+
+    `var[i_1, ..., i_n,
+         sparse_delta.indices[i_1, ..., i_n, j]] = sparse_delta.updates[
+            i_1, ..., i_n, j]`
+
+    When sparse_delta.indices is a 1D tensor, this operation is equivalent to
+    `scatter_update`.
+
+    To avoid this operation one can looping over the first `ndims` of the
+    variable and using `scatter_update` on the subtensors that result of slicing
+    the first dimension. This is a valid option for `ndims = 1`, but less
+    efficient than this implementation.
+
+    Args:
+      sparse_delta: `tf.IndexedSlices` to be assigned to this variable.
+      use_locking: If `True`, use locking during the operation.
+      name: the name of the operation.
+
+    Returns:
+      The updated variable.
+
+    Raises:
+      TypeError: if `sparse_delta` is not an `IndexedSlices`.
+    ")
+                        (reparse-symbol indented_block_body) [38652 40599])
+                    ("scatter_nd_sub" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [40621 40625])
+                            ("indices" variable nil (reparse-symbol function_parameters) [40627 40634])
+                            ("updates" variable nil (reparse-symbol function_parameters) [40636 40643])
+                            ("name" variable nil (reparse-symbol function_parameters) [40645 40649]))                          
+                        :documentation "Applies sparse subtraction to individual values or slices in a Variable.
+
+    `ref` is a `Tensor` with rank `P` and `indices` is a `Tensor` of rank `Q`.
+
+    `indices` must be integer tensor, containing indices into `ref`.
+    It must be shape `[d_0, ..., d_{Q-2}, K]` where `0 < K <= P`.
+
+    The innermost dimension of `indices` (with length `K`) corresponds to
+    indices into elements (if `K = P`) or slices (if `K < P`) along the `K`th
+    dimension of `ref`.
+
+    `updates` is `Tensor` of rank `Q-1+P-K` with shape:
+
+    ```
+    [d_0, ..., d_{Q-2}, ref.shape[K], ..., ref.shape[P-1]].
+    ```
+
+    For example, say we want to add 4 scattered elements to a rank-1 tensor to
+    8 elements. In Python, that update would look like this:
+
+    ```python
+        ref = tf.Variable([1, 2, 3, 4, 5, 6, 7, 8])
+        indices = tf.constant([[4], [3], [1] ,[7]])
+        updates = tf.constant([9, 10, 11, 12])
+        op = ref.scatter_nd_sub(indices, updates)
+        with tf.compat.v1.Session() as sess:
+          print sess.run(op)
+    ```
+
+    The resulting update to ref would look like this:
+
+        [1, -9, 3, -6, -6, 6, 7, -4]
+
+    See `tf.scatter_nd` for more details about how to make updates to
+    slices.
+
+    Args:
+      indices: The indices to be used in the operation.
+      updates: The values to be used in the operation.
+      name: the name of the operation.
+
+    Returns:
+      The updated variable.
+    ")
+                        (reparse-symbol indented_block_body) [40602 42250])
+                    ("scatter_nd_add" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [42272 42276])
+                            ("indices" variable nil (reparse-symbol function_parameters) [42278 42285])
+                            ("updates" variable nil (reparse-symbol function_parameters) [42287 42294])
+                            ("name" variable nil (reparse-symbol function_parameters) [42296 42300]))                          
+                        :documentation "Applies sparse addition to individual values or slices in a Variable.
+
+    `ref` is a `Tensor` with rank `P` and `indices` is a `Tensor` of rank `Q`.
+
+    `indices` must be integer tensor, containing indices into `ref`.
+    It must be shape `[d_0, ..., d_{Q-2}, K]` where `0 < K <= P`.
+
+    The innermost dimension of `indices` (with length `K`) corresponds to
+    indices into elements (if `K = P`) or slices (if `K < P`) along the `K`th
+    dimension of `ref`.
+
+    `updates` is `Tensor` of rank `Q-1+P-K` with shape:
+
+    ```
+    [d_0, ..., d_{Q-2}, ref.shape[K], ..., ref.shape[P-1]].
+    ```
+
+    For example, say we want to add 4 scattered elements to a rank-1 tensor to
+    8 elements. In Python, that update would look like this:
+
+    ```python
+        ref = tf.Variable([1, 2, 3, 4, 5, 6, 7, 8])
+        indices = tf.constant([[4], [3], [1] ,[7]])
+        updates = tf.constant([9, 10, 11, 12])
+        add = ref.scatter_nd_add(indices, updates)
+        with tf.compat.v1.Session() as sess:
+          print sess.run(add)
+    ```
+
+    The resulting update to ref would look like this:
+
+        [1, 13, 3, 14, 14, 6, 7, 20]
+
+    See `tf.scatter_nd` for more details about how to make updates to
+    slices.
+
+    Args:
+      indices: The indices to be used in the operation.
+      updates: The values to be used in the operation.
+      name: the name of the operation.
+
+    Returns:
+      The updated variable.
+    ")
+                        (reparse-symbol indented_block_body) [42253 43900])
+                    ("scatter_nd_update" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [43925 43929])
+                            ("indices" variable nil (reparse-symbol function_parameters) [43931 43938])
+                            ("updates" variable nil (reparse-symbol function_parameters) [43940 43947])
+                            ("name" variable nil (reparse-symbol function_parameters) [43949 43953]))                          
+                        :documentation "Applies sparse assignment to individual values or slices in a Variable.
+
+    `ref` is a `Tensor` with rank `P` and `indices` is a `Tensor` of rank `Q`.
+
+    `indices` must be integer tensor, containing indices into `ref`.
+    It must be shape `[d_0, ..., d_{Q-2}, K]` where `0 < K <= P`.
+
+    The innermost dimension of `indices` (with length `K`) corresponds to
+    indices into elements (if `K = P`) or slices (if `K < P`) along the `K`th
+    dimension of `ref`.
+
+    `updates` is `Tensor` of rank `Q-1+P-K` with shape:
+
+    ```
+    [d_0, ..., d_{Q-2}, ref.shape[K], ..., ref.shape[P-1]].
+    ```
+
+    For example, say we want to add 4 scattered elements to a rank-1 tensor to
+    8 elements. In Python, that update would look like this:
+
+    ```python
+        ref = tf.Variable([1, 2, 3, 4, 5, 6, 7, 8])
+        indices = tf.constant([[4], [3], [1] ,[7]])
+        updates = tf.constant([9, 10, 11, 12])
+        op = ref.scatter_nd_update(indices, updates)
+        with tf.compat.v1.Session() as sess:
+          print sess.run(op)
+    ```
+
+    The resulting update to ref would look like this:
+
+        [1, 11, 3, 10, 9, 6, 7, 12]
+
+    See `tf.scatter_nd` for more details about how to make updates to
+    slices.
+
+    Args:
+      indices: The indices to be used in the operation.
+      updates: The values to be used in the operation.
+      name: the name of the operation.
+
+    Returns:
+      The updated variable.
+    ")
+                        (reparse-symbol indented_block_body) [43903 45558])
+                    ("_strided_slice_assign" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [45587 45591])
+                            ("begin" variable nil (reparse-symbol function_parameters) [45593 45598])
+                            ("end" variable nil (reparse-symbol function_parameters) [45600 45603])
+                            ("strides" variable nil (reparse-symbol function_parameters) [45605 45612])
+                            ("value" variable nil (reparse-symbol function_parameters) [45614 45619])
+                            ("name" variable nil (reparse-symbol function_parameters) [45621 45625])
+                            ("begin_mask" variable nil (reparse-symbol function_parameters) [45627 45637])
+                            ("end_mask" variable nil (reparse-symbol function_parameters) [45667 45675])
+                            ("ellipsis_mask" variable nil (reparse-symbol function_parameters) [45677 45690])
+                            ("new_axis_mask" variable nil (reparse-symbol function_parameters) [45692 45705])
+                            ("shrink_axis_mask" variable nil (reparse-symbol function_parameters) [45735 45751]))                          )
+                        (reparse-symbol indented_block_body) [45561 46316])
+                    ("__complex__" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [46335 46339]))                          )
+                        (reparse-symbol indented_block_body) [46319 46383])
+                    ("__int__" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [46398 46402]))                          )
+                        (reparse-symbol indented_block_body) [46386 46442])
+                    ("__long__" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [46458 46462]))                          )
+                        (reparse-symbol indented_block_body) [46445 46503])
+                    ("__float__" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [46520 46524]))                          )
+                        (reparse-symbol indented_block_body) [46506 46566])
+                    ("_dense_var_to_tensor" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [46594 46598])
+                            ("dtype" variable nil (reparse-symbol function_parameters) [46600 46605])
+                            ("name" variable nil (reparse-symbol function_parameters) [46612 46616])
+                            ("as_ref" variable nil (reparse-symbol function_parameters) [46623 46629]))                          )
+                        (reparse-symbol indented_block_body) [46569 46981])
+                    ("__iadd__" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [46997 47001])
+                            ("unused_other" variable nil (reparse-symbol function_parameters) [47003 47015]))                          )
+                        (reparse-symbol indented_block_body) [46984 47275])
+                    ("__isub__" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [47291 47295])
+                            ("unused_other" variable nil (reparse-symbol function_parameters) [47297 47309]))                          )
+                        (reparse-symbol indented_block_body) [47278 47569])
+                    ("__imul__" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [47585 47589])
+                            ("unused_other" variable nil (reparse-symbol function_parameters) [47591 47603]))                          )
+                        (reparse-symbol indented_block_body) [47572 47821])
+                    ("__idiv__" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [47837 47841])
+                            ("unused_other" variable nil (reparse-symbol function_parameters) [47843 47855]))                          )
+                        (reparse-symbol indented_block_body) [47824 48073])
+                    ("__itruediv__" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [48093 48097])
+                            ("unused_other" variable nil (reparse-symbol function_parameters) [48099 48111]))                          )
+                        (reparse-symbol indented_block_body) [48076 48329])
+                    ("__irealdiv__" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [48349 48353])
+                            ("unused_other" variable nil (reparse-symbol function_parameters) [48355 48367]))                          )
+                        (reparse-symbol indented_block_body) [48332 48585])
+                    ("__ipow__" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [48601 48605])
+                            ("unused_other" variable nil (reparse-symbol function_parameters) [48607 48619]))                          )
+                        (reparse-symbol indented_block_body) [48588 48840]))                  
+                :type "class")
+                nil [13346 48840])
+            ("ResourceVariable" type
+               (:documentation "Variable based on resource handles.
+
+  See the [Variables How To](https://tensorflow.org/guide/variables)
+  for a high level overview.
+
+  A `ResourceVariable` allows you to maintain state across subsequent calls to
+  session.run.
+
+  The `ResourceVariable` constructor requires an initial value for the variable,
+  which can be a `Tensor` of any type and shape. The initial value defines the
+  type and shape of the variable. After construction, the type and shape of
+  the variable are fixed. The value can be changed using one of the assign
+  methods.
+
+  Just like any `Tensor`, variables created with
+  `tf.Variable(use_resource=True)` can be used as inputs for other Ops in the
+  graph. Additionally, all the operators overloaded for the `Tensor` class are
+  carried over to variables, so you can also add nodes to the graph by just
+  doing arithmetic on variables.
+
+  Unlike ref-based variable, a ResourceVariable has well-defined semantics. Each
+  usage of a ResourceVariable in a TensorFlow graph adds a read_value operation
+  to the graph. The Tensors returned by a read_value operation are guaranteed to
+  see all modifications to the value of the variable which happen in any
+  operation on which the read_value depends on (either directly, indirectly, or
+  via a control dependency) and guaranteed to not see any modification to the
+  value of the variable from operations that depend on the read_value operation.
+  Updates from operations that have no dependency relationship to the read_value
+  operation might or might not be visible to read_value.
+
+  For example, if there is more than one assignment to a ResourceVariable in
+  a single session.run call there is a well-defined value for each operation
+  which uses the variable's value if the assignments and the read are connected
+  by edges in the graph. Consider the following example, in which two writes
+  can cause tf.Variable and tf.ResourceVariable to behave differently:
+
+  ```python
+  a = tf.Variable(1.0, use_resource=True)
+  a.initializer.run()
+
+  assign = a.assign(2.0)
+  with tf.control_dependencies([assign]):
+    b = a.read_value()
+  with tf.control_dependencies([b]):
+    other_assign = a.assign(3.0)
+  with tf.control_dependencies([other_assign]):
+    # Will print 2.0 because the value was read before other_assign ran. If
+    # `a` was a tf.Variable instead, 2.0 or 3.0 could be printed.
+    tf.compat.v1.Print(b, [b]).eval()
+  ```
+  "
+                :superclasses ("BaseResourceVariable")
+                :members 
+                  ( ("__init__" function
+                       (:suite 
+                          ( ("\"\"\"Creates a variable.
+
+    Args:
+      initial_value: A `Tensor`, or Python object convertible to a `Tensor`,
+        which is the initial value for the Variable. Can also be a
+        callable with no argument that returns the initial value when called.
+        (Note that initializer functions from init_ops.py must first be bound
+         to a shape before being used here.)
+      trainable: If `True`, the default, also adds the variable to the graph
+        collection `GraphKeys.TRAINABLE_VARIABLES`. This collection is used as
+        the default list of variables to use by the `Optimizer` classes.
+        Defaults to `True`, unless `synchronization` is set to `ON_READ`, in
+        which case it defaults to `False`.
+      collections: List of graph collections keys. The new variable is added to
+        these collections. Defaults to `[GraphKeys.GLOBAL_VARIABLES]`.
+      validate_shape: Ignored. Provided for compatibility with tf.Variable.
+      caching_device: Optional device string or function describing where the
+        Variable should be cached for reading.  Defaults to the Variable's
+        device.  If not `None`, caches on another device.  Typical use is to
+        cache on the device where the Ops using the Variable reside, to
+        deduplicate copying through `Switch` and other conditional statements.
+      name: Optional name for the variable. Defaults to `'Variable'` and gets
+        uniquified automatically.
+      dtype: If set, initial_value will be converted to the given type.
+        If None, either the datatype will be kept (if initial_value is
+        a Tensor) or float32 will be used (if it is a Python object convertible
+        to a Tensor).
+      variable_def: `VariableDef` protocol buffer. If not None, recreates the
+        `ResourceVariable` object with its contents. `variable_def` and other
+        arguments (except for import_scope) are mutually exclusive.
+      import_scope: Optional `string`. Name scope to add to the
+        ResourceVariable. Only used when `variable_def` is provided.
+      constraint: An optional projection function to be applied to the variable
+        after being updated by an `Optimizer` (e.g. used to implement norm
+        constraints or value constraints for layer weights). The function must
+        take as input the unprojected Tensor representing the value of the
+        variable and return the Tensor for the projected value
+        (which must have the same shape). Constraints are not safe to
+        use when doing asynchronous distributed training.
+      distribute_strategy: The tf.distribute.Strategy this variable is being
+        created inside of.
+      synchronization: Indicates when a distributed a variable will be
+        aggregated. Accepted values are constants defined in the class
+        `tf.VariableSynchronization`. By default the synchronization is set to
+        `AUTO` and the current `DistributionStrategy` chooses
+        when to synchronize.
+      aggregation: Indicates how a distributed variable will be aggregated.
+        Accepted values are constants defined in the class
+        `tf.VariableAggregation`.
+      shape: (optional) The shape of this variable. If None, the shape of
+        `initial_value` will be used. When setting this argument to
+        `tf.TensorShape(None)` (representing an unspecified shape), the variable
+        can be assigned with values of different shapes.
+
+    Raises:
+      ValueError: If the initial value is not specified, or does not have a
+        shape and `validate_shape` is `True`.
+
+    @compatibility(eager)
+    When Eager Execution is enabled, the default for the `collections` argument
+    is `None`, which signifies that this `Variable` will not be added to any
+    collections.
+    @end_compatibility
+    \"\"\"" code nil (reparse-symbol indented_block_body) [51881 55662])
+                            ("if" code nil (reparse-symbol indented_block_body) [55667 56501]))                          
+                        :parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [51332 51336])
+                            ("initial_value" variable nil (reparse-symbol function_parameters) [51394 51407])
+                            ("trainable" variable nil (reparse-symbol function_parameters) [51429 51438])
+                            ("collections" variable nil (reparse-symbol function_parameters) [51460 51471])
+                            ("validate_shape" variable nil (reparse-symbol function_parameters) [51493 51507])
+                            ("caching_device" variable nil (reparse-symbol function_parameters) [51564 51578])
+                            ("name" variable nil (reparse-symbol function_parameters) [51600 51604])
+                            ("dtype" variable nil (reparse-symbol function_parameters) [51626 51631])
+                            ("variable_def" variable nil (reparse-symbol function_parameters) [51653 51665])
+                            ("import_scope" variable nil (reparse-symbol function_parameters) [51687 51699])
+                            ("constraint" variable nil (reparse-symbol function_parameters) [51721 51731])
+                            ("distribute_strategy" variable nil (reparse-symbol function_parameters) [51753 51772])
+                            ("synchronization" variable nil (reparse-symbol function_parameters) [51794 51809])
+                            ("aggregation" variable nil (reparse-symbol function_parameters) [51831 51842])
+                            ("shape" variable nil (reparse-symbol function_parameters) [51864 51869]))                          
+                        :documentation "Creates a variable.
+
+    Args:
+      initial_value: A `Tensor`, or Python object convertible to a `Tensor`,
+        which is the initial value for the Variable. Can also be a
+        callable with no argument that returns the initial value when called.
+        (Note that initializer functions from init_ops.py must first be bound
+         to a shape before being used here.)
+      trainable: If `True`, the default, also adds the variable to the graph
+        collection `GraphKeys.TRAINABLE_VARIABLES`. This collection is used as
+        the default list of variables to use by the `Optimizer` classes.
+        Defaults to `True`, unless `synchronization` is set to `ON_READ`, in
+        which case it defaults to `False`.
+      collections: List of graph collections keys. The new variable is added to
+        these collections. Defaults to `[GraphKeys.GLOBAL_VARIABLES]`.
+      validate_shape: Ignored. Provided for compatibility with tf.Variable.
+      caching_device: Optional device string or function describing where the
+        Variable should be cached for reading.  Defaults to the Variable's
+        device.  If not `None`, caches on another device.  Typical use is to
+        cache on the device where the Ops using the Variable reside, to
+        deduplicate copying through `Switch` and other conditional statements.
+      name: Optional name for the variable. Defaults to `'Variable'` and gets
+        uniquified automatically.
+      dtype: If set, initial_value will be converted to the given type.
+        If None, either the datatype will be kept (if initial_value is
+        a Tensor) or float32 will be used (if it is a Python object convertible
+        to a Tensor).
+      variable_def: `VariableDef` protocol buffer. If not None, recreates the
+        `ResourceVariable` object with its contents. `variable_def` and other
+        arguments (except for import_scope) are mutually exclusive.
+      import_scope: Optional `string`. Name scope to add to the
+        ResourceVariable. Only used when `variable_def` is provided.
+      constraint: An optional projection function to be applied to the variable
+        after being updated by an `Optimizer` (e.g. used to implement norm
+        constraints or value constraints for layer weights). The function must
+        take as input the unprojected Tensor representing the value of the
+        variable and return the Tensor for the projected value
+        (which must have the same shape). Constraints are not safe to
+        use when doing asynchronous distributed training.
+      distribute_strategy: The tf.distribute.Strategy this variable is being
+        created inside of.
+      synchronization: Indicates when a distributed a variable will be
+        aggregated. Accepted values are constants defined in the class
+        `tf.VariableSynchronization`. By default the synchronization is set to
+        `AUTO` and the current `DistributionStrategy` chooses
+        when to synchronize.
+      aggregation: Indicates how a distributed variable will be aggregated.
+        Accepted values are constants defined in the class
+        `tf.VariableAggregation`.
+      shape: (optional) The shape of this variable. If None, the shape of
+        `initial_value` will be used. When setting this argument to
+        `tf.TensorShape(None)` (representing an unspecified shape), the variable
+        can be assigned with values of different shapes.
+
+    Raises:
+      ValueError: If the initial value is not specified, or does not have a
+        shape and `validate_shape` is `True`.
+
+    @compatibility(eager)
+    When Eager Execution is enabled, the default for the `collections` argument
+    is `None`, which signifies that this `Variable` will not be added to any
+    collections.
+    @end_compatibility
+    "
+                        :constructor-flag t)
+                        (reparse-symbol indented_block_body) [51319 56501])
+                    ("_init_from_args" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [56524 56528])
+                            ("initial_value" variable nil (reparse-symbol function_parameters) [56552 56565])
+                            ("trainable" variable nil (reparse-symbol function_parameters) [56594 56603])
+                            ("collections" variable nil (reparse-symbol function_parameters) [56632 56643])
+                            ("caching_device" variable nil (reparse-symbol function_parameters) [56672 56686])
+                            ("name" variable nil (reparse-symbol function_parameters) [56715 56719])
+                            ("dtype" variable nil (reparse-symbol function_parameters) [56748 56753])
+                            ("constraint" variable nil (reparse-symbol function_parameters) [56782 56792])
+                            ("synchronization" variable nil (reparse-symbol function_parameters) [56821 56836])
+                            ("aggregation" variable nil (reparse-symbol function_parameters) [56865 56876])
+                            ("distribute_strategy" variable nil (reparse-symbol function_parameters) [56905 56924])
+                            ("shape" variable nil (reparse-symbol function_parameters) [56953 56958]))                          
+                        :documentation "Creates a variable.
+
+    Args:
+      initial_value: A `Tensor`, or Python object convertible to a `Tensor`,
+        which is the initial value for the Variable. The initial value must have
+        a shape specified unless `validate_shape` is set to False. Can also be a
+        callable with no argument that returns the initial value when called.
+        (Note that initializer functions from init_ops.py must first be bound
+         to a shape before being used here.)
+      trainable: If `True`, the default, also adds the variable to the graph
+        collection `GraphKeys.TRAINABLE_VARIABLES`. This collection is used as
+        the default list of variables to use by the `Optimizer` classes.
+        Defaults to `True`, unless `synchronization` is set to `ON_READ`, in
+        which case it defaults to `False`.
+      collections: List of graph collections keys. The new variable is added to
+        these collections. Defaults to `[GraphKeys.GLOBAL_VARIABLES]`.
+      caching_device: Optional device string or function describing where the
+        Variable should be cached for reading.  Defaults to the Variable's
+        device.  If not `None`, caches on another device.  Typical use is to
+        cache on the device where the Ops using the Variable reside, to
+        deduplicate copying through `Switch` and other conditional statements.
+      name: Optional name for the variable. Defaults to `'Variable'` and gets
+        uniquified automatically.
+      dtype: If set, initial_value will be converted to the given type.
+        If None, either the datatype will be kept (if initial_value is
+       a Tensor) or float32 will be used (if it is a Python object convertible
+       to a Tensor).
+      constraint: An optional projection function to be applied to the variable
+        after being updated by an `Optimizer` (e.g. used to implement norm
+        constraints or value constraints for layer weights). The function must
+        take as input the unprojected Tensor representing the value of the
+        variable and return the Tensor for the projected value
+        (which must have the same shape). Constraints are not safe to
+        use when doing asynchronous distributed training.
+      synchronization: Indicates when a distributed a variable will be
+        aggregated. Accepted values are constants defined in the class
+        `tf.VariableSynchronization`. By default the synchronization is set to
+        `AUTO` and the current `DistributionStrategy` chooses
+        when to synchronize.
+      aggregation: Indicates how a distributed variable will be aggregated.
+        Accepted values are constants defined in the class
+        `tf.VariableAggregation`.
+      distribute_strategy: DistributionStrategy under which this variable
+        was created.
+      shape: (optional) The shape of this variable. If None, the shape of
+        `initial_value` will be used. When setting this argument to
+        `tf.TensorShape(None)` (representing an unspecified shape), the variable
+        can be assigned with values of different shapes.
+
+    Raises:
+      ValueError: If the initial value is not specified, or does not have a
+        shape and `validate_shape` is `True`.
+
+    @compatibility(eager)
+    When Eager Execution is enabled, variables are never added to collections.
+    It is not implicitly added to the `GLOBAL_VARIABLES` or
+    `TRAINABLE_VARIABLES` collections, and the `collections` argument is
+    ignored.
+    @end_compatibility
+    ")
+                        (reparse-symbol indented_block_body) [56504 68575])
+                    ("_init_from_proto" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [68599 68603])
+                            ("variable_def" variable nil (reparse-symbol function_parameters) [68605 68617])
+                            ("import_scope" variable nil (reparse-symbol function_parameters) [68619 68631]))                          
+                        :documentation "Initializes from `VariableDef` proto.")
+                        (reparse-symbol indented_block_body) [68578 71376]))                  
+                :type "class")
+                nil [48842 71376])
+            ("UninitializedVariable" type
+               (:documentation "A variable with no initializer."
+                :superclasses ("BaseResourceVariable")
+                :members 
+                  ( ("__init__" function
+                       (:suite 
+                          ( ("\"\"\"Creates the variable handle.
+
+    Args:
+      trainable: If `True`, GradientTapes automatically watch uses of this
+        Variable.
+      caching_device: Optional device string or function describing where the
+        Variable should be cached for reading.  Defaults to the Variable's
+        device.  If not `None`, caches on another device.  Typical use is to
+        cache on the device where the Ops using the Variable reside, to
+        deduplicate copying through `Switch` and other conditional statements.
+      name: Optional name for the variable. Defaults to `'Variable'` and gets
+        uniquified automatically.
+      shape: The variable's shape.
+      dtype: The variable's dtype.
+      constraint: An optional projection function to be applied to the variable
+        after being updated by an `Optimizer` (e.g. used to implement norm
+        constraints or value constraints for layer weights). The function must
+        take as input the unprojected Tensor representing the value of the
+        variable and return the Tensor for the projected value
+        (which must have the same shape). Constraints are not safe to
+        use when doing asynchronous distributed training.
+      synchronization: Indicates when a distributed a variable will be
+        aggregated. Accepted values are constants defined in the class
+        `tf.VariableSynchronization`. By default the synchronization is set to
+        `AUTO` and the current `DistributionStrategy` chooses
+        when to synchronize.
+      aggregation: Indicates how a distributed variable will be aggregated.
+        Accepted values are constants defined in the class
+        `tf.VariableAggregation`.
+      extra_handle_data: Optional, another resource handle or Tensor with handle
+        data to merge with `shape` and `dtype`.
+      distribute_strategy: The tf.distribute.Strategy this variable is being
+        created inside of.
+    \"\"\"" code nil (reparse-symbol indented_block_body) [71806 73726])
+                            ("with" code nil (reparse-symbol indented_block_body) [73731 73814])
+                            ("with" code nil (reparse-symbol indented_block_body) [73818 75136])
+                            ("super" code nil (reparse-symbol indented_block_body) [75140 75475]))                          
+                        :parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [71533 71537])
+                            ("trainable" variable nil (reparse-symbol function_parameters) [71545 71554])
+                            ("caching_device" variable nil (reparse-symbol function_parameters) [71567 71581])
+                            ("name" variable nil (reparse-symbol function_parameters) [71594 71598])
+                            ("shape" variable nil (reparse-symbol function_parameters) [71611 71616])
+                            ("dtype" variable nil (reparse-symbol function_parameters) [71629 71634])
+                            ("constraint" variable nil (reparse-symbol function_parameters) [71647 71657])
+                            ("synchronization" variable nil (reparse-symbol function_parameters) [71670 71685])
+                            ("aggregation" variable nil (reparse-symbol function_parameters) [71698 71709])
+                            ("extra_handle_data" variable nil (reparse-symbol function_parameters) [71722 71739])
+                            ("distribute_strategy" variable nil (reparse-symbol function_parameters) [71752 71771])
+                            ("unused_kwargs" variable nil (reparse-symbol function_parameters) [71784 71799]))                          
+                        :documentation "Creates the variable handle.
+
+    Args:
+      trainable: If `True`, GradientTapes automatically watch uses of this
+        Variable.
+      caching_device: Optional device string or function describing where the
+        Variable should be cached for reading.  Defaults to the Variable's
+        device.  If not `None`, caches on another device.  Typical use is to
+        cache on the device where the Ops using the Variable reside, to
+        deduplicate copying through `Switch` and other conditional statements.
+      name: Optional name for the variable. Defaults to `'Variable'` and gets
+        uniquified automatically.
+      shape: The variable's shape.
+      dtype: The variable's dtype.
+      constraint: An optional projection function to be applied to the variable
+        after being updated by an `Optimizer` (e.g. used to implement norm
+        constraints or value constraints for layer weights). The function must
+        take as input the unprojected Tensor representing the value of the
+        variable and return the Tensor for the projected value
+        (which must have the same shape). Constraints are not safe to
+        use when doing asynchronous distributed training.
+      synchronization: Indicates when a distributed a variable will be
+        aggregated. Accepted values are constants defined in the class
+        `tf.VariableSynchronization`. By default the synchronization is set to
+        `AUTO` and the current `DistributionStrategy` chooses
+        when to synchronize.
+      aggregation: Indicates how a distributed variable will be aggregated.
+        Accepted values are constants defined in the class
+        `tf.VariableAggregation`.
+      extra_handle_data: Optional, another resource handle or Tensor with handle
+        data to merge with `shape` and `dtype`.
+      distribute_strategy: The tf.distribute.Strategy this variable is being
+        created inside of.
+    "
+                        :constructor-flag t)
+                        (reparse-symbol indented_block_body) [71472 75476]))                  
+                :type "class")
+                nil [71378 75476])
+            ("_pywrap_utils" code nil nil [75478 75542])
+            ("math_ops" variable nil nil [75543 75594])
+            ("_dense_var_to_tensor" function (:arguments 
+              ( ("var" variable nil (reparse-symbol function_parameters) [75658 75661])
+                ("dtype" variable nil (reparse-symbol function_parameters) [75663 75668])
+                ("name" variable nil (reparse-symbol function_parameters) [75675 75679])
+                ("as_ref" variable nil (reparse-symbol function_parameters) [75686 75692]))              ) nil [75633 75810])
+            ("ops" code nil nil [75941 76064])
+            ("ops" code nil nil [76065 76122])
+            ("_UnreadVariable" type
+               (:documentation "Represents a future for a read of a variable.
+
+  Pretends to be the tensor if anyone looks.
+  "
+                :superclasses ("BaseResourceVariable")
+                :members 
+                  ( ("__init__" function
+                       (:suite 
+                          ( ("if" code nil (reparse-symbol indented_block_body) [76383 76488])
+                            ("if" code nil (reparse-symbol indented_block_body) [76688 76988])
+                            ("super" code nil (reparse-symbol indented_block_body) [76992 77194])
+                            ("self" variable nil (reparse-symbol indented_block_body) [77199 77226]))                          
+                        :parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [76289 76293])
+                            ("handle" variable nil (reparse-symbol function_parameters) [76295 76301])
+                            ("dtype" variable nil (reparse-symbol function_parameters) [76303 76308])
+                            ("shape" variable nil (reparse-symbol function_parameters) [76310 76315])
+                            ("in_graph_mode" variable nil (reparse-symbol function_parameters) [76317 76330])
+                            ("deleter" variable nil (reparse-symbol function_parameters) [76332 76339])
+                            ("parent_op" variable nil (reparse-symbol function_parameters) [76356 76365])
+                            ("unique_id" variable nil (reparse-symbol function_parameters) [76367 76376]))                          
+                        :constructor-flag t)
+                        (reparse-symbol indented_block_body) [76276 77227])
+                    ("name" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [77251 77255]))                          
+                        :decorators 
+                          ( ("property" function (:type "decorator") nil nil))                          )
+                        (reparse-symbol indented_block_body) [77230 77360])
+                    ("value" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [77373 77377]))                          )
+                        (reparse-symbol indented_block_body) [77363 77416])
+                    ("read_value" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [77434 77438]))                          )
+                        (reparse-symbol indented_block_body) [77419 77477])
+                    ("_read_variable_op" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [77502 77506]))                          )
+                        (reparse-symbol indented_block_body) [77480 77790])
+                    ("assign_sub" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [77808 77812])
+                            ("delta" variable nil (reparse-symbol function_parameters) [77814 77819])
+                            ("use_locking" variable nil (reparse-symbol function_parameters) [77821 77832])
+                            ("name" variable nil (reparse-symbol function_parameters) [77839 77843])
+                            ("read_value" variable nil (reparse-symbol function_parameters) [77850 77860]))                          )
+                        (reparse-symbol indented_block_body) [77793 78066])
+                    ("assign_add" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [78084 78088])
+                            ("delta" variable nil (reparse-symbol function_parameters) [78090 78095])
+                            ("use_locking" variable nil (reparse-symbol function_parameters) [78097 78108])
+                            ("name" variable nil (reparse-symbol function_parameters) [78115 78119])
+                            ("read_value" variable nil (reparse-symbol function_parameters) [78126 78136]))                          )
+                        (reparse-symbol indented_block_body) [78069 78342])
+                    ("assign" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [78356 78360])
+                            ("value" variable nil (reparse-symbol function_parameters) [78362 78367])
+                            ("use_locking" variable nil (reparse-symbol function_parameters) [78369 78380])
+                            ("name" variable nil (reparse-symbol function_parameters) [78387 78391])
+                            ("read_value" variable nil (reparse-symbol function_parameters) [78398 78408]))                          )
+                        (reparse-symbol indented_block_body) [78345 78606])
+                    ("scatter_sub" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [78625 78629])
+                            ("sparse_delta" variable nil (reparse-symbol function_parameters) [78631 78643])
+                            ("use_locking" variable nil (reparse-symbol function_parameters) [78645 78656])
+                            ("name" variable nil (reparse-symbol function_parameters) [78664 78668]))                          )
+                        (reparse-symbol indented_block_body) [78609 78871])
+                    ("scatter_add" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [78890 78894])
+                            ("sparse_delta" variable nil (reparse-symbol function_parameters) [78896 78908])
+                            ("use_locking" variable nil (reparse-symbol function_parameters) [78910 78921])
+                            ("name" variable nil (reparse-symbol function_parameters) [78929 78933]))                          )
+                        (reparse-symbol indented_block_body) [78874 79136])
+                    ("scatter_max" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [79155 79159])
+                            ("sparse_delta" variable nil (reparse-symbol function_parameters) [79161 79173])
+                            ("use_locking" variable nil (reparse-symbol function_parameters) [79175 79186])
+                            ("name" variable nil (reparse-symbol function_parameters) [79194 79198]))                          )
+                        (reparse-symbol indented_block_body) [79139 79401])
+                    ("scatter_min" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [79420 79424])
+                            ("sparse_delta" variable nil (reparse-symbol function_parameters) [79426 79438])
+                            ("use_locking" variable nil (reparse-symbol function_parameters) [79440 79451])
+                            ("name" variable nil (reparse-symbol function_parameters) [79459 79463]))                          )
+                        (reparse-symbol indented_block_body) [79404 79666])
+                    ("scatter_mul" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [79685 79689])
+                            ("sparse_delta" variable nil (reparse-symbol function_parameters) [79691 79703])
+                            ("use_locking" variable nil (reparse-symbol function_parameters) [79705 79716])
+                            ("name" variable nil (reparse-symbol function_parameters) [79724 79728]))                          )
+                        (reparse-symbol indented_block_body) [79669 79931])
+                    ("scatter_div" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [79950 79954])
+                            ("sparse_delta" variable nil (reparse-symbol function_parameters) [79956 79968])
+                            ("use_locking" variable nil (reparse-symbol function_parameters) [79970 79981])
+                            ("name" variable nil (reparse-symbol function_parameters) [79989 79993]))                          )
+                        (reparse-symbol indented_block_body) [79934 80196])
+                    ("scatter_update" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [80218 80222])
+                            ("sparse_delta" variable nil (reparse-symbol function_parameters) [80224 80236])
+                            ("use_locking" variable nil (reparse-symbol function_parameters) [80238 80249])
+                            ("name" variable nil (reparse-symbol function_parameters) [80257 80261]))                          )
+                        (reparse-symbol indented_block_body) [80199 80470])
+                    ("batch_scatter_update" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [80498 80502])
+                            ("sparse_delta" variable nil (reparse-symbol function_parameters) [80504 80516])
+                            ("use_locking" variable nil (reparse-symbol function_parameters) [80518 80529])
+                            ("name" variable nil (reparse-symbol function_parameters) [80537 80541]))                          )
+                        (reparse-symbol indented_block_body) [80473 80710])
+                    ("scatter_nd_sub" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [80732 80736])
+                            ("indices" variable nil (reparse-symbol function_parameters) [80738 80745])
+                            ("updates" variable nil (reparse-symbol function_parameters) [80747 80754])
+                            ("name" variable nil (reparse-symbol function_parameters) [80756 80760]))                          )
+                        (reparse-symbol indented_block_body) [80713 80903])
+                    ("scatter_nd_add" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [80925 80929])
+                            ("indices" variable nil (reparse-symbol function_parameters) [80931 80938])
+                            ("updates" variable nil (reparse-symbol function_parameters) [80940 80947])
+                            ("name" variable nil (reparse-symbol function_parameters) [80949 80953]))                          )
+                        (reparse-symbol indented_block_body) [80906 81096])
+                    ("scatter_nd_update" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [81121 81125])
+                            ("indices" variable nil (reparse-symbol function_parameters) [81127 81134])
+                            ("updates" variable nil (reparse-symbol function_parameters) [81136 81143])
+                            ("name" variable nil (reparse-symbol function_parameters) [81145 81149]))                          )
+                        (reparse-symbol indented_block_body) [81099 81355])
+                    ("op" function
+                       (:parent "dummy"
+                        :decorators 
+                          ( ("property" function (:type "decorator") nil nil))                          
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [81377 81381]))                          
+                        :documentation "The op for this variable.")
+                        (reparse-symbol indented_block_body) [81358 81447]))                  
+                :type "class")
+                nil [76125 81447])
+            ("ops" code nil nil [81449 81501])
+            ("" code nil nil [81525 81543])
+            ("_ReadGrad" function
+               (:documentation "Gradient for read op."
+                :arguments 
+                  ( ("_" variable nil (reparse-symbol function_parameters) [81558 81559])
+                    ("grad" variable nil (reparse-symbol function_parameters) [81561 81565]))                  )
+                nil [81544 81612])
+            ("variable_shape" function (:arguments 
+              ( ("handle" variable nil (reparse-symbol function_parameters) [81633 81639])
+                ("out_type" variable nil (reparse-symbol function_parameters) [81641 81649]))              ) nil [81614 82206])
+            ("" code nil nil [82229 82247])
+            ("_GatherGrad" function
+               (:documentation "Gradient for gather op."
+                :arguments 
+                  ( ("op" variable nil (reparse-symbol function_parameters) [82264 82266])
+                    ("grad" variable nil (reparse-symbol function_parameters) [82268 82272]))                  )
+                nil [82248 82723])
+            ("_to_proto_fn" function
+               (:documentation "Converts Variable and ResourceVariable to VariableDef for collections."
+                :arguments 
+                  ( ("v" variable nil (reparse-symbol function_parameters) [82742 82743])
+                    ("export_scope" variable nil (reparse-symbol function_parameters) [82745 82757]))                  )
+                nil [82725 82891])
+            ("_from_proto_fn" function
+               (:documentation "Creates Variable or ResourceVariable from VariableDef as needed."
+                :arguments 
+                  ( ("v" variable nil (reparse-symbol function_parameters) [82912 82913])
+                    ("import_scope" variable nil (reparse-symbol function_parameters) [82915 82927]))                  )
+                nil [82893 83166])
+            ("ops" code nil nil [83168 83331])
+            ("ops" code nil nil [83332 83498])
+            ("ops" code nil nil [83499 83670])
+            ("ops" code nil nil [83671 83833])
+            ("ops" code nil nil [83834 83996])
+            ("ops" code nil nil [83997 84155])
+            ("ops" code nil nil [84156 84319])
+            ("is_resource_variable" function
+               (:documentation "\"Returns True if `var` is to be considered a ResourceVariable."
+                :arguments 
+                  ( ("var" variable nil (reparse-symbol function_parameters) [84347 84350]))                  )
+                nil [84322 84530])
+            ("copy_to_graph_uninitialized" function
+               (:documentation "Copies an existing variable to a new graph, with no initializer."
+                :arguments 
+                  ( ("var" variable nil (reparse-symbol function_parameters) [84564 84567]))                  )
+                nil [84532 85174])
+            ("ops" code nil nil [85175 85206])
+            ("ops" code nil nil [85207 85250])
+            ("ops" code nil nil [85251 85289])
+            ("VariableSpec" type
+               (:documentation "Describes a tf.Variable."
+                :superclasses ("tensor_spec.DenseSpec")
+                :members 
+                  ( ("__slots__" variable nil (reparse-symbol indented_block_body) [85371 85385])
+                    ("value_type" variable nil (reparse-symbol indented_block_body) [85389 85445])
+                    ("_to_components" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [85468 85472])
+                            ("value" variable nil (reparse-symbol function_parameters) [85474 85479]))                          )
+                        (reparse-symbol indented_block_body) [85449 85512])
+                    ("_from_components" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [85536 85540])
+                            ("components" variable nil (reparse-symbol function_parameters) [85542 85552]))                          )
+                        (reparse-symbol indented_block_body) [85515 85585])
+                    ("_from_compatible_tensor_list" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [85621 85625])
+                            ("tensor_list" variable nil (reparse-symbol function_parameters) [85627 85638]))                          )
+                        (reparse-symbol indented_block_body) [85588 85700]))                  
+                :type "class")
+                nil [85292 85700])
+            ("_pywrap_utils" code nil nil [85702 85758]))          
+      :file "resource_variable_ops.py"
+      :pointmax 85759
+      :fsize 85758
+      :lastmodtime '(24344 16516 34667 253000)
+      :unmatched-syntax '((NAME 67971 . 67984) (IF 68001 . 68003) (ELSE 68024 . 68028) (INDENT_BLOCK 65183 . 65494) (NEWLINE 65133 . 65134) (COLON 65132 . 65133) (WITH 64986 . 64990) (COMMA 65020 . 65021) (INDENT_BLOCK 63356 . 63526) (NEWLINE 63355 . 63356) (COLON 63354 . 63355) (WITH 63290 . 63294) (COMMA 63324 . 63325) (INDENT_BLOCK 45820 . 46316) (NEWLINE 45819 . 45820) (COLON 45818 . 45819) (WITH 45758 . 45762) (COMMA 45789 . 45790) (INDENT_BLOCK 31124 . 31288) (NEWLINE 31123 . 31124) (COLON 31122 . 31123) (WITH 31062 . 31066) (COMMA 31093 . 31094) (INDENT_BLOCK 30109 . 30273) (NEWLINE 30108 . 30109) (COLON 30107 . 30108) (WITH 30047 . 30051) (COMMA 30078 . 30079)))
+    (semanticdb-table "semanticdb-table"
+      :file "gen_resource_variable_ops.py"
+      :fsize 53218
+      :lastmodtime '(24344 16516 14667 272000)))
+  :file "!usr!local!lib!python3.8!dist-packages!tensorflow!python!ops!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

@@ -17,6 +17,9 @@
  '(global-ede-mode t)
  '(inhibit-startup-screen t)
  '(initial-buffer-choice nil)
+ '(package-selected-packages
+   (quote
+    (eradio ess-R-data-view ess slack python-pytest python-black markdown-mode+ json-mode eimp auto-complete)))
  '(scroll-bar-mode nil)
  '(semantic-mode t)
  '(show-paren-mode t)
@@ -33,9 +36,25 @@
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 
-(set-frame-parameter (selected-frame) 'alpha '(85 85))
-(add-to-list 'default-frame-alist '(alpha) '(85 85))
+(set-frame-parameter (selected-frame) 'alpha '(95 85))
+(add-to-list 'default-frame-alist '(alpha) '(95 85))
+(defun toggle-transparency ()
+  (interactive)
+  (let ((alpha (frame-parameter nil 'alpha)))
+    (if (eq
+     (if (numberp alpha)
+         alpha
+       (cdr alpha)) ; may also be nil
+     100)
+    (set-frame-parameter nil 'alpha '(85 . 50))
+      (set-frame-parameter nil 'alpha '(100 . 100)))))
 
+(defun light-colors()
+  "high contrast for sunny days"
+  (set-background-color white)
+  (set-foreground-color black)
+  )
+;;(global-set-key (kbd "C-/") 'light-colors)
 
 ;;(set-face-attribute 'default nil :background "black"
 ;; :foreground "white" :font "Sans" :height 160)
@@ -71,13 +90,12 @@
 
 ;;----------------------------------PACKAGES---------------------------------------
 (require 'package) 
-(add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (when (< emacs-major-version 24)
   ;; For important compatibility libraries like cl-lib
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 (package-initialize)
- 
+
 (let ((default-directory  "~/.emacs.d/"))
   (normal-top-level-add-subdirs-to-load-path))
 
@@ -99,7 +117,7 @@
   (let ((b (if mark-active (min (point) (mark)) (point-min)))
         (e (if mark-active (max (point) (mark)) (point-max))))
     (shell-command-on-region b e
-     "python -mjson.tool" (current-buffer) t)))
+			     "python -mjson.tool" (current-buffer) t)))
 
 ;; (use-package markdown-mode
 ;;   :ensure t
@@ -128,9 +146,20 @@
 ;;  (interactive)
 ;;  (pop-to-buffer (make-comint "Node Shell" "node" nil "~/bin/node-in-node.js")))cd
 ;;
+
+(add-to-list 'auto-mode-alist '("\\.R\\'" . ess-r-mode))
+(add-hook 'ess-mode-hook 
+          (lambda () 
+            (local-set-key (kbd "RET") 'newline)))
+(setq ess-indent-with-fancy-comments nil)
+(require 'ess)
+
+
 (load-file "~/.emacs.d/web-mode.el")
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.ts\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.tpl\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
@@ -142,7 +171,7 @@
 (add-to-list 'auto-mode-alist '("\\.api\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("/some/react/path/.*\\.js[x]?\\'" . web-mode))
 (setq web-mode-content-types-alist
-     '(("json" . "/some/path/.*\\.api\\'")
+      '(("json" . "/some/path/.*\\.api\\'")
 	("xml"  . "/other/path/.*\\.api\\'")
 	("jsx"  . "/some/react/path/.*\\.js[x]?\\'")))
 (load-file "~/.emacs.d/web-beautify.el")
@@ -161,6 +190,8 @@
 
 (eval-after-load 'css-mode
   '(define-key css-mode-map (kbd "C-c b") 'web-beautify-css))
+
+
 ;;(load-file "~/.emacs.d/js-comint.el")
 ;;(require 'js-comint)
 ;;(setq inferior-js-program-command "/usr/bin/java org.mozilla.javascript.tools.shell.Main")
@@ -178,9 +209,10 @@
 ;;		("\\.php3$" . two-mode-mode) )
 ;;	      auto-mode-alist) )
 (load-file "~/.emacs.d/yaml-mode.el")
-(add-hook 'yaml-mode-hook
-        (lambda ()
-            (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
+(;;add-hook 'yaml-mode-hook
+	  (lambda ()
+           (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
+
 ;; (load-file "~/.emacs.d/php-mode.el")
 ;; (load-file "~/.emacs.d/multi-web-mode.el")
 ;; (require 'multi-web-mode)
@@ -203,20 +235,20 @@
 ;;------------------------------------BACKUP---------------------------------
 (desktop-save-mode 1)
 (setq
- backup-by-copying t      ; don't clobber symlinks
- backup-directory-alist
- '(("." . "~/.emacs.d/saves/"))    ; don't litter my fs tree
- delete-old-versions t
- kept-new-versions 6
- kept-old-versions 2
- version-control t) 
+backup-by-copying t      ; don't clobber symlinks
+backup-directory-alist
+'(("." . "~/.emacs.d/saves/"))    ; don't litter my fs tree
+delete-old-versions t
+kept-new-versions 6
+kept-old-versions 2
+version-control t) 
 
 (setq temporary-file-directory "~/lav/tmp/")
 (setq small-temporary-file-directory "~/lav/tmp/")
 
 ;;-----------------------------------interactive-----------------------------
 ;; (autoload 'python-mode "python-mode" "Python Mode." t)
-(add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
+(add-to-list 'auto-mode-alist '("\\.py*\\'" . python-mode))
 (add-to-list 'interpreter-mode-alist '("python" . python-mode))
 (setq python-shell-interpreter "/usr/bin/python3"
       python-shell-interpreter-args "-i")
@@ -259,30 +291,29 @@
 ;;   + `python-shell-prompt-input-regexps'
 ;;   + `python-shell-prompt-output-regexps'
 
+;; (ac-config-default)
+;; (defvar ac-source-python
+;;   '((candidates .
+;; 		(lambda ()
+;; 		  (mapcar '(lambda (completion)
+;; 			     (first (last (split-string completion "\\." t))))
+;; 			  (python-symbol-completions (python-partial-symbol)))))))
+;; (add-hook 'python-mode-hook
+;; 	  (lambda() (setq ac-sources '(ac-source-python))))
+;; (define-key ac-completing-map "\ESC/" 'ac-stop)
 
-(ac-config-default)
-(defvar ac-source-python
-  '((candidates .
-		(lambda ()
-		  (mapcar '(lambda (completion)
-			     (first (last (split-string completion "\\." t))))
-			  (python-symbol-completions (python-partial-symbol)))))))
-(add-hook 'python-mode-hook
-	  (lambda() (setq ac-sources '(ac-source-python))))
-(define-key ac-completing-map "\ESC/" 'ac-stop)
+;; (define-key isearch-mode-map (kbd "<left>") 'isearch-repeat-backward)
+;; (global-set-key (kbd "<f4>") (lambda () (interactive) (setq current-prefix-arg '(4)) (call-interactively 'compile)))
 
-;;(define-key isearch-mode-map (kbd "<left>") 'isearch-repeat-backward)
-;;(global-set-key (kbd "<f4>") (lambda () (interactive) (setq current-prefix-arg '(4)) (call-interactively 'compile)))
-
-;;(custom-set-variables
+;; (custom-set-variables
 ;;  '(auto-save-file-name-transforms '((".*" "~/.emacs.d/saves/\\1" t)))
 ;;  '(backup-directory-alist '((".*" . "~/.emacs.d/backups/"))))
-;;
-;;(setq backup-directory-alist
+
+;; (setq backup-directory-alist
 ;;      `((".*" . ,temporary-file-directory)))
-;;(setq auto-save-file-name-transforms
+;; (setq auto-save-file-name-transforms
 ;;      `((".*" ,temporary-file-directory t)))
-;;
+
 ;; (defun join-lines (arg)
 ;;   (interactive "p")
 ;;   (end-of-line)
@@ -294,13 +325,32 @@
 ;;   (next-line)
 ;;   (join-line)
 ;;   (delete-horizontal-space))
-(defun  inskcape-test ()
-  (let*
-    ((desktop (dbus-call-method
-               :session "org.inkscape" "/org/inkscape/application"
-               "org.inkscape.application" "desktop_new"))
-     (rect (dbus-call-method
-               :session "org.inkscape" desktop
-               "org.inkscape.document" "rectangle" :int32 100 :int32  100 :int32  100 :int32  100))
-           )))
-			
+;; (defun  inskcape-test ()
+;;  (let*
+;;      ((desktop (dbus-call-method
+;; 		 :session "org.inkscape" "/org/inkscape/application"
+;; 		 "org.inkscape.application" "desktop_new"))
+;;       (rect (dbus-call-method
+;; 	      :session "org.inkscape" desktop
+;; 	      "org.inkscape.document" "rectangle" :int32 100 :int32  100 :int32  100 :int32  100))
+;;       )))
+
+;; find aspell and hunspell automatically
+
+;; (cond
+;;  ;; try hunspell at first
+;;  ;; if hunspell does NOT exist, use aspell
+;;  ((executable-find "hunspell")
+;;   (setq ispell-program-name "hunspell")
+;;   (setq ispell-local-dictionary "en_US")
+;;   (setq ispell-local-dictionary-alist
+;;         ;; Please note the list `("-d" "en_US")` contains ACTUAL parameters passed to hunspell
+;;         ;; You could use `("-d" "en_US,en_US-med")` to check with multiple dictionaries
+;;         '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US") nil utf-8))))
+
+;;  ((executable-find "aspell")
+;;   (setq ispell-program-name "aspell")
+;;   ;; Please note ispell-extra-args contains ACTUAL parameters passed to aspell
+;;   (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_US"))))
+
+

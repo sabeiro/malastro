@@ -8,6 +8,7 @@ case $1 in
 	;;
 	port) #connect to port
 		telnet $hostA $port
+		curl -v telnet://$hostA:$port
 		netcat -p $port -w 5 $hostA 42
 		nc -zv $hostA $port
 	;;
@@ -15,7 +16,9 @@ case $1 in
 		lsof -i :$port
 		nstat -tln | grep $port
 		netstat -ntpl | grep $port
-		sudo netstat -tulpn | grep -i listen 
+		sudo lsof -i -n -P | grep TCP | more
+		sudo ss -tulpn | grep $port
+		sudo netstat -tulpen | grep LISTEN 
 	;;
 	ip) #network spec
 		nslookup $hostA
@@ -23,6 +26,7 @@ case $1 in
 	firewall) #firewall
 		sudo ufw status 
 		sudo iptables -L
+		sudo ufw status numbered
 		#sudo ufw enable
 		#sudo ufw disable
 		#sudo ufw allow ssh
@@ -33,6 +37,7 @@ case $1 in
 	scan_net)
 		nmap -sn 129.168.0.0/24
 		sudo netdiscover -r 192.168.1.0/24 -i wlan0
+		ss -ltnp
 	*)
 		echo "net utils"
 	;;

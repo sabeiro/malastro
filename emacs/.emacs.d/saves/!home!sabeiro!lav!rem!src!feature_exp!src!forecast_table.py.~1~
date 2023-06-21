@@ -1,0 +1,463 @@
+import os, sys, gzip, random, json, datetime, re, io
+import pandas as pd 
+import numpy as np
+import matplotlib.pyplot as plt
+import scipy as sp
+
+import xgboost
+from statsmodels.graphics.tsaplots import plot_acf,plot_pacf 
+from statsmodels.tsa.seasonal import seasonal_decompose
+
+dL = os.listdir(os.environ['LAV_DIR']+'/src/')
+sys.path = list(set(sys.path + [os.environ['LAV_DIR']+'/src/'+x for x in dL]))
+baseDir = os.environ['LAV_DIR']
+import albio.forecast as a_f
+import albio.series_forecast as s_f
+import albio.series_stat as s_s
+import lernia.train_reshape as t_s
+import lernia.train_score as tsc
+import lernia.train_viz as t_v
+import lernia.train_model as t_m
+import deep_lernia.train_keras as t_k
+import deep_lernia.train_longShort as tls
+import importlib
+
+conf = s_f.standardConf()
+
+fName = baseDir + "rem/raw/telemetry_1sec.csv.gz"
+fName = baseDir + "rem/raw/spike_list.csv.gz"
+fName = baseDir + "rem/raw/spike_deci.csv.gz"
+featL = pd.read_csv(fName,compression="gzip")
+
+xL = ['object_distance','brake_pressure','force_lon','wheel_speed','vehicle_ping','rtp_lost','rtp_late','modem_rtt','modem_tx','camera_jitter','room_ram','room_cpu','vehicle_ram','vehicle_cpu']
+xL = ['object_distance','force_lat','steering_wheel','wheel_speed','vehicle_ping','rtp_lost','rtp_late','modem_tx','vehicle_ram','vehicle_cpu']
+xL = ['force_lon','wheel_speed','camera_jitter','arrival_time-Cellular 1','arrival_time-Cellular 2','arrival_time-Cellular 3','arrival_time-Cellular 4','bytes-Cellular 1','bytes-Cellular 2','bytes-Cellular 3','bytes-Cellular 4']
+yL = ['camera_latency','joystick_latency','e2e_latency']
+tL = xL + yL
+featL.loc[:,"from_peak"] = featL['from_peak'].apply(lambda x:  int( x*10 )/10. )
+serAv = featL.groupby('from_peak').agg(np.nanmean).reset_index()
+serVar = featL.groupby('from_peak').agg(np.std).reset_index()
+
+if False:
+    print('-----------------------xgboost-----------------------')
+    from xgboost import XGBRegressor
+    import xgboost as xgb
+    xL = ['force_lat','force_lon','wheel_speed','camera_jitter','arrival_time-Cellular 1','arrival_time-Cellular 2','arrival_time-Cellular 3','arrival_time-Cellular 4','bytes-Cellular 1','bytes-Cellular 2','bytes-Cellular 3','bytes-Cellular 4','camera_latency','joystick_latency','e2e_latency']
+    yL = ['from_peak']
+    n_train = 100
+    X = serAv[xL]
+    y = serAv[yL[0]]
+    X_train, X_test = X[:n_train], X[n_train:]
+    y_train, y_test = y[:n_train], y[n_train:]
+    model = XGBRegressor(objective='reg:squarederror', n_estimators=1000)
+    model.fit(X_train, y_train)
+    y_pred = model.predict(X_test)
+    print(tsc.calcMetrics(y_pred,y_test))
+    model = XGBRegressor(objective='reg:squarederror', n_estimators=1000)
+    model.fit(X, y)
+    y_pred = model.predict(X)
+    print(tsc.calcMetrics(y_pred,y))
+    plt.scatter(y_pred,y)
+    plt.show()
+
+    importlib.reload(t_m)
+    dall = xgb.DMatrix(X, label=y, nthread=-1)
+    dtrain = xgb.DMatrix(X_train, label=y_train, nthread=-1)
+    dtest = xgb.DMatrix(X_test, label=y_test, nthread=-1)
+    watchlist = [(dtrain, 'train'), (dtest, 'test')]
+    params = {'alpha': 0.15000000000000002,'eta': 0.02,'eval_metric': 'cox-nloglik','gamma': 0.26,'lambda': 1.4000000000000001,'max_depth': 9,'min_child_weight': 4,'objective': 'survival:cox','subsample': 0.8}
+    bst = xgb.train(params,dtrain,num_boost_round=100,evals=watchlist,early_stopping_rounds=5,verbose_eval=1)
+    y_pred = bst.predict(dtest)
+    plt.scatter(y_test,y_pred)
+    plt.show()
+    print(tsc.calcMetrics(y_pred,y_test))
+    y_pred = bst.predict(dall)
+    plt.scatter(y,y_pred)
+    plt.xlabel("from_peak")
+    plt.ylabel("prediction deviation")
+    plt.show()
+    print(tsc.calcMetrics(y_pred,y_test))
+    from sksurv.metrics import cumulative_dynamic_auc
+    from sksurv.util import Surv, check_y_survival
+
+    def target_to_time(x):
+        return abs(x) - (x >= 0).astype(int)
+
+    def target_to_event(x):
+        return (x >= 0)
+    
+    def sksurv_format(y):
+        return Surv.from_arrays(time=target_to_time(y),event=target_to_event(y))
+
+    y_pred = bst.predict(dtest)
+    t = target_to_time(y_test)
+    va_times = np.arange(min(t), max(t), 1)
+    va_auc, va_mean_auc = cumulative_dynamic_auc(
+        sksurv_format(y_train),
+        sksurv_format(y_test),
+        y_pred, va_times
+    )
+    plt.plot(va_times, va_auc, marker="o")
+    plt.axhline(va_mean_auc, linestyle="--")
+    plt.xlabel("seconds from spike")
+    plt.ylabel("time-dependent AUC")
+    plt.grid(True)
+    plt.show()
+
+    from sksurv.metrics import cumulative_dynamic_auc
+    from sksurv.util import Surv, check_y_survival
+    from sksurv.linear_model.coxph import BreslowEstimator
+    from sksurv.nonparametric import CensoringDistributionEstimator, SurvivalFunctionEstimator
+    from sklearn.utils import check_consistent_length, check_array
+    
+if False:
+    print('-----------------------forecast----------------------------')
+    importlib.reload(s_s)
+    def transform(X):
+        setL = X['from_peak'].abs() < 16
+        for t in tL:
+            X.loc[:,t] = s_s.interpMissing(X[t])
+            X.loc[:,t] = t_r.normPercentile(X[t],perc=[1,99])
+            X.loc[:,t] = s_s.interpMissing(X[t])
+            #X.loc[:,t] = s_s.serSmooth(X[t],width=5,steps=12)
+            #X.loc[:,t] = s_s.serRunAv(X[t],steps=12)
+            #X.loc[:,t] = X[t] - X[t].shift(1) 
+        X = X.loc[setL,:]
+        return X
+    
+    xL = ['object_distance','force_lat','steering_wheel','wheel_speed','vehicle_ping','rtp_lost','rtp_late','modem_tx','vehicle_ram','vehicle_cpu']
+    #xL = ['bytes-Cellular 1','bytes-Cellular 2','bytes-Cellular 3','bytes-Cellular 4']
+    yL = ['joystick_latency','camera_latency']
+    tL = yL + xL
+    feat = transform(featL.copy())
+    serAv = feat.groupby('from_peak').agg(np.nanmean).reset_index()
+    t_v.plotTimeSeries(serAv[tL],t=serAv['from_peak'])
+    plt.show()
+
+    importlib.reload(t_k)
+    importlib.reload(tls)
+    tK = tls.timeSeries(feat[tL])
+    tK.scale(feature_range=(-1,1))
+    if True:
+        tK.lstmBatch(batch_size=1,neurons=6)
+    else:
+        tK.loadModel(baseDir + "rem/train/lstm_camera_fore")
+        tK.model.compile(loss='mean_squared_error', optimizer='adam')
+    kpi = tK.train(batch_size=1,nb_epoch=10,portion=.8,shuffle=True)
+    X = serAv[tL]
+    tK.setX(X)
+    tK.scale()
+    for i in range(200):
+        kpi = tK.train(batch_size=1,nb_epoch=20,portion=.8,shuffle=True)
+
+    serL = np.unique(feat['series'])
+    for i in range(500):
+        s = np.random.choice(serL)
+        g = feat[feat['series'] == s]
+        X = g[tL]; y = g['camera_latency']
+        tK.setX(X); tK.setY(y); tK.scale()
+        kpi = tK.train(batch_size=1,nb_epoch=20,portion=.8,shuffle=True)
+
+    X = serAv[tL]; tK.setX(X); tK.scale()
+    for i in range(20):
+        kpi = tK.train(batch_size=1,nb_epoch=20,portion=.8,shuffle=True)
+
+    g = serAv
+    X = tK.scaleX(X=g[tL]).values
+    y_pred = tK.predict(X)
+    y_fore = tK.forecast(X)
+    plt.plot(g['from_peak'],X[:,1],label="test camera",linewidth=2)
+    plt.plot(g['from_peak'],y_pred[:,1],label="prediction camera")
+    plt.plot(g['from_peak'],y_fore[:,1],label="forecast camera")
+    plt.legend()
+    plt.show()
+    tK.plotHistory()
+    plt.show()
+
+    if False:
+        tK.saveModel(baseDir + "rem/train/lstm_camera_fore")
+        tK.saveModel(baseDir + "rem/train/lstm_camera_sec")
+
+if False:
+    print('------------------------------forecast-from-peak----------------------------')
+    importlib.reload(t_k)
+    importlib.reload(tls)
+    tK = tls.timeSeries(feat[tL])
+    tK.scale(feature_range=(-1,1))
+    tK.loadModel(baseDir + "rem/train/lstm_camera_sec")
+    tK.model.compile(loss='mean_squared_error', optimizer='adam')
+
+    def forePeak(g1):
+        g = g1[:6]
+        X = tK.scaleX(X=g[tL]).values
+        y_fore = tK.forecast(X)
+        t = g['from_peak'].values
+        max_camera = t[np.argmax(y_fore[:,1])]
+        max_joystick = t[np.argmax(y_fore[:,0])]
+        peak = {"series":i,"from_peak":x
+                ,"spike_camera":max(y_fore[:,1]),"spike_joystick":max(y_fore[:,0]),"max_camera":max_camera,"max_joystick":max_joystick}
+        fore = pd.DataFrame({"start":x,"joystick":X[:,0],"camera":X[:,1],"fore_camera":y_fore[:,1],"from_peak":g['from_peak'],"series":i})
+        return peak, fore
+    
+    foreL = [];  peakL = []
+    ser = serAv.copy()#[serAv['from_peak'].abs() < 16]
+    for x in ser['from_peak']:
+        print(x)
+        g = ser[ser['from_peak'] > x]
+        if len(g) == 0: break
+        peak, fore = forePeak(g)
+        peakL.append(peak)
+        foreL.append(fore)
+    foreS = pd.concat(foreL)
+    peakS = pd.DataFrame(peakL)
+
+    X = tK.scaleX(X=ser[tL])
+    plt.plot(ser['from_peak'],X['camera_latency'],label="average",linewidth=3)
+    plt.plot(peakS['from_peak'],peakS['spike_camera'],"--",label="peak forecasted")
+    #plt.plot(peakS['max_camera'],peakS['spike_camera'],"--",label="forecast average")
+    plt.legend()
+    plt.xlabel("seconds from peak")
+    plt.ylabel("latency normalized")
+    plt.show()
+    
+    X = tK.scaleX(X=ser[tL])
+    y_pred = tK.predict(X)
+    plt.plot(ser['from_peak'],X['camera_latency'],label="real",linewidth=2)
+    plt.plot(ser['from_peak'],y_pred[:,1],".-",label="prediction",color="green")
+    sL = [-2,-1,-0.8,-0.5,-0.1,0]
+    sL = [-6,-5,-4,-3,-2,-1,0,1]
+    sL = list(range(-12,2))
+    for i, j in enumerate(sL):
+        c = t_v.colorL[i]
+        g1 = ser[ser['from_peak'] > j]
+        g1 = g1[:6]
+        X = tK.scaleX(X=g1[tL]).values
+        y_fore = tK.forecast(X)
+        plt.plot(g1['from_peak'],y_fore[:,1],"--",label="forecast " + str(j),color=c)
+    plt.xlabel("seconds from peak")
+    plt.ylabel("normalized latency")
+    plt.legend()
+    plt.show()
+
+    foreL = []
+    peakL = []
+    ser = serAv.copy()#[serAv['from_peak'].abs() < 4]
+    j = 0
+    for i,g in feat.groupby('series'):
+        print(i)
+        print("process %.2f" % float(j/len(serL)))
+        j += 1
+        for x in ser['from_peak']:
+            g1 = g[g['from_peak'] > x]
+            if len(g1) == 0: break
+            peak, fore = forePeak(g1)
+            peakL.append(peak)
+            foreL.append(fore)
+
+    foreD = pd.concat(foreL)
+    peakD = pd.DataFrame(peakL)
+    foreD.to_csv(baseDir + "rem/raw/spike_forecast_sec.csv.gz",index=False)
+    peakD.to_csv(baseDir + "rem/raw/spike_forecast_sec_max.csv.gz",index=False)
+
+    t_v.plotBinned(peakD['from_peak'],peakD['spike_camera'],label="max forecast",alpha=0.01,isScatter=True)
+    X = tK.scaleX(X=ser[tL])
+    plt.plot(ser['from_peak'],X['camera_latency'],label="average",linewidth=3)
+    plt.legend()
+    plt.xlabel("seconds from peak")
+    plt.ylabel("latency normalized")
+    plt.show()
+
+    g = peakD[peakD['series'] == '10_s_148']
+    plt.bar(g['from_peak'],g['spike_camera'],label="spike camera",alpha=0.3,width=0.1)
+    plt.bar(g['from_peak'],g['spike_joystick'],label="spike joystick",alpha=0.3,width=0.1)
+    plt.legend()
+    plt.xlabel("from peak seconds")
+    plt.ylabel("spike")
+    plt.show()
+
+    importlib.reload(t_k)
+    importlib.reload(tls)
+    X = feat[xL + ['camera_latency'] ]
+    y = feat['camera_latency']
+    tK = tls.timeSeries(X)
+    tK.scale(feature_range=(-1,1))
+    tK.lstmBatch(batch_size=1,neurons=4)
+    #kpi = tK.train(batch_size=1,nb_epoch=1,portion=.8,shuffle=True)
+    X = serAv[xL + ['camera_latency'] ]
+    y = serAv['camera_latency']
+    tK.setX(X), tK.setY(y)
+    tK.scale()
+    
+    for i in range(10):
+        kpi = tK.train(batch_size=1,nb_epoch=10,portion=.8,shuffle=True)
+    fig, ax = plt.subplots(1,1)
+    ax.plot(tK.y,label="series",linewidth=2)
+    for lim in [40,80,120]:
+        t = [x for x in range(lim,len(y))]
+        tK.plotPrediction(tK.X[lim:],tK.y[lim:],t=t,ax=ax)
+    plt.show()
+    
+    #tK.saveModel(baseDir + "rem/train/lstm_camera08")
+    
+    fig, ax = plt.subplots(2,3)
+    ax = ax.flatten()
+    for a in ax:
+        s = np.random.choice(serL)
+        g = feat[feat['series'] == s]
+        n = 0#int(len(g)*np.random.random())
+        X = tK.scaleX(X=g[tL][n:])
+        y = tK.scaleY(g['camera_latency']).flatten()
+        t = g['from_peak'][n:]
+        #y_pred = tK.predict(tK.reshape(X.values)).flatten()
+        y_pred = tK.predict(X[n:].values)
+        a.set_title(s)
+        a.plot(g['from_peak'],y,label="real")
+        a.plot(t,y_pred[:,1],label="forecast")
+        a.legend()
+    plt.show()
+
+    spikeL = []
+    for i,g in featL.groupby('series'):
+        y = s_s.interpMissing(g['camera_latency'])
+        X = s_s.interpMissingMatrix(g[xL + ['camera_latency']])
+        tK.setX(X), tK.setY(y)
+        tK.scale()
+        y_pred = tK.predict(tK.reshape(tK.X.values))
+        sp1 =  1.*(tK.y[:,0] > 0.5)
+        sp2 =  1.*(y_pred[:,0] > 0.5)
+        spi = pd.DataFrame({"real":sp1,"pred":sp2,"series":s})
+        spikeL.append(spi)
+
+    spikeL = pd.concat(spikeL)
+    cm = t_v.plotConfMat(spikeL['real'],spikeL['pred'])
+    t_v.plotHeatmap(cm/cm.sum())
+    plt.title("confusion matrix")
+    plt.show()
+
+    perfL = tK.featKnockOut()
+    tK.plotFeatImportance(perfL)
+    plt.show()
+    
+if False: # forecast
+    n = 16
+    y = serAv['camera_latency']
+    X = serAv[xL]
+    t = serAv['from_peak']
+    importlib.reload(s_f)
+    importlib.reload(a_f)
+    yh, Xh, th = y[:-n], X[:-n], t[:-n]
+    tf = a_f.add_delta(t,n=n,dt="seconds")
+    #t1, pred_lst, c = a_f.forecast_lstm(th,Xh,yh,n=n)
+    t2, pred_mlp, c = a_f.mlp_regressor(th,Xh,yh,X,n=n)
+    t3, pred_pro, c = a_f.prophet(th,Xh,yh,X,n=n)
+    t4, pred_arm, c = a_f.arima(th,Xh,yh,n=n,conf=conf)
+    #t5, pred_biw, conf = a_f.trendFluct(th,xh,yh,n=n,conf=conf,isPlot=False)
+    
+    #plt.plot(t1,pred_lst,label="lmts")
+    plt.plot(th,yh,marker='o',linewidth=2,color="red",label="historical data")
+    plt.plot(t,y,linewidth=1,color="red",label="real data")
+    plt.fill_between(t3,pred_pro['yhat_upper'],pred_pro['yhat_lower'],color="#00004040",linestyle="--",label="confidence")
+    plt.plot(t3,pred_pro['trend'],label="prophet")
+    plt.plot(t2,pred_mlp,label="MLP regressor")
+    plt.plot(t4,pred_arm,label="arima")
+    #plt.plot(t5,pred_biw,label="biweek")
+    plt.legend()
+    plt.xticks(rotation=15)
+    plt.show()
+
+    
+
+
+if False:
+    print('-------------------------------distinguish-components------------------------')
+    import statsmodels.api as sm
+    dta = sm.datasets.co2.load_pandas().data
+    dta.co2.interpolate(inplace=True)
+    res = sm.tsa.seasonal_decompose(dta.co2)
+    res.plot()
+    plt.show()
+    
+    today = datetime.datetime.today().replace(microsecond=0)
+    serAv.index = [today + datetime.timedelta(seconds=x) for x in serAv['from_peak']]
+    serAv.index.freq = pd.infer_freq(serAv.index)
+    res = seasonal_decompose(serAv["camera_latency"],model="add")
+    res.plot()
+    plt.show()
+
+    
+
+
+
+# from pandas import DataFrame
+# from pandas import Series
+# from pandas import concat
+# from pandas import read_csv
+# from pandas import datetime
+# from sklearn.metrics import mean_squared_error
+# from sklearn.preprocessing import MinMaxScaler
+# from keras.models import Sequential
+# from keras.layers import Dense
+# from keras.layers import LSTM
+# from math import sqrt
+# from matplotlib import pyplot
+# from numpy import array
+
+# def series_to_supervised(data, n_in=1, n_out=1, dropnan=True):
+#     n_vars = 1 if type(data) is list else data.shape[1]
+#     df = DataFrame(data)
+#     cols, names = list(), list()
+#     for i in range(n_in, 0, -1):
+#         cols.append(df.shift(i))
+#         names += [('var%d(t-%d)' % (j+1, i)) for j in range(n_vars)]
+#     for i in range(0, n_out):
+#         cols.append(df.shift(-i))
+#         if i == 0:
+#             names += [('var%d(t)' % (j+1)) for j in range(n_vars)]
+#         else:
+#             names += [('var%d(t+%d)' % (j+1, i)) for j in range(n_vars)]
+#     agg = concat(cols, axis=1)
+#     agg.columns = names
+#     if dropnan:
+#         agg.dropna(inplace=True)
+#     return agg
+
+# n_lag = 2
+# n_seq = 1#3
+# n_test = 10
+# nb_epoch = 150
+# n_batch = 1
+# n_neurons = 1
+# diff_values = serAv[['joystick_latency','camera_latency']].values
+# scaler = MinMaxScaler(feature_range=(-1, 1))
+# scaled_values = scaler.fit_transform(diff_values)
+# supervised = series_to_supervised(scaled_values, n_lag, n_seq)
+# supervised_values = supervised.values
+# train, test = supervised_values[0:-n_test], supervised_values[-n_test:]
+# X, y = train[:, 0:n_lag], train[:, n_lag:]
+# X = X.reshape(X.shape[0], 1, X.shape[1])
+# model = Sequential()
+# model.add(LSTM(n_neurons, batch_input_shape=(n_batch, X.shape[1], X.shape[2]), stateful=True))
+# model.add(Dense(y.shape[1]))
+# model.compile(loss='mean_squared_error', optimizer='adam')
+# for i in range(nb_epoch):
+#     model.fit(X, y, epochs=1, batch_size=n_batch, verbose=2, shuffle=False)
+#     model.reset_states()
+# forecasts = list()
+# for i in range(len(test)):
+#     X, y = test[i, 0:n_lag], test[i, n_lag:]
+#     X = X.reshape(1, 1, len(X))
+#     forecast = model.predict(X, batch_size=n_batch)
+#     fore = [x for x in forecast[0, :]]
+#     forecasts.append(fore)
+
+# forecasts = np.asarray(forecasts)
+# plt.plot(test[:,0],label="test camera",linewidth=2)
+# plt.plot(forecasts[:,0],label="fore camera")
+# plt.plot(test[:,1],label="test joystick",linewidth=2)
+# plt.plot(forecasts[:,1],label="fore joystick")
+# plt.legend()
+# plt.show()
+
+
+
+

@@ -1,0 +1,19 @@
+HouseOneRoomNumber*(HouseOneUse+HouseOneRoofType+HouseOneFloorType+HouseOneWallType+HouseOneBuiltTime-4)+10*(HouseOneLummaConnection)
+
+ValueHouseOne+2*ValueHouseTwo+3*ValueHouseThree+4*ValueHouseFour+5*ValueHouseFive+6*ValueHouseSix+10*(KindofToilet-1)+10*(PortableWaterSource-1)
+
+
+frequencies variables = WealthIndex.
+
+compute Classes = 1.
+	if(WealthIndex >= 80) & (WealthIndex <= 120) Classes = 2.
+	if(WealthIndex >= 121) & (WealthIndex <= 600) Classes = 3.
+execute.
+
+crosstabs
+	/table = Lowestincome by Classes
+	/cells = count column.
+
+crosstabs
+	/tables = Highestincome by Classes
+	/cells = count column.

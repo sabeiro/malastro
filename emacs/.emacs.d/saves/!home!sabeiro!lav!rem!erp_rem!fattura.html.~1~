@@ -1,0 +1,291 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+    <head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="" class="entry-summary">
+	<meta name="author" content="">
+	<!-- <link rel="stylesheet" type="text/css" media="print" href="print.css" /> -->
+	<title>Fattura</title>
+
+	<style type="text/css" media="all">
+	 @font-face {
+	     font-family: themeFont;
+	     src: url("fonts/Oswald-Light.ttf");
+	 }
+	 html{
+	     background: url("img/SfondoKotobaAlpha.png") no-repeat center center fixed;
+	     /* -webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover; */
+	 }
+	 body{
+	     font-family: themeFont;
+	     margin: 0;
+	     padding: 0;
+	 }
+	 div.header{
+	     background:#ffffff;
+	     /* height:30px; */
+	     width:100%;
+	     position:fixed;
+	     display:inline-block;
+	     margin-top:0px;
+	     top:0px;
+	     margin-right:0;
+	     text-color:#ffffff;
+	     font-size:16px;
+	     z-index:999;
+	     text-align: left;
+	     opacity:0.5;
+	     vertical-align: top;
+	 }
+	 div.headerR{
+	     background:#ffffff;
+	     height:30px;
+	     width:350px;
+	     position:fixed;
+	     display:inline-block;
+	     margin-top:0px;
+	     margin-right:0px;
+	     top:0px;
+	     font-size:25px;
+	     z-index:999;
+	     text-align: left;
+	     opacity:0.9;
+	     float:right;
+	     right:0px;
+	 }
+	 div.footer{
+	     background:#ffffff;
+	     height:30px;
+	     width:100%;
+	     position:fixed;
+	     display:block;
+	     margin-bottom:0px;
+	     bottom:0px;
+	     margin-right:auto;
+	     margin-left:auto;
+	     color:#000000;
+	     font-size:14px;
+	     z-index:999;
+	     text-align: left;
+	 }
+	 table{
+	     margin:auto auto auto auto;
+	     overflow-x:auto;
+	     border-spacing: 0.5rem;
+	     border-collapse: collapse;
+	     font-size: 14px;
+	     /* margin: 45px; */
+	     /* text-align: left; */
+	     width: 680px;
+	     /* position:relative; */
+	     /* table-layout: fixed; */
+	 }
+	 .tableIt{
+	     margin:auto auto auto auto;
+	     overflow-y:scroll;
+	     max-height:300px;
+	     height:300px;
+	     width:90%;
+	     border:2px;
+	     border-color:#000000;
+	     border-spacing: 0.5rem;
+	     border-collapse: collapse;
+	     display:inline-block;
+	 }
+	 tbody {
+	     /* display: block; */
+	 }
+
+	 thead {
+	     /* display: block; */
+	     /* position: absolute; */
+	     /* display:inline; */
+	 }
+	 tr{
+	     border-bottom: 1px solid #ccc;
+	 }
+	 tr:last-child {
+	     border: none;
+	 }
+	 td{
+	     padding:5px 10px 0px 0px;
+	 }
+	 .custDet{
+	     margin:auto auto auto auto;
+	     display:inline-block;
+	 }
+	 .wrapper{
+	     position:relative;
+	     margin: 100px auto auto auto;
+	     float:bottom;
+	     width:50%;
+	     display:table;
+	     transform: translate(0%,10%);
+	 }
+	 .detTab{
+	     transform: translate(0%,10%);
+	     margin: auto auto 200px auto;
+	 }
+	 .send-to, .ship-to, .inv-det{
+	     /* position:absolute; */
+	     font-size:14px;
+	     width:200px;
+	     display:inline-block;
+	     vertical-align:top;
+	     /* float:top; */
+	     margin: 0 auto;
+	 }
+	 ul{
+	     /* list-style-image: url('sqpurple.gif'); */
+	     list-style: none outside none;
+	 }
+	 li {
+	     /* font: 200 20px/1.5 Helvetica, Verdana, sans-serif; */
+	 }
+	 li:last-child {
+	     border: none;
+	 }
+	 li a {
+	     text-decoration: none;
+	     color: #000;
+	     display: block;
+	     width: 200px;	     
+	     -webkit-transition: font-size 0.3s ease, background-color 0.3s ease;
+	     -moz-transition: font-size 0.3s ease, background-color 0.3s ease;
+	     -o-transition: font-size 0.3s ease, background-color 0.3s ease;
+	     -ms-transition: font-size 0.3s ease, background-color 0.3s ease;
+	     transition: font-size 0.3s ease, background-color 0.3s ease;
+	 }
+	 li a:hover {
+	     background: #f6f6f6;
+	 }
+	</style>
+    </head>
+    <body class="printable comments-exist" itemscope itemtype="http://schema.org/Article">
+	<div class="header">
+	    <ul><li>Giovanni Marelli <li></li> Via Renzano, 36 - 25087 Salò (BS) </li><li> P.iva IT03668250982  </li><li>marelli@inventati.org - dauvi.org</li></ul>
+	</div>
+	<div class="headerR">
+	    <ul><li>Data science: latency forecast</li></ul>
+	</div>
+	<div class="wrapper">
+	    <div class="custDet">
+		<div class="send-to">
+		    <b>Bill to:</b>
+		    <ul><li>Ree Technology GmbH</li>
+			<li>c/o The Drivery</li>
+			<li>Mariendorfer Damm 1</li>
+			<li>12099 Berlin</li>
+		    </ul>
+		</div>
+		<!-- <div class="ship-to">
+		     <b>Consegna a:</b>
+		     <ul><li>RubberDuck srl.</li>
+		     <li>Via Vittoria Colonna 50</li>
+		     <li>20149 Milano</li>
+		     <li>P.Iva IT07301490962</li>
+		     </ul>
+		     </div> -->
+		<div class="inv-det">
+		    <b>Details:</b>
+		    <ul><li>invoice #: <span id="invoice_id">1-03</span></li>
+			<li>issued: 2020/08/26</li>
+			<li>due: </li>
+		    </ul>
+		</div>
+	    </div><!-- custDet -->
+	    <div class="detTab">
+		<table id="itTab">
+		</table>
+	    </div>
+	    
+	</div>
+	<div class="footer"><i>Bank coordinate</i>: IT35D0511655180000000024893 <i>Beneficiary</i>: Marelli Giovanni</div>
+	<script src="js/modernizr-custom.js"></script>
+	<script src="js/jquery-3.0.0.min.js"></script>
+	<script src="js/jquery-migrate-1.4.1.min.js"></script>
+	<script>
+	 $(document).ready(function() {
+	     $.ajax({
+		 type: "GET",
+		 url: "worked_hours.csv",
+		 dataType: "text",
+		 success: function(data) {processData(data);}
+	     });
+	 });
+	 function parse_row(row){
+	     var insideQuote = false,                                             
+		 entries = [],                                                    
+		 entry = [];
+	     row.split('').forEach(function (character) {                         
+		 if(character === '"') {
+		     insideQuote = !insideQuote;                                      
+		 } else {
+		     if(character == "," && !insideQuote) {                           
+			 entries.push(entry.join(''));                                  
+			 entry = [];                                                    
+		     } else {
+			 entry.push(character);                                         
+		     }                                                                
+		 }                                                                  
+	     });
+	     entries.push(entry.join(''));                                        
+	     return entries;                                                      
+	 }
+	 function processData(allText) {
+	     var allTextLines = allText.split(/\r\n|\n/);
+	     var n_row = allTextLines.length
+	     var entries = parse_row(allTextLines[0]);
+	     var header = entries;
+	     var n_col = entries.length;
+	     var lines = [];
+	     var tabTxt = '<thead><tr>';
+	     var tabTot = 0;
+	     var tabPr = 0;
+	     var cw = "31";
+	     for(var h in header){
+		 tabTxt += '<td>' + header[h] + '</td>';
+	     }
+	     tabTxt += '</tr></thead>'
+	     tabTxt += '<tbody>';
+	     for(var r=1;r<n_row-1;r++){
+		 var row = {};
+		 var entries = parse_row(allTextLines[r]);
+		 cw = entries[3];
+		 tabTxt += '<tr>'
+		 for(var c=0;c<n_col;c++){
+		     var field = entries[c].replace(/['"]+/g, '');
+		     tabTxt += '<td>' + field + '</td>';
+		     row[header[c]] = entries[c];
+		 }
+		 tabTxt += '</tr>'
+		 tabTot += parseFloat(row['total']);
+		 lines.push(row);
+	     }
+	     tabPr = tabTot * 80.;
+	     tabTxt += '<tr><td>'+ '<b>Total:</b>' + '</td><td></td><td></td><td></td><td>' +  tabTot + 'h</td><td>' +   tabPr + '€</td></tr>';
+	     tabTxt += '</tbody>';
+	     $('#itTab').html(tabTxt);
+	     $('#invoice_id').text("20-" + cw);
+
+	     
+	     /* var lines = [];
+		var record_num = entries.length;  // or however many elements there are in each row
+		var headings = entries.splice(0,record_num);
+		console.log(allTextLines);
+		while (entries.length>0) {
+		var tarr = [];
+		for (var j=0; j<record_num; j++) {
+		tarr.push(headings[j]+":"+entries.shift());
+		}
+		lines.push(tarr);
+		}
+		console.log(lines); */
+	 }
+	 
+	</script>
+    </body>
+</html>

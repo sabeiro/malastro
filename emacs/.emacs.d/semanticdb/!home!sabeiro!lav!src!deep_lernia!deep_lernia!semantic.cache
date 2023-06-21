@@ -1,0 +1,677 @@
+;; Object semanticdb-project-database-file
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "semanticdb-project-database-file"
+  :tables
+  (list
+    (semanticdb-table "semanticdb-table"
+      :major-mode python-mode
+      :tags 
+        '( ("\"\"\"
+train_longShort:
+implementation of the long short term memory to forecast time series
+\"\"\"" code nil nil [1 94])
+            ("re" include nil nil [96 129])
+            ("datetime" include nil nil [96 129])
+            ("json" include nil nil [96 129])
+            ("random" include nil nil [96 129])
+            ("numpy" include nil nil [130 148])
+            ("pandas" include nil nil [149 168])
+            ("scipy" include nil nil [169 187])
+            ("matplotlib.pyplot" include nil nil [188 219])
+            ("keras" include nil nil [220 232])
+            ("tensorflow" include nil nil [233 250])
+            ("keras" include nil nil [251 281])
+            ("keras.layers" include nil nil [282 393])
+            ("keras.layers" include nil nil [394 466])
+            ("keras.models" include nil nil [467 509])
+            ("keras.callbacks" include nil nil [510 549])
+            ("keras.preprocessing.text" include nil nil [550 596])
+            ("keras.preprocessing.sequence" include nil nil [597 651])
+            ("sklearn.model_selection" include nil nil [652 704])
+            ("keras.utils" include nil nil [705 743])
+            ("keras.models" include nil nil [744 779])
+            ("sklearn.preprocessing" include nil nil [781 857])
+            ("sklearn.metrics" include nil nil [858 904])
+            ("keras.wrappers.scikit_learn" include nil nil [905 959])
+            ("sklearn.model_selection" include nil nil [960 1011])
+            ("sklearn.model_selection" include nil nil [1012 1053])
+            ("sklearn.pipeline" include nil nil [1054 1091])
+            ("lernia.train_score" include nil nil [1093 1125])
+            ("deep_lernia.train_keras" include nil nil [1126 1172])
+            ("timeSeries" type
+               (:documentation "keras on time series"
+                :superclasses ("trainKeras")
+                :members 
+                  ( ("__init__" function
+                       (:suite 
+                          ( ("\"\"\"initiate parent and set Xy\"\"\"" code nil (reparse-symbol indented_block_body) [1279 1311])
+                            ("trainKeras" code nil (reparse-symbol indented_block_body) [1320 1347]))                          
+                        :parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [1253 1257])
+                            ("X" variable nil (reparse-symbol function_parameters) [1258 1259])
+                            ("y" variable nil (reparse-symbol function_parameters) [1260 1261]))                          
+                        :documentation "initiate parent and set Xy"
+                        :constructor-flag t)
+                        (reparse-symbol indented_block_body) [1240 1348])
+                    ("longShort" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [1367 1371]))                          
+                        :documentation "define an autoencoder model")
+                        (reparse-symbol indented_block_body) [1353 1753])
+                    ("textModel" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [1772 1776])
+                            ("max_words" variable nil (reparse-symbol function_parameters) [1777 1786])
+                            ("max_phrase_len" variable nil (reparse-symbol function_parameters) [1791 1805]))                          
+                        :documentation "define a model for text")
+                        (reparse-symbol indented_block_body) [1758 2336])
+                    ("modelXgboost" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [2359 2363]))                          
+                        :documentation "define xgboost model")
+                        (reparse-symbol indented_block_body) [2342 2590])
+                    ("modelLongShort" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [2631 2635])
+                            ("input_shape" variable nil (reparse-symbol function_parameters) [2636 2647]))                          
+                        :documentation "define baseline model")
+                        (reparse-symbol indented_block_body) [2612 3112])
+                    ("lstmBatch" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [3131 3135])
+                            ("batch_size" variable nil (reparse-symbol function_parameters) [3136 3146])
+                            ("neurons" variable nil (reparse-symbol function_parameters) [3150 3157])
+                            ("n_in" variable nil (reparse-symbol function_parameters) [3161 3165])
+                            ("n_out" variable nil (reparse-symbol function_parameters) [3169 3174]))                          
+                        :documentation " long short with batch_size")
+                        (reparse-symbol indented_block_body) [3117 3549])
+                    ("longShortDeep" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [3572 3576])
+                            ("batch_size" variable nil (reparse-symbol function_parameters) [3577 3587])
+                            ("neurons" variable nil (reparse-symbol function_parameters) [3591 3598])
+                            ("n_in" variable nil (reparse-symbol function_parameters) [3603 3607])
+                            ("n_out" variable nil (reparse-symbol function_parameters) [3611 3616]))                          
+                        :documentation " long short with batch_size")
+                        (reparse-symbol indented_block_body) [3554 4153])
+                    ("newModel" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [4179 4183]))                          
+                        :documentation "define a new model")
+                        (reparse-symbol indented_block_body) [4166 4299])
+                    ("defModel" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [4325 4329]))                          
+                        :documentation "create or return an existing model")
+                        (reparse-symbol indented_block_body) [4312 4461])
+                    ("toSupervised" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [4487 4491])
+                            ("X" variable nil (reparse-symbol function_parameters) [4492 4493])
+                            ("n_in" variable nil (reparse-symbol function_parameters) [4494 4498])
+                            ("n_out" variable nil (reparse-symbol function_parameters) [4501 4506]))                          
+                        :documentation "perform a n_in shift for each of training feature")
+                        (reparse-symbol indented_block_body) [4470 5106])
+                    ("shiftColumns" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [5128 5132])
+                            ("X" variable nil (reparse-symbol function_parameters) [5133 5134])
+                            ("n_in" variable nil (reparse-symbol function_parameters) [5135 5139]))                          
+                        :documentation "perform a n_in shift for each of training feature")
+                        (reparse-symbol indented_block_body) [5111 5394])
+                    ("splitSet" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [5417 5421])
+                            ("X1" variable nil (reparse-symbol function_parameters) [5422 5424])
+                            ("portion" variable nil (reparse-symbol function_parameters) [5425 5432])
+                            ("n_in" variable nil (reparse-symbol function_parameters) [5437 5441])
+                            ("n_out" variable nil (reparse-symbol function_parameters) [5444 5449])
+                            ("shuffle" variable nil (reparse-symbol function_parameters) [5452 5459]))                          
+                        :documentation "overwrite split set preparing Xy")
+                        (reparse-symbol indented_block_body) [5404 6387])
+                    ("train" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [6402 6406])
+                            ("batch_size" variable nil (reparse-symbol function_parameters) [6407 6417])
+                            ("nb_epoch" variable nil (reparse-symbol function_parameters) [6420 6428])
+                            ("shuffle" variable nil (reparse-symbol function_parameters) [6433 6440])
+                            ("calc_metrics" variable nil (reparse-symbol function_parameters) [6447 6459])
+                            ("portion" variable nil (reparse-symbol function_parameters) [6466 6473])
+                            ("n_in" variable nil (reparse-symbol function_parameters) [6479 6483])
+                            ("n_out" variable nil (reparse-symbol function_parameters) [6486 6491])
+                            ("args" variable nil (reparse-symbol function_parameters) [6494 6500]))                          
+                        :documentation "train a baseline model resetting the states every nb_epochs")
+                        (reparse-symbol indented_block_body) [6392 7333])
+                    ("evaluate" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [7351 7355])
+                            ("shuffle" variable nil (reparse-symbol function_parameters) [7356 7363])
+                            ("mode" variable nil (reparse-symbol function_parameters) [7369 7373])
+                            ("portion" variable nil (reparse-symbol function_parameters) [7385 7392])
+                            ("n_in" variable nil (reparse-symbol function_parameters) [7397 7401])
+                            ("n_out" variable nil (reparse-symbol function_parameters) [7404 7409]))                          
+                        :documentation "evaluate performances")
+                        (reparse-symbol indented_block_body) [7338 7774])
+                    ("trainCross" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [7798 7802])
+                            ("X_test" variable nil (reparse-symbol function_parameters) [7803 7809])
+                            ("batch_size" variable nil (reparse-symbol function_parameters) [7810 7820])
+                            ("nb_epoch" variable nil (reparse-symbol function_parameters) [7823 7831])
+                            ("calc_metrics" variable nil (reparse-symbol function_parameters) [7836 7848])
+                            ("n_in" variable nil (reparse-symbol function_parameters) [7855 7859])
+                            ("n_out" variable nil (reparse-symbol function_parameters) [7862 7867]))                          
+                        :documentation "train a baseline model resetting the states every nb_epochs")
+                        (reparse-symbol indented_block_body) [7783 8810])
+                    ("trainBoost" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [8830 8834])
+                            ("shuffle" variable nil (reparse-symbol function_parameters) [8835 8842])
+                            ("calc_metrics" variable nil (reparse-symbol function_parameters) [8849 8861])
+                            ("portion" variable nil (reparse-symbol function_parameters) [8868 8875])
+                            ("n_in" variable nil (reparse-symbol function_parameters) [8881 8885])
+                            ("n_out" variable nil (reparse-symbol function_parameters) [8888 8893])
+                            ("args" variable nil (reparse-symbol function_parameters) [8896 8902]))                          
+                        :documentation "train a baseline model resetting the states every nb_epochs")
+                        (reparse-symbol indented_block_body) [8815 10269])
+                    ("predict" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [10287 10291])
+                            ("X_test" variable nil (reparse-symbol function_parameters) [10292 10298])
+                            ("batch_size" variable nil (reparse-symbol function_parameters) [10299 10309])
+                            ("n_in" variable nil (reparse-symbol function_parameters) [10312 10316]))                          
+                        :documentation "prediction for the short long term memory")
+                        (reparse-symbol indented_block_body) [10275 10864])
+                    ("forecast" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [10887 10891])
+                            ("X_test" variable nil (reparse-symbol function_parameters) [10892 10898])
+                            ("batch_size" variable nil (reparse-symbol function_parameters) [10899 10909])
+                            ("n_in" variable nil (reparse-symbol function_parameters) [10912 10916]))                          
+                        :documentation "forecast using longshort")
+                        (reparse-symbol indented_block_body) [10874 11606])
+                    ("forecastLongShort" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [11633 11637])
+                            ("y" variable nil (reparse-symbol function_parameters) [11638 11639])
+                            ("ahead" variable nil (reparse-symbol function_parameters) [11640 11645])
+                            ("epoch" variable nil (reparse-symbol function_parameters) [11649 11654])
+                            ("n_in" variable nil (reparse-symbol function_parameters) [11658 11662])
+                            ("n_out" variable nil (reparse-symbol function_parameters) [11665 11670]))                          
+                        :documentation "forecast on ahead time points")
+                        (reparse-symbol indented_block_body) [11611 12482])
+                    ("reshape" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [12499 12503])
+                            ("X" variable nil (reparse-symbol function_parameters) [12504 12505])
+                            ("mode" variable nil (reparse-symbol function_parameters) [12506 12510])
+                            ("batch_size" variable nil (reparse-symbol function_parameters) [12516 12526]))                          
+                        :documentation "reshape the input dataset")
+                        (reparse-symbol indented_block_body) [12487 12694]))                  
+                :type "class")
+                nil [1175 12694]))          
+      :file "train_longShort.py"
+      :pointmax 12699
+      :fsize 12698
+      :lastmodtime '(24437 56571 607281 182000)
+      :unmatched-syntax nil)
+    (semanticdb-table "semanticdb-table"
+      :major-mode python-mode
+      :tags 
+        '( ("\"\"\"
+train_keras:
+parent class for keras learning  
+\"\"\"" code nil nil [1 55])
+            ("re" include nil nil [57 90])
+            ("datetime" include nil nil [57 90])
+            ("json" include nil nil [57 90])
+            ("random" include nil nil [57 90])
+            ("numpy" include nil nil [91 109])
+            ("pandas" include nil nil [110 129])
+            ("scipy" include nil nil [130 148])
+            ("matplotlib.pyplot" include nil nil [149 180])
+            ("keras" include nil nil [181 193])
+            ("tensorflow" include nil nil [194 211])
+            ("keras" include nil nil [212 242])
+            ("keras.layers" include nil nil [243 354])
+            ("keras.models" include nil nil [355 397])
+            ("keras.callbacks" include nil nil [398 447])
+            ("keras.wrappers.scikit_learn" include nil nil [448 502])
+            ("sklearn.preprocessing" include nil nil [503 579])
+            ("keras" include nil nil [580 608])
+            ("lernia.train_score" include nil nil [609 641])
+            ("lernia.train_viz" include nil nil [642 672])
+            ("getConf" function (:documentation "returns a standard configuration dict") nil [931 1286])
+            ("NBatchLogger" type
+               (:superclasses ("Callback")
+                :members 
+                  ( ("__init__" function
+                       (:suite 
+                          ( ("self" variable nil (reparse-symbol indented_block_body) [1358 1371])
+                            ("self" variable nil (reparse-symbol indented_block_body) [1380 1402]))                          
+                        :parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [1334 1338])
+                            ("display" variable nil (reparse-symbol function_parameters) [1340 1347]))                          
+                        :constructor-flag t)
+                        (reparse-symbol indented_block_body) [1321 1403])
+                    ("on_batch_end" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [1430 1434])
+                            ("batch" variable nil (reparse-symbol function_parameters) [1435 1440])
+                            ("logs" variable nil (reparse-symbol function_parameters) [1441 1445]))                          )
+                        (reparse-symbol indented_block_body) [1413 1702]))                  
+                :type "class")
+                nil [1287 1702])
+            ("trainKeras" type
+               (:documentation "train_keras basics utilities"
+                :members 
+                  ( ("__init__" function
+                       (:suite 
+                          ( ("\"\"\"save data set matrix\"\"\"" code nil (reparse-symbol indented_block_body) [1825 1851])
+                            ("if" code nil (reparse-symbol indented_block_body) [1860 1906])
+                            ("self" variable nil (reparse-symbol indented_block_body) [1914 1930])
+                            ("self" code nil (reparse-symbol indented_block_body) [1939 1951])
+                            ("if" code nil (reparse-symbol indented_block_body) [1960 1984])
+                            ("self" variable nil (reparse-symbol indented_block_body) [1992 2009]))                          
+                        :parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [1789 1793])
+                            ("X" variable nil (reparse-symbol function_parameters) [1794 1795])
+                            ("y" variable nil (reparse-symbol function_parameters) [1796 1797])
+                            ("conf" variable nil (reparse-symbol function_parameters) [1805 1809]))                          
+                        :documentation "save data set matrix"
+                        :constructor-flag t)
+                        (reparse-symbol indented_block_body) [1776 2010])
+                    ("setBoundary" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [2031 2035])
+                            ("X" variable nil (reparse-symbol function_parameters) [2036 2037]))                          
+                        :documentation "Save the normalization boundaries")
+                        (reparse-symbol indented_block_body) [2015 2467])
+                    ("setLimit" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [2485 2489])
+                            ("y" variable nil (reparse-symbol function_parameters) [2490 2491]))                          
+                        :documentation "Save the normalization boundaries")
+                        (reparse-symbol indented_block_body) [2472 2602])
+                    ("setOptimizer" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [2624 2628])
+                            ("name" variable nil (reparse-symbol function_parameters) [2629 2633])
+                            ("args" variable nil (reparse-symbol function_parameters) [2639 2645]))                          
+                        :documentation "set optimizer for the model")
+                        (reparse-symbol indented_block_body) [2607 3287])
+                    ("setModel" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [3305 3309])
+                            ("model" variable nil (reparse-symbol function_parameters) [3310 3315]))                          
+                        :documentation "set an external created model")
+                        (reparse-symbol indented_block_body) [3292 3389])
+                    ("setX" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [3411 3415])
+                            ("X" variable nil (reparse-symbol function_parameters) [3416 3417]))                          
+                        :documentation "reset data set")
+                        (reparse-symbol indented_block_body) [3402 3703])
+                    ("getX" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [3717 3721]))                          
+                        :documentation "return data set")
+                        (reparse-symbol indented_block_body) [3708 3776])
+                    ("setY" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [3790 3794])
+                            ("y" variable nil (reparse-symbol function_parameters) [3795 3796]))                          
+                        :documentation "reset data set")
+                        (reparse-symbol indented_block_body) [3781 4014])
+                    ("getY" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [4028 4032]))                          
+                        :documentation "return data set")
+                        (reparse-symbol indented_block_body) [4019 4087])
+                    ("getEpochs" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [4106 4110]))                          
+                        :documentation "return the total number of epochs")
+                        (reparse-symbol indented_block_body) [4092 4285])
+                    ("printModel" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [4305 4309]))                          
+                        :documentation "print current model")
+                        (reparse-symbol indented_block_body) [4290 4382])
+                    ("reshape" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [4399 4403])
+                            ("X" variable nil (reparse-symbol function_parameters) [4404 4405])
+                            ("mode" variable nil (reparse-symbol function_parameters) [4406 4410]))                          
+                        :documentation "reshape the input dataset")
+                        (reparse-symbol indented_block_body) [4387 4475])
+                    ("plotHistory" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [4500 4504])
+                            ("ax" variable nil (reparse-symbol function_parameters) [4505 4507]))                          
+                        :documentation "plot history of training performace")
+                        (reparse-symbol indented_block_body) [4484 5062])
+                    ("plotPrediction" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [5086 5090])
+                            ("X" variable nil (reparse-symbol function_parameters) [5091 5092])
+                            ("y" variable nil (reparse-symbol function_parameters) [5100 5101])
+                            ("t" variable nil (reparse-symbol function_parameters) [5109 5110])
+                            ("ax" variable nil (reparse-symbol function_parameters) [5118 5120])
+                            ("color" variable nil (reparse-symbol function_parameters) [5126 5131])
+                            ("reshape" variable nil (reparse-symbol function_parameters) [5137 5144]))                          
+                        :documentation "plot history of training performace")
+                        (reparse-symbol indented_block_body) [5067 5869])
+                    ("saveModel" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [5889 5893])
+                            ("fName" variable nil (reparse-symbol function_parameters) [5894 5899]))                          
+                        :documentation "save last trained model")
+                        (reparse-symbol indented_block_body) [5875 6314])
+                    ("loadModel" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [6333 6337])
+                            ("fName" variable nil (reparse-symbol function_parameters) [6338 6343]))                          
+                        :documentation "load trained model")
+                        (reparse-symbol indented_block_body) [6319 6749])
+                    ("getModel" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [6767 6771]))                          
+                        :documentation "return the encoder")
+                        (reparse-symbol indented_block_body) [6754 6913])
+                    ("delModel" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [6931 6935]))                          
+                        :documentation "delete current model")
+                        (reparse-symbol indented_block_body) [6918 7046])
+                    ("scale" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [7069 7073])
+                            ("feature_range" variable nil (reparse-symbol function_parameters) [7074 7087]))                          
+                        :documentation "scaler function")
+                        (reparse-symbol indented_block_body) [7059 7625])
+                    ("scaleX" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [7641 7645])
+                            ("X" variable nil (reparse-symbol function_parameters) [7646 7647])
+                            ("feature_range" variable nil (reparse-symbol function_parameters) [7651 7664]))                          
+                        :documentation "scaler function")
+                        (reparse-symbol indented_block_body) [7630 7982])
+                    ("scaleY" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [8350 8354])
+                            ("y" variable nil (reparse-symbol function_parameters) [8355 8356])
+                            ("feature_range" variable nil (reparse-symbol function_parameters) [8364 8377]))                          
+                        :documentation "scale the y")
+                        (reparse-symbol indented_block_body) [8339 8789])
+                    ("delScale" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [8807 8811]))                          
+                        :documentation "remove scaler from class")
+                        (reparse-symbol indented_block_body) [8794 8993])
+                    ("invert_scale" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [9027 9031])
+                            ("value" variable nil (reparse-symbol function_parameters) [9033 9038]))                          
+                        :documentation "invert scaled values")
+                        (reparse-symbol indented_block_body) [9010 9290])
+                    ("defConv2D" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [9313 9317]))                          
+                        :documentation "define a convolutional neural network for small images")
+                        (reparse-symbol indented_block_body) [9299 10076])
+                    ("newModel" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [10094 10098]))                          
+                        :documentation "pointer to the model")
+                        (reparse-symbol indented_block_body) [10081 10174])
+                    ("defModel" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [10200 10204]))                          
+                        :documentation "return a new model if not previously defined")
+                        (reparse-symbol indented_block_body) [10187 10415])
+                    ("splitSet" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [10433 10437])
+                            ("X1" variable nil (reparse-symbol function_parameters) [10438 10440])
+                            ("y" variable nil (reparse-symbol function_parameters) [10441 10442])
+                            ("shuffle" variable nil (reparse-symbol function_parameters) [10443 10450])
+                            ("portion" variable nil (reparse-symbol function_parameters) [10456 10463]))                          
+                        :documentation "split data set")
+                        (reparse-symbol indented_block_body) [10420 10979])
+                    ("evaluate" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [10997 11001])
+                            ("shuffle" variable nil (reparse-symbol function_parameters) [11002 11009])
+                            ("mode" variable nil (reparse-symbol function_parameters) [11015 11019])
+                            ("n_out" variable nil (reparse-symbol function_parameters) [11037 11042]))                          
+                        :documentation "evaluate performances")
+                        (reparse-symbol indented_block_body) [10984 11306])
+                    ("predict" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [11331 11335])
+                            ("X_test" variable nil (reparse-symbol function_parameters) [11336 11342]))                          
+                        :documentation "predict a trained model")
+                        (reparse-symbol indented_block_body) [11319 11425])
+                    ("train" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [11444 11448])
+                            ("y" variable nil (reparse-symbol function_parameters) [11449 11450])
+                            ("shuffle" variable nil (reparse-symbol function_parameters) [11458 11465])
+                            ("calc_metrics" variable nil (reparse-symbol function_parameters) [11471 11483])
+                            ("args" variable nil (reparse-symbol function_parameters) [11490 11496]))                          
+                        :documentation "train the current model, calculate scores")
+                        (reparse-symbol indented_block_body) [11434 12399])
+                    ("featKnockOut" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [12425 12429])
+                            ("X" variable nil (reparse-symbol function_parameters) [12430 12431])
+                            ("shuffle" variable nil (reparse-symbol function_parameters) [12439 12446])
+                            ("portion" variable nil (reparse-symbol function_parameters) [12452 12459])
+                            ("mode" variable nil (reparse-symbol function_parameters) [12464 12468]))                          
+                        :documentation "feature knock out, recursively remove one feature at time and calculate performances")
+                        (reparse-symbol indented_block_body) [12408 13276])
+                    ("plotFeatImportance" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [13308 13312])
+                            ("perfL" variable nil (reparse-symbol function_parameters) [13313 13318])
+                            ("ax" variable nil (reparse-symbol function_parameters) [13319 13321]))                          
+                        :documentation "boxplot of scores per feature")
+                        (reparse-symbol indented_block_body) [13285 13683]))                  
+                :type "class")
+                nil [1715 13683]))          
+      :file "train_keras.py"
+      :pointmax 13684
+      :fsize 13683
+      :lastmodtime '(24437 52539 773377 774000)
+      :unmatched-syntax nil)
+    (semanticdb-table "semanticdb-table"
+      :major-mode python-mode
+      :tags 
+        '( ("\"\"\"
+train_deep:
+implementation of keras library for deep learning predictors and regressors
+\"\"\"" code nil nil [1 96])
+            ("re" include nil nil [98 131])
+            ("datetime" include nil nil [98 131])
+            ("json" include nil nil [98 131])
+            ("random" include nil nil [98 131])
+            ("numpy" include nil nil [132 150])
+            ("pandas" include nil nil [151 170])
+            ("scipy" include nil nil [171 189])
+            ("matplotlib.pyplot" include nil nil [190 221])
+            ("keras" include nil nil [222 234])
+            ("tensorflow" include nil nil [235 252])
+            ("keras" include nil nil [253 283])
+            ("keras.layers" include nil nil [284 407])
+            ("keras.models" include nil nil [408 450])
+            ("keras.callbacks" include nil nil [451 490])
+            ("keras.wrappers.scikit_learn" include nil nil [491 545])
+            ("sklearn.preprocessing" include nil nil [546 622])
+            ("keras" include nil nil [623 651])
+            ("lernia.train_score" include nil nil [652 684])
+            ("deep_lernia.train_keras" include nil nil [685 731])
+            ("deep_lernia.train_keras" include nil nil [732 769])
+            ("getConf" function (:documentation "returns a standard configuration dict") nil [771 859])
+            ("regressor" type
+               (:documentation "keras regressor"
+                :superclasses ("trainKeras")
+                :members 
+                  ( ("__init__" function
+                       (:suite 
+                          ( ("trainKeras" code nil (reparse-symbol indented_block_body) [968 1002])
+                            ("self" variable nil (reparse-symbol indented_block_body) [1011 1035]))                          
+                        :parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [932 936])
+                            ("X" variable nil (reparse-symbol function_parameters) [937 938])
+                            ("y" variable nil (reparse-symbol function_parameters) [939 940])
+                            ("conf" variable nil (reparse-symbol function_parameters) [948 952]))                          
+                        :constructor-flag t)
+                        (reparse-symbol indented_block_body) [919 1036])
+                    ("setRegressor" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [1058 1062])
+                            ("name" variable nil (reparse-symbol function_parameters) [1063 1067])
+                            ("args" variable nil (reparse-symbol function_parameters) [1079 1085]))                          
+                        :documentation "set a regressor")
+                        (reparse-symbol indented_block_body) [1041 1311])
+                    ("baselineMod" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [1340 1344])
+                            ("layer" variable nil (reparse-symbol function_parameters) [1345 1350]))                          
+                        :documentation "define a baseline model")
+                        (reparse-symbol indented_block_body) [1324 1712])
+                    ("twoLayerMod" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [1741 1745])
+                            ("layer" variable nil (reparse-symbol function_parameters) [1746 1751]))                          
+                        :documentation "define a two layer regressor")
+                        (reparse-symbol indented_block_body) [1725 2150])
+                    ("threeLayerMod" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [2173 2177])
+                            ("layer" variable nil (reparse-symbol function_parameters) [2178 2183]))                          
+                        :documentation "define a two layer regressor")
+                        (reparse-symbol indented_block_body) [2155 2638])
+                    ("baseline" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [2665 2669])
+                            ("y" variable nil (reparse-symbol function_parameters) [2670 2671])
+                            ("n_fold" variable nil (reparse-symbol function_parameters) [2679 2685]))                          
+                        :documentation "run a baseline model")
+                        (reparse-symbol indented_block_body) [2652 3468]))                  
+                :type "class")
+                nil [860 3468])
+            ("predictor" type
+               (:documentation "keras regressor"
+                :superclasses ("trainKeras")
+                :members 
+                  ( ("__init__" function
+                       (:suite 
+                          ( ("\"\"\"call trainKeras constructor\"\"\"" code nil (reparse-symbol indented_block_body) [3566 3599])
+                            ("trainKeras" code nil (reparse-symbol indented_block_body) [3608 3635]))                          
+                        :parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [3549 3553])
+                            ("X" variable nil (reparse-symbol function_parameters) [3554 3555]))                          
+                        :documentation "call trainKeras constructor"
+                        :constructor-flag t)
+                        (reparse-symbol indented_block_body) [3536 3636])
+                    ("defConv2d" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [3655 3659])
+                            ("X" variable nil (reparse-symbol function_parameters) [3660 3661]))                          
+                        :documentation "define a two dimensional convolution neural network")
+                        (reparse-symbol indented_block_body) [3641 4475])
+                    ("categorical" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [4496 4500])
+                            ("n_cat" variable nil (reparse-symbol function_parameters) [4501 4506]))                          
+                        :documentation "set and compile a logistic model")
+                        (reparse-symbol indented_block_body) [4480 4948])
+                    ("logistic" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [4971 4975]))                          
+                        :documentation "set and compile a logistic model")
+                        (reparse-symbol indented_block_body) [4958 5066])
+                    ("catPictures" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [5092 5096])
+                            ("y" variable nil (reparse-symbol function_parameters) [5097 5098])
+                            ("epoch" variable nil (reparse-symbol function_parameters) [5099 5104]))                          
+                        :documentation "classify pictures by category")
+                        (reparse-symbol indented_block_body) [5076 6169]))                  
+                :type "class")
+                nil [3477 6169]))          
+      :file "train_deep.py"
+      :pointmax 7996
+      :fsize 7995
+      :lastmodtime '(24373 1566 54254 398000)
+      :unmatched-syntax nil))
+  :file "!home!sabeiro!lav!src!deep_lernia!deep_lernia!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

@@ -1,0 +1,59 @@
+## inter feature persistance
+
+We want to check which features are phased together. At first we calculate a correlation on a rolling window of a short period of 16 seconds
+
+![correlation_rolling](img/correlation_rolling.png)
+_correlation on a rolling window_
+
+Than we iterate over all features to understand which is the most temporarly correlating, we clearly see that most of the feature don't have a window correlation while vehicle ping does
+
+![sync_violin](img/sync_violin.png)
+_violin plot of correlation distribution_
+
+Apart from the trivial correlations we see that the networking features are the ones most correlating
+
+![sync_correlation](img/sync_correlation.png)
+_window correlation of features_
+
+If we look at the cross correlation with time delay we see again that `vehicle_ping` has the most persistent temporal correlation with `latency`. We realize that the upsampling creates artificial fluctuations every neighbouring second
+
+![sync_xcor](img/sync_xcor.pong)
+_cross correlation with delay_
+
+From the cross correlation we can compute the decay time
+
+![sync_decay](img/sync_decay.png)
+_exponential regression on the decay_
+
+We calculate for each feature a decay time
+
+![sync_decay](img/sync_decayExp.png)
+_regression on decays_
+
+and calculate the persistance as the sum of the decay curve over the decay interval
+
+![sync_persistance](img/sync_persistance.png)
+_persistance among features_
+
+We than iterate over all features and calculate the cross and auto persistance. Large values singalize a bad sampling (artificial similarity) 
+
+![sync_persistanceM](img/sync_persistanceM.png)
+_matrix of persistance among features_
+
+We now calculate the peak at the maximum cross correlation delay, smoothing is necessary to remove artefacts
+
+![sync_peak](img/sync_peak.png)
+_peak at the maximum cross correlation delay_
+
+Not all phase calculations lead to reasonable results, we see that many phase lag estimations are inconclusive, either null or fluctuating a lot. We are pretty cofindent that over the hundrets of spike events in general few features can anticipate the spike
+
+![sync_previous](img/sync_previous.png)
+_features with a negative time delay compared to camera latency_
+
+Data are pretty noisy and we want to establish temporal sorting for at least the average of all the spike events
+
+![phase_lag](img/phase_lag.png)
+_phase lag between features_
+
+We can roughly say that rtp and joystick features happen before the camera spike
+

@@ -1,0 +1,93 @@
+\documentclass[a4paper,12pt]{article}
+\title{\textbf{natbib.sty --- versione italiana}\\ 
+Prova del formato \emph{natbib\_ita}}
+\author{Vito Muggeo e Vittorio De Martino\\ \small {\texttt{ vitomuggeo@hotmail.com  v.demart@dada.it}}}
+\date{Settembre 2002}
+
+\usepackage[italian]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{a4}
+\usepackage{natbib}
+
+\begin{document}
+\maketitle
+
+\begin{center}{\large Attenzione questo documento è un `flash' sui formati \verb|natbib_ita.bst| e  \verb|plain_ita.bst| del pacchetto \textsf{natbib} scritti sostanzialmente per saggiare il loro utilizzo in lingua italiana.\\ Se riesci a leggerlo, allora puoi utilizzare \textsf{natbib} per i tui documenti !}
+\end{center}
+
+\section{Introduzione}
+
+\textsf{natbib} è un pacchetto di \LaTeXe\ scritto da P.W.~Daly che consente, utilizzando vari formati (file .bst), di personalizzare la bibliografia  producendo sia  riferimenti nel corpo del documento, sia l'elenco in coda, mediante `numeri' (formato \verb|plain_ita.bst|) o `testo' (formato \verb|natbib_ita.bst|). 
+
+Esistono molte altre opzioni di \textsf{natbib}, per le quali è bene far riferimento al relativo manuale per approfondimenti.
+
+Supponiamo di disporre di un classico documento \texttt{.tex} pronto per la compilazione e di un documento di database per la bibliografia, \texttt{biblio.bib}. Il documento \texttt{.tex} dovrebbe, ad esempio, essere così costituito:
+
+\begin{verbatim}
+\documentclass{article}
+\usepackage{natbib}
+\begin{document}
+
+Il condizionamento alle statistiche ancillari è, alle volte, 
+davvero auspicabile \citep{art1}; vedi anche \citet{art2}. 
+Comunque non c'è unanimità sull'argomento \citep[ad es.,][]{art3}.
+Altri riferimenti sono \citet{art4} o \citet{art5} o 
+\citet{art6} o \citet{art7} ed infine \citep[pg12--20]{art8}.
+
+\bibliographystyle{natbib}
+\bibliography{biblio}
+\end{document}
+\end{verbatim}
+
+Il file \texttt{.bib} dovrebbe essere costituito dalla lista dei riferimenti specificandone il tipo (article, PhD thesis, \ldots), ovvero:
+\begin{verbatim}
+@article{art1,
+	author={F. Gargano and G. Lovison },
+	title={Some notes on conditional inference},
+	journal={J.A.S.A.},
+	volume={2},
+	year={1999},
+	pages={23-45}
+}
+
+@phdthesis{art2,
+	author={M.T. Morana},
+	title={La valutazione di Gargano},
+	school={Universit{\`a} di Palermo},
+	year={2001}
+}
+...
+\end{verbatim}
+ 
+Compilando con \verb|latex| quindi \verb|bibtex| e poi nuovamente \verb|latex| (due volte) si ottiene il classico documento di output con i riferimenti bibliografici `testuali', ovvero 
+
+``\ldots è, alle volte, davvero auspicabile (Gargano and Lovison, 1999); vedi anche Morana (2001) \ldots.''
+
+L'elenco in coda al documento è opportunamente formattato con la lista disposta in ordine alfabetico, ad esempio:\\
+
+\noindent Gargano, F. and Lovison, G. (1999). Some notes on conditional inference. {\sl J.A.S.A.}, \textbf{2}, 23--45\\
+
+\noindent Morana, M. (2001). {\it La valutazione di Gargano.} Ph.D. thesis, Università di Palermo.\\ 
+
+
+\section{La traduzione italiana}
+Per l'utilizzo di \textsf{natbib} in documenti italiani, le formattazioni di termini anglo-sassoni quali `and', `Ph.D. thesis' non sono adeguati; anche, la virgola dopo il cognome (Morana, M.) dovrebbe essere eliminata. A tal fine è stato fornito un file \verb|natbib_ita.bst| che, non è altro che una modifica del file \texttt{natbib.bst}. \`E sufficiente, a questo punto, utilizzare il comando \verb|\bibliographystyle{natbib_ita}| che chiama il file \verb|natbib_ita.bst| invece che \texttt{natbib.bst}. L'ouput è, in tal caso:\\
+
+``Il condizionamento alle statistiche ancillari è, alle volte, davvero auspicabile \citep{art1}; vedi anche \citet{art2}. Comunque non c'è unanimità sull'argomento \citep[ad es.,][]{art3}.
+Altri riferimenti sono \citet{art4} o \citet{art5} o \citet{art6} o \citet{art7} ed infine \citep[pg12--20]{art8}.''\\
+
+L' elenco in coda al documento risulta evidentemente:
+
+\nocite{*}
+%
+\bibliographystyle{natbib_ita} 
+%\bibliographystyle{natbib_ita} 
+\bibliography{biblio}
+
+\vspace{1cm}
+Ora provate a sosituire \verb|natbib_ita| in \verb|\bibliographystyle| con \verb|plain_ita| o più semplicemente ad utilizzare il file \verb|test_plain.tex|. In questo caso si può usare solo il comando \verb|\citep|. 
+
+
+\end{document}
+
+

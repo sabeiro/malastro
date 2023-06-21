@@ -1,0 +1,160 @@
+
+## feature extraction
+
+Code: [etl_feature](src/etl_feature.py).
+
+Data are stored in Athena in the database `ree-cloud-data-prod`.
+
+![redash_query](img/redash_query.png)
+_redash query on telemetry table_
+
+We have 4 relevant tables `['telemetry','network_log','session','incident']` which log all relevant events connected to the drive. Tables are partioned down to the single hour and vehicle.
+
+We have 3 environments `['prod','stg','dev']` where only in `prod` data are complete.
+
+### telemetry
+
+Telemetry contains the most useful information, most of the sensor data concerning vehicle dynamics and board usage. Data are ingested in an unregular way, every sensor calls the backend with different timing. Each 200ms we see a main ingestion of 2 to 5 sensors around 30ms. Information is scattered and uncomplete. 
+
+![telemetry_table](img/telemetry_table.png)
+_telemetry table, on record per topic_
+
+We call the `['mean_km_per_hour', 'lateral_force_m_per_sec_squared','longitudinal_force_m_per_sec_squared']` the `sensor_features` and the `['v_cpu_usage_percent', 'v_ram_usage_percent'` the `board features` and the `['e2e_latency', 'camera_latency', 'joystick_latency']` the `predictions`.
+
+## data ingestion
+
+We have different sources populating the `telemetry` table, some coming from the `vehicle`, others from the `control_room`. Data are collected and ingested with a different pace and sent to the backend and follow this [protobuffer schema](https://github.com/Reemote/ree-cloud-proto/blob/master/proto/ree/telemetry/v1/telemetry.proto#L373).
+
+![telemetry_meta](img/telemetry_meta.png)
+_telemetry meta information_
+
+Each ROS topic collects the data at a different publishing rate, data are punctual and not averaged on the device. Some data don't get sent or they don't get collected, additional logs are stored on the vehicle but not sent to the backend. 
+
+Each topic has a publisher and a subscriber, the publisher set the timestamp and sends data over the network. 
+
+At first we see that data ingestion pretty irregular.
+
+<!-- ![ingestion_ms](img/ingestion_ms.png "ingestion milliseconds") -->
+<!-- _different sources ingest the data with different frequency, phase, amplitude_ -->
+
+We than group the different sources based on their firing behaviour
+
+![ingestion_group](img/ingestion_group.png "ingestion milliseconds")
+_grouping sources per frequency range_
+
+We see that even within the same source group we have diffente firing behaviour and syncing the different sources is not trivial. 
+
+We create a heatmap to visualize the firing behaviour
+
+![telemetry_matrix](img/telemetry_matrix.png)
+_firing behaviour for telemetry features_
+
+Despite the visualization the features are not ingested regularly and some frequencies are pretty low
+
+![telemetry_frequency](img/telemetry_frequency.png)
+_telemetry frequency_
+
+The data is than sent to the backend and arrives at `stream_ingestion_timestamp_ms` and get processed at `processing_timestamp_ms` by kinesis.
+
+## ingestion delay
+
+We see a clear delay between the time the topic publisher sends the data and kinesis process it
+
+![delay_processing](img/delay_processing.png)
+_delay in processing the data, around 5 seconds as median_
+
+While the data arriving at the backend has at least 200ms delay till 1s. Streaming data has a curious cycle pattern to be further investigated.
+
+![delay_streaming](img/delay_streaming.png)
+_delay in streaming the data_
+
+We finally check that the latency is equal for all cameras
+
+![latency_per_camera](img/latency_per_camera.png)
+_all 4 cameras have the same mean latency_
+
+## data stream
+
+Source: [proc_telemetry](src/proc_telemetry)
+
+Data is coming irregularly and values fluctuates artificially because of time buckets. We need to re write the data flow to have consistent data for the predictions.
+
+We take cut the timestamp and calculate the deci seconds to create more consistent time bins
+
+![spark_resample](img/spark_resample.png)
+_resampling time bins_
+
+We still have many empty values and we create a rolling window to replace the missing values with the running average 
+
+![spark_runningAv](img/spark_runningAv.png)
+_running average over the previous and successive 3 records_
+
+## data extraction
+
+We mainly use **athena** to download the data but we have a strong preference for **spark** since it enables a more careful and complete workflow moving from simple queries to a complete software design
+
+Athena limitations:
+
+* can't handle `null` in averages
+* NaN/10. = 0. which is wrong
+* can't create libraries
+* no user defined functions
+
+We than **avoid all arithmetic operations** in athena to avoid fake zeros.
+
+## network_log data
+
+We analyze the network data to understand which features should be joined with the telemetry table. 
+
+The series have many empty values
+
+![series_network](img/network_series.png)
+_time series network features_
+
+Distributions are pretty narrow and have many outliers, not all cameras have the same network figure.
+
+![boxplot_network](img/network_boxplot.png)
+_boxplot of network features_
+
+Some features correlate and can be neglected
+
+![correlation_network](img/network_correlation.png)
+_correlation across network features_
+
+Some features work in particular regimes and are multimodal
+
+![joyplot_network](img/network_joyplot.png)
+_network joyplot_
+
+We join the the `telemetry` table with the `network_log` table to explore additional features but the new sources are even more noisy
+
+![netlog](img/netlog_series.png)
+_joined `network_log` and `telemetry` tables_
+
+## modem data 
+
+Source: [etl_telemetry_deci](src/stat_telemetry.py)
+Query: [network_log.sql](queries/resample_deci.sql)
+
+
+![modem0_pair](img/modem_corr.png)
+_correlation between modems_
+
+![modem0_pair](img/modem_series.png)
+_time series of features_
+
+![modem0_pair](img/modem_boxplot.png)
+_boxplot of modem features_
+
+![modem0_pair](img/modem0_pair.png)
+_pair plot of modem 0_
+
+![modem1_pair](img/modem1_pair.png)
+_pair plot of modem 1_
+
+![modem2_pair](img/modem2_pair.png)
+_pair plot of modem 2_
+
+![modem3_pair](img/modem3_pair.png)
+_pair plot of modem 3_
+

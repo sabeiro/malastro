@@ -1,0 +1,187 @@
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/theme/beamerthemeAnnArbor.sty,v 1.4 2007/01/28 20:48:30 tantau Exp $
+\useinnertheme[shadow=true]{rounded}
+\useoutertheme{infolines}
+\usecolortheme{wolverine}
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/theme/beamerthemeAntibes.sty,v 1.10 2007/01/28 20:48:30 tantau Exp $
+\useoutertheme{tree}
+\usecolortheme{whale}
+\usecolortheme{orchid}
+\useinnertheme{rectangles}
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/theme/compatibility/beamerthemebars.sty,v 1.9 2007/01/28 20:48:30 tantau Exp $
+\usefonttheme[onlysmall]{structurebold}
+\useoutertheme[footline=authorinstitutetitle]{miniframes}
+\usecolortheme{whale}
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/theme/beamerthemeBergen.sty,v 1.4 2007/01/28 20:48:30 tantau Exp $
+\usecolortheme{orchid}
+\useinnertheme{rectangles}
+\useinnertheme{inmargin}
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/theme/beamerthemeBerkeley.sty,v 1.11 2007/01/28 20:48:30 tantau Exp $
+\DeclareOptionBeamer{hideothersubsections}{\PassOptionsToPackage{hideothersubsections=#1}{beamerouterthemesidebar}}
+\DeclareOptionBeamer{hideallsubsections}{\PassOptionsToPackage{hideallsubsections=#1}{beamerouterthemesidebar}}
+\DeclareOptionBeamer{width}{\PassOptionsToPackage{width=#1}{beamerouterthemesidebar}}
+\DeclareOptionBeamer{left}{\PassOptionsToPackage{left}{beamerouterthemesidebar}}
+\DeclareOptionBeamer{right}{\PassOptionsToPackage{right}{beamerouterthemesidebar}}
+\useoutertheme{sidebar}
+\useinnertheme{rectangles}
+\usecolortheme{whale}
+\usecolortheme{orchid}
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/theme/beamerthemeBerlin.sty,v 1.11 2007/01/28 20:48:30 tantau Exp $
+\useoutertheme[footline=authorinstitutetitle]{miniframes}
+\usecolortheme{whale}
+\usecolortheme{orchid}
+\useinnertheme{rectangles}
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/theme/beamerthemeBoadilla.sty,v 1.2 2007/01/28 20:48:30 tantau Exp $
+\usecolortheme{rose}
+\useinnertheme[shadow]{rounded}
+\usecolortheme{dolphin}
+\useoutertheme{infolines}
+% Tills' opinion: should be done in an inner theme, not here.
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/theme/beamerthemeboxes.sty,v 1.8 2007/01/28 20:48:30 tantau Exp $
+\defbeamertemplate*{headline}{boxes theme}
+\defbeamertemplate*{footline}{boxes theme}
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/theme/beamerthemeCambridgeUS.sty,v 1.2 2007/01/28 20:48:30 tantau Exp $
+\useinnertheme[shadow=true]{rounded}
+\useoutertheme{infolines}
+\usecolortheme{beaver}
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/theme/compatibility/beamerthemeclassic.sty,v 1.9 2007/01/28 20:48:30 tantau Exp $
+\usefonttheme[onlylarge]{structureitalicserif}
+\usefonttheme[onlysmall]{structuresmallcapsserif}
+\usetheme{Singapore}
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/theme/compatibility/beamerthemecompatibility.sty,v 1.8 2007/01/28 20:48:30 tantau Exp $
+\usefonttheme[onlysmall]{structurebold}
+\useoutertheme[subsection=false]{miniframes}
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/theme/beamerthemeCopenhagen.sty,v 1.8 2007/01/28 20:48:30 tantau Exp $
+\useoutertheme{split}
+\useinnertheme{rounded}
+\usecolortheme{whale}
+\usecolortheme{orchid}
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/theme/beamerthemeDarmstadt.sty,v 1.9 2007/01/28 20:48:30 tantau Exp $
+\useoutertheme{smoothbars}
+\useinnertheme[shadow=true]{rounded}
+\usecolortheme{orchid}
+\usecolortheme{whale}
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/theme/beamerthemedefault.sty,v 1.7 2007/01/28 20:48:30 tantau Exp $
+\usefonttheme{default}
+\usecolortheme{default}
+\useinnertheme{default}
+\useoutertheme{default}
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/theme/beamerthemeDresden.sty,v 1.9 2007/01/28 20:48:30 tantau Exp $
+\useoutertheme[footline=authorinstitutetitle]{miniframes}
+\usecolortheme{whale}
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/theme/beamerthemeFrankfurt.sty,v 1.9 2007/01/28 20:48:30 tantau Exp $
+\useoutertheme[subsection=false]{smoothbars}
+\useinnertheme[shadow=true]{rounded}
+\usecolortheme{orchid}
+\usecolortheme{whale}
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/theme/beamerthemeGoettingen.sty,v 1.7 2007/01/28 20:48:30 tantau Exp $
+\DeclareOptionBeamer{hideothersubsections}{\PassOptionsToPackage{hideothersubsections}{beamerouterthemesidebar}}
+\DeclareOptionBeamer{hideallsubsections}{\PassOptionsToPackage{hideallsubsections}{beamerouterthemesidebar}}
+\PassOptionsToPackage{right}{beamerouterthemesidebar}
+\PassOptionsToPackage{width=2cm}{beamerouterthemesidebar}
+\DeclareOptionBeamer{width}{\PassOptionsToPackage{width=#1}{beamerouterthemesidebar}}
+\DeclareOptionBeamer{left}{\PassOptionsToPackage{left}{beamerouterthemesidebar}}
+\DeclareOptionBeamer{right}{\PassOptionsToPackage{right}{beamerouterthemesidebar}}
+\useoutertheme[height=0pt]{sidebar}
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/theme/beamerthemeHannover.sty,v 1.11 2007/01/28 20:48:30 tantau Exp $
+{\PassOptionsToPackage{width=#1}{beamerouterthemesidebar}}
+{\PassOptionsToPackage{hideothersubsections=#1}{beamerouterthemesidebar}}
+{\PassOptionsToPackage{hideallsubsections=#1}{beamerouterthemesidebar}}
+\useoutertheme[height=0pt,left]{sidebar}
+\usecolortheme{seahorse}
+\useinnertheme{circles}
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/theme/beamerthemeIlmenau.sty,v 1.11 2007/01/28 20:48:30 tantau Exp $
+\useoutertheme[footline=authorinstitutetitle]{miniframes}
+\usecolortheme{whale}
+\usecolortheme{orchid}
+\useinnertheme{rounded}
+\ProvidesPackage{beamerthemeJLTree}
+\usecolortheme{rose} 
+\useinnertheme[shadow=true]{rounded}% les block
+\defbeamertemplate*{footline}{JLTree theme}
+\defbeamertemplate*{sidebar right}{JLTree theme}{}
+\defbeamertemplate*{headline}{JLTree theme}
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/theme/beamerthemeJuanLesPins.sty,v 1.9 2007/01/28 20:48:30 tantau Exp $
+\useoutertheme{smoothtree}
+\usecolortheme{whale}
+\usecolortheme{orchid}
+\useinnertheme[shadow=true]{rounded}
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/theme/compatibility/beamerthemelined.sty,v 1.4 2007/01/28 20:48:30 tantau Exp $
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/theme/beamerthemeLuebeck.sty,v 1.8 2007/01/28 20:48:30 tantau Exp $
+\useoutertheme{split}
+\useinnertheme{rectangles}
+\usecolortheme{whale}
+\usecolortheme{orchid}
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/theme/beamerthemeMadrid.sty,v 1.8 2007/01/28 20:48:30 tantau Exp $
+\usecolortheme{whale}
+\usecolortheme{orchid}
+\useinnertheme[shadow]{rounded}
+\useoutertheme{infolines}
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/theme/beamerthemeMalmoe.sty,v 1.8 2007/01/28 20:48:30 tantau Exp $
+\useoutertheme{split}
+\usecolortheme{whale}
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/theme/beamerthemeMarburg.sty,v 1.11 2007/01/28 20:48:30 tantau Exp $
+\PassOptionsToPackage{right}{beamerouterthemesidebar}
+\PassOptionsToPackage{width=2cm}{beamerouterthemesidebar}
+\DeclareOptionBeamer{hideothersubsections}{\PassOptionsToPackage{hideothersubsections=#1}{beamerouterthemesidebar}}
+\DeclareOptionBeamer{hideallsubsections}{\PassOptionsToPackage{hideallsubsections=#1}{beamerouterthemesidebar}}
+\DeclareOptionBeamer{width}{\PassOptionsToPackage{width=#1}{beamerouterthemesidebar}}
+\DeclareOptionBeamer{left}{\PassOptionsToPackage{left}{beamerouterthemesidebar}}
+\DeclareOptionBeamer{right}{\PassOptionsToPackage{right}{beamerouterthemesidebar}}
+\usecolortheme{whale}
+\useoutertheme[height=0pt]{sidebar}
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/theme/beamerthemeMontpellier.sty,v 1.6 2007/01/28 20:48:30 tantau Exp $
+\useoutertheme{tree}
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/theme/beamerthemePaloAlto.sty,v 1.11 2007/01/28 20:48:30 tantau Exp $
+\DeclareOptionBeamer{hideothersubsections}{\PassOptionsToPackage{hideothersubsections=#1}{beamerouterthemesidebar}}
+\DeclareOptionBeamer{hideallsubsections}{\PassOptionsToPackage{hideallsubsections=#1}{beamerouterthemesidebar}}
+\DeclareOptionBeamer{width}{\PassOptionsToPackage{width=#1}{beamerouterthemesidebar}}
+\DeclareOptionBeamer{left}{\PassOptionsToPackage{left}{beamerouterthemesidebar}}
+\DeclareOptionBeamer{right}{\PassOptionsToPackage{right}{beamerouterthemesidebar}}
+\useoutertheme{sidebar}
+\useinnertheme[shadow=true]{rounded}
+\usecolortheme{orchid}
+\usecolortheme{whale}
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/theme/beamerthemePittsburgh.sty,v 1.5 2007/01/28 20:48:30 tantau Exp $
+\useinnertheme{circles}
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/theme/compatibility/beamerthemeplain.sty,v 1.5 2007/01/28 20:48:30 tantau Exp $
+\PackageWarning{beamerthemeplain}{This package is obsolet - use font theme italics instead}
+\usefonttheme{structureitalicserif}
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/theme/beamerthemeRochester.sty,v 1.8 2007/01/28 20:48:30 tantau Exp $
+\DeclareOptionBeamer{height}{\PassOptionsToPackage{height=#1}{beamerouterthemesidebar}}
+\useoutertheme[width=0pt]{sidebar}
+\useinnertheme{rectangles}
+\usecolortheme{whale}
+\usecolortheme{orchid}
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/theme/compatibility/beamerthemeshadow.sty,v 1.12 2007/01/28 20:48:30 tantau Exp $
+\useinnertheme[shadow=true]{rounded}
+\usecolortheme{orchid}
+\usecolortheme{whale}
+\useoutertheme{shadow}
+\usefonttheme[onlysmall]{structurebold}
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/theme/compatibility/beamerthemesidebar.sty,v 1.13 2007/01/28 20:48:30 tantau Exp $
+\PassOptionsToPackage{width=2.5cm}{beamerouterthemesidebar}
+\DeclareOptionBeamer{width}{\PassOptionsToPackage{width=#1}{beamerouterthemesidebar}}
+\useoutertheme[right,height=0pt]{sidebar}
+  \usefonttheme{structurebold}
+  \usecolortheme{whale}
+  \usecolortheme{seahorse}  
+  \usecolortheme{sidebartab}
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/theme/beamerthemeSingapore.sty,v 1.10 2007/01/28 20:48:30 tantau Exp $
+\useoutertheme[subsection=false]{miniframes}
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/theme/compatibility/beamerthemesplit.sty,v 1.9 2007/01/28 20:48:30 tantau Exp $
+\usecolortheme{whale}
+\useoutertheme{split}
+\usefonttheme[onlysmall]{structurebold}
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/theme/beamerthemeSzeged.sty,v 1.6 2007/01/28 20:48:30 tantau Exp $
+\useoutertheme[footline=institutetitle]{miniframes}
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/theme/compatibility/beamerthemetree.sty,v 1.9 2007/01/28 20:48:30 tantau Exp $
+\def\beamer@theme@col{\setbeamercolor{separation line}{use=structure,bg=structure.fg!50!bg}}
+\DeclareOptionBeamer{bars}{\def\beamer@theme@col{\usecolortheme{whale}}}
+\usefonttheme[onlysmall]{structurebold}
+\beamer@theme@col
+\useoutertheme{tree}
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/theme/beamerthemeWarsaw.sty,v 1.9 2007/01/28 20:48:30 tantau Exp $
+\useinnertheme[shadow=true]{rounded}
+\useoutertheme{shadow}
+\usecolortheme{orchid}
+\usecolortheme{whale}

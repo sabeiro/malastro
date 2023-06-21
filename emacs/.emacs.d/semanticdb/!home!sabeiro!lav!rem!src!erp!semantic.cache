@@ -1,0 +1,32 @@
+;; Object semanticdb-project-database-file
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "semanticdb-project-database-file"
+  :tables
+  (list
+    (semanticdb-table "semanticdb-table"
+      :major-mode python-mode
+      :tags 
+        '( ("io" include nil nil [1 53])
+            ("re" include nil nil [1 53])
+            ("datetime" include nil nil [1 53])
+            ("json" include nil nil [1 53])
+            ("random" include nil nil [1 53])
+            ("gzip" include nil nil [1 53])
+            ("sys" include nil nil [1 53])
+            ("os" include nil nil [1 53])
+            ("pandas" include nil nil [54 73])
+            ("numpy" include nil nil [74 92])
+            ("matplotlib.pyplot" include nil nil [93 124])
+            ("dL" variable nil nil [126 172])
+            ("sys" variable nil nil [173 251])
+            ("baseDir" variable nil nil [252 283])
+            ("hours" variable nil nil [285 342])
+            ("cust" variable nil nil [343 400]))          
+      :file "fattura.py"
+      :pointmax 402
+      :fsize 283
+      :lastmodtime '(24390 24085 154576 815000)
+      :unmatched-syntax '((NAME 343 . 347) ($EOI 404 . 404) (NAME 343 . 347) ($EOI 360 . 360) (NAME 343 . 347) ($EOI 350 . 350))))
+  :file "!home!sabeiro!lav!rem!src!erp!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

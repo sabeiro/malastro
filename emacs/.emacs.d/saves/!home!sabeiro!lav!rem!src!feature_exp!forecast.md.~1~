@@ -1,0 +1,68 @@
+## spike forecast
+
+Code: [feature_etl](src/forecast_spike.py).
+
+To forecast a spike we start first with a good prediction
+
+![prediction forecast](img/prediction_forecast.png)
+_difference between prediction and forecast_
+
+We see that the training process runs smoothly
+![prediction_history](img/prediction_history.png)
+_traning history_
+
+Than we roll different spike advance times until the spike is forecasted
+
+![forecast_advance](img/forecast_advance.png)
+_forecast advance effectivity_
+
+We can see that around -0.5 seconds the spike is forecasted correctly
+
+![forecast_prior](img/forecast_prior.png)
+_forecast prior to the spike_
+
+We iterate over every single series and forecast from every single `from_peak` value and compute the maximum of the forecasted latency
+
+![forecast_series](img/forecast_series.png)
+_maximum latency forecast per series_
+
+To speed up a bit the exploration we analyze the sec pace series. We see that the forecast for the denoised series is pretty accurate 
+
+![forecast_anticipation](img/forecast_anticipation.png)
+_rolling forecast on the next 6 seconds_
+
+In some cases forecast results are different for neighboring starting points
+
+![forecast_anticipation](img/forecast_anticipation1.png)
+_rolling forecast on the next 6 seconds_
+
+Some models are really accurate on the denoised series
+
+![forecast_anticipation](img/forecast_aligned.png)
+_rolling forecast on the next 6 seconds_
+
+We see that in some cases we have false positive
+
+![false_positive](img/false_positive.png)
+_false positive, a spike is forecasted where there is none_
+
+If we analyze the maximum of the peak forecast we see that some models can forecast 3 seconds in advance
+
+![forecast_max](img/forecast_max.png)
+_maximum forecast on a rolling windows of 12 seconds_
+
+We than calculate the forecast curves per series and per starting point and calculate the maximum for each curve. For some models the forecast returns many false positives
+
+![forecast_flat](img/forecast_flat.png)
+_maximum forecast on a rolling windows of 6 seconds_
+
+
+# forecast alternatives
+
+We started performing some naive forecasting on the time series and we compare the results of facebook prophet, a multi layer perceptron regressor and a arima. The first two models take into consideration the sensor features too. 
+
+We see that the peaks are really abrupt and the naive models can't forecast it.
+
+![first_peak](img/first_peak.png "first peak")
+_first peak_
+

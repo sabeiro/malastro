@@ -1,0 +1,51 @@
+;; Object semanticdb-project-database-file
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "semanticdb-project-database-file"
+  :tables
+  (list
+    (semanticdb-table "semanticdb-table"
+      :major-mode python-mode
+      :tags 
+        '( ("io" include nil nil [1 53])
+            ("re" include nil nil [1 53])
+            ("datetime" include nil nil [1 53])
+            ("json" include nil nil [1 53])
+            ("random" include nil nil [1 53])
+            ("gzip" include nil nil [1 53])
+            ("sys" include nil nil [1 53])
+            ("os" include nil nil [1 53])
+            ("pandas" include nil nil [54 73])
+            ("numpy" include nil nil [74 92])
+            ("scipy" include nil nil [93 122])
+            ("joypy" include nil nil [123 135])
+            ("matplotlib.pyplot" include nil nil [136 167])
+            ("seaborn" include nil nil [168 189])
+            ("dL" variable nil nil [191 237])
+            ("sys" variable nil nil [238 316])
+            ("baseDir" variable nil nil [317 348])
+            ("importlib" include nil nil [350 366])
+            ("lernia.train_viz" include nil nil [367 397])
+            ("lernia.train_reshape" include nil nil [398 432])
+            ("albio.series_stat" include nil nil [433 464])
+            ("print" code nil nil [466 537])
+            ("folder" variable nil nil [538 555])
+            ("folder" variable nil nil [556 572])
+            ("featL" variable nil nil [573 660])
+            ("print" code nil nil [661 679])
+            ("xL" variable nil nil [760 815])
+            ("yL" variable nil nil [816 858])
+            ("tL" code nil nil [859 871])
+            ("if" code nil nil [873 1105])
+            ("if" code nil nil [1111 2271])
+            ("if" code nil nil [2277 2796])
+            ("if" code nil nil [2797 4014])
+            ("if" code nil nil [4017 4627])
+            ("if" code nil nil [4628 5386]))          
+      :file "stat_telemetry.py"
+      :pointmax 5386
+      :fsize 5403
+      :lastmodtime '(24428 29332 398548 311000)
+      :unmatched-syntax nil))
+  :file "!home!sabeiro!lav!rem!src!feature_exp!src!old!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

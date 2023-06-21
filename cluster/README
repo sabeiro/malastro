@@ -1,0 +1,7 @@
+sudo cp wpa_supplicant.conf /
+sudo cp dhcpcd.conf /etc
+sudo cp hostname /etc/
+sudo cp hosts /etc/
+sudo apt-get update
+sudo apt-get upgrade -y
+

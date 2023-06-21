@@ -1,0 +1,34 @@
+#!/usr/bin/python
+
+import midi
+import sys
+import math
+
+BassNote = 55
+NoteRange = 36
+Count = 0.
+Entropy = 0.
+histogram = [0] * NoteRange
+frequency = [0.0]*NoteRange
+label = [0] * NoteRange
+midifile = sys.argv[1]
+stream = midi.read_midifile(midifile)
+
+for event in stream.iterevents():
+    #print event
+    #if (event.track == 1):
+    if isinstance(event, midi.NoteEvent):
+        idx = event.pitch - BassNote
+        histogram[idx] += 1
+        Count += 1.
+
+for i in range(BassNote,BassNote+NoteRange):
+    idx = i - BassNote
+    label[idx] = event.NoteMap(i)
+    frequency[idx] = float(histogram[idx])/Count
+    if (frequency[idx] > 0.):
+        Entropy += -frequency[idx]*math.log(frequency[idx],2)
+
+print frequency
+print "Entropy: %f" % Entropy
+#stream.textdump()

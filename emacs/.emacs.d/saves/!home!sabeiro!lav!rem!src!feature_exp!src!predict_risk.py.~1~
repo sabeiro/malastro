@@ -1,0 +1,72 @@
+if False:
+    print('-----------------------xgboost-----------------------')
+    from xgboost import XGBRegressor
+    import xgboost as xgb
+    xL = ['force_lat','force_lon','wheel_speed','camera_jitter','arrival_time-Cellular 1','arrival_time-Cellular 2','arrival_time-Cellular 3','arrival_time-Cellular 4','bytes-Cellular 1','bytes-Cellular 2','bytes-Cellular 3','bytes-Cellular 4','camera_latency','joystick_latency','e2e_latency']
+    yL = ['from_peak']
+    n_train = 100
+    X = serAv[xL]
+    y = serAv[yL[0]]
+    X_train, X_test = X[:n_train], X[n_train:]
+    y_train, y_test = y[:n_train], y[n_train:]
+    model = XGBRegressor(objective='reg:squarederror', n_estimators=1000)
+    model.fit(X_train, y_train)
+    y_pred = model.predict(X_test)
+    print(tsc.calcMetrics(y_pred,y_test))
+    model = XGBRegressor(objective='reg:squarederror', n_estimators=1000)
+    model.fit(X, y)
+    y_pred = model.predict(X)
+    print(tsc.calcMetrics(y_pred,y))
+    plt.scatter(y_pred,y)
+    plt.show()
+
+    importlib.reload(t_m)
+    dall = xgb.DMatrix(X, label=y, nthread=-1)
+    dtrain = xgb.DMatrix(X_train, label=y_train, nthread=-1)
+    dtest = xgb.DMatrix(X_test, label=y_test, nthread=-1)
+    watchlist = [(dtrain, 'train'), (dtest, 'test')]
+    params = {'alpha': 0.15000000000000002,'eta': 0.02,'eval_metric': 'cox-nloglik','gamma': 0.26,'lambda': 1.4000000000000001,'max_depth': 9,'min_child_weight': 4,'objective': 'survival:cox','subsample': 0.8}
+    bst = xgb.train(params,dtrain,num_boost_round=100,evals=watchlist,early_stopping_rounds=5,verbose_eval=1)
+    y_pred = bst.predict(dtest)
+    plt.scatter(y_test,y_pred)
+    plt.show()
+    print(tsc.calcMetrics(y_pred,y_test))
+    y_pred = bst.predict(dall)
+    plt.scatter(y,y_pred)
+    plt.xlabel("from_peak")
+    plt.ylabel("prediction deviation")
+    plt.show()
+    print(tsc.calcMetrics(y_pred,y_test))
+    from sksurv.metrics import cumulative_dynamic_auc
+    from sksurv.util import Surv, check_y_survival
+
+    def target_to_time(x):
+        return abs(x) - (x >= 0).astype(int)
+
+    def target_to_event(x):
+        return (x >= 0)
+    
+    def sksurv_format(y):
+        return Surv.from_arrays(time=target_to_time(y),event=target_to_event(y))
+
+    y_pred = bst.predict(dtest)
+    t = target_to_time(y_test)
+    va_times = np.arange(min(t), max(t), 1)
+    va_auc, va_mean_auc = cumulative_dynamic_auc(
+        sksurv_format(y_train),
+        sksurv_format(y_test),
+        y_pred, va_times
+    )
+    plt.plot(va_times, va_auc, marker="o")
+    plt.axhline(va_mean_auc, linestyle="--")
+    plt.xlabel("seconds from spike")
+    plt.ylabel("time-dependent AUC")
+    plt.grid(True)
+    plt.show()
+
+    from sksurv.metrics import cumulative_dynamic_auc
+    from sksurv.util import Surv, check_y_survival
+    from sksurv.linear_model.coxph import BreslowEstimator
+    from sksurv.nonparametric import CensoringDistributionEstimator, SurvivalFunctionEstimator
+    from sklearn.utils import check_consistent_length, check_array
+    

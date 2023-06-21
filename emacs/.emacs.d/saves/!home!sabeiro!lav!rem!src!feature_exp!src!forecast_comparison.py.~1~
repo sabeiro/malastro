@@ -1,0 +1,105 @@
+if False: # forecast
+    print('----------------------forecast-model-comparison----------------------------')
+    conf = a_f.standardConf()
+    n = 16
+    tL = xL + ['joystick_latency']
+    y = serAv['camera_latency']
+    X = serAv[tL]
+    t = serAv['from_peak']
+    yh, Xh, th = y[:-n], X[:-n], t[:-n]
+    importlib.reload(s_f)
+    importlib.reload(a_f)
+    sF = a_f.forecast(t,X,y)
+    sF.mlp_regressor()
+    sF.prophet()
+    sF.arima()
+
+    #t5, pred_biw, conf = a_f.trendFluct(th,xh,yh,n=n,conf=conf,isPlot=False)
+    ser = serAv.copy()#[serAv['from_peak'].abs() < 16]
+    foreL = [];  peakL = []
+    for x in ser['from_peak']:
+        print(x)
+        g1 = ser[ser['from_peak'] > x].index
+        if len(g1) == 0: break
+        g = g1[:6]
+        yf, Xf, tf = ser.loc[g1,'camera_latency'], ser.loc[g1,tL], ser.loc[g1,'from_peak']    
+        y_mlp = sF.mlp_forecast(tf,Xf)
+        y_pro = sF.prophet_forecast(tf,Xf)
+        y_arm = sF.arima_forecast(tf,Xf)
+        peak = {"series":"average","from_peak":x,"spike_mlp":max(y_mlp),"spike_pro":max(y_pro['yhat']),"spike_arm":max(y_arm)}
+        peakL.append(peak)
+    peakS = pd.DataFrame(peakL)
+
+    plt.plot(ser['from_peak'],ser['camera_latency'],label="average",linewidth=3)
+    plt.plot(peakS['from_peak'],peakS['spike_mlp'],"--",label="mlp")
+    plt.plot(peakS['from_peak'],peakS['spike_pro'],"--",label="prophet")
+    plt.plot(peakS['from_peak'],peakS['spike_arm'],"--",label="arima")
+    plt.legend()
+    plt.xlabel("seconds from peak")
+    plt.ylabel("latency normalized")
+    plt.show()
+    
+
+    plt.plot(ser['from_peak'],ser['camera_latency'],label="real",linewidth=2)
+    sL = list(range(-12,2))
+    for i, j in enumerate(sL):
+        c = t_v.colorL[i]
+        g1 = ser[ser['from_peak'] > j].index
+        if len(g1) == 0: break
+        g = g1[:6]
+        yf, Xf, tf = ser.loc[g1,'camera_latency'], ser.loc[g1,tL], ser.loc[g1,'from_peak']    
+        y_mlp = sF.mlp_forecast(tf,Xf)
+        y_pro = sF.prophet_forecast(tf,Xf)
+        y_arm = sF.arima_forecast(tf,Xf)
+        plt.plot(tf,y_mlp,"-.",label="mlp " + str(j),color=c)
+        plt.plot(tf,y_pro["yhat"],"--",label="prophet " + str(j),color=c)
+        plt.plot(tf,y_arm,".-",label="arima " + str(j),color=c)
+    plt.xlabel("seconds from peak")
+    plt.ylabel("normalized latency")
+    plt.legend()
+    plt.show()
+
+
+    importlib.reload(s_f)
+    importlib.reload(a_f)
+    sF = a_f.forecast(t,X,y)
+    sF.mlp_regressor()
+    sF.prophet()
+    sF.arima()
+    yh, Xh, th = y[:-n], X[:-n], t[:-n]
+    yf, Xf, tf = y[-n:], X[-n:], t[-n:]
+    y_mlp = sF.mlp_forecast(tf,Xf)
+    y_pro = sF.prophet_forecast(tf,Xf)
+    y_arm = sF.arima_forecast(tf,Xf)
+    #plt.plot(t1,pred_lst,label="lmts")
+    plt.plot(th,yh,marker='o',linewidth=2,color="red",label="historical data")
+    plt.plot(t,y,linewidth=1,color="red",label="real data")
+    #plt.fill_between(tf,y_pro['yhat_upper'],y_pro['yhat_lower'],color="#00004040",linestyle="--",label="confidence")
+    plt.plot(tf,y_pro['yhat'],label="prophet")
+    plt.plot(tf,y_mlp,label="MLP regressor")
+    plt.plot(tf,y_arm,label="arima")
+    plt.ylim(-1,1)
+    plt.legend()
+    plt.xticks(rotation=15)
+    plt.show()
+
+    
+
+
+if False:
+    print('-------------------------------distinguish-components------------------------')
+    import statsmodels.api as sm
+    dta = sm.datasets.co2.load_pandas().data
+    dta.co2.interpolate(inplace=True)
+    res = sm.tsa.seasonal_decompose(dta.co2)
+    res.plot()
+    plt.show()
+    
+    today = datetime.datetime.today().replace(microsecond=0)
+    serAv.index = [today + datetime.timedelta(seconds=x) for x in serAv['from_peak']]
+    serAv.index.freq = pd.infer_freq(serAv.index)
+    res = seasonal_decompose(serAv["camera_latency"],model="add")
+    res.plot()
+    plt.show()
+
+    

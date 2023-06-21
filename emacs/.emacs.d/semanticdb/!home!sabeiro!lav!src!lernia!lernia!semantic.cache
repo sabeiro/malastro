@@ -1,0 +1,993 @@
+;; Object semanticdb-project-database-file
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "semanticdb-project-database-file"
+  :tables
+  (list
+    (semanticdb-table "semanticdb-table"
+      :major-mode python-mode
+      :tags 
+        '( ("\"\"\"
+train_feature:
+utils to describe feature importance, handle outliers 
+\"\"\"" code nil nil [1 78])
+            ("re" include nil nil [80 113])
+            ("datetime" include nil nil [80 113])
+            ("json" include nil nil [80 113])
+            ("random" include nil nil [80 113])
+            ("numpy" include nil nil [114 132])
+            ("pandas" include nil nil [133 152])
+            ("scipy" include nil nil [153 171])
+            ("matplotlib.pyplot" include nil nil [172 203])
+            ("sklearn.cluster" include nil nil [204 238])
+            ("scipy.cluster.hierarchy" include nil nil [239 283])
+            ("scipy.cluster.hierarchy" include nil nil [284 339])
+            ("sklearn" include nil nil [340 372])
+            ("sklearn" include nil nil [373 393])
+            ("albio" include nil nil [394 406])
+            ("sklearn.metrics.pairwise" include nil nil [407 463])
+            ("collections" include nil nil [464 499])
+            ("selectNumeric" function
+               (:documentation "selects only numeric features"
+                :arguments 
+                  ( ("X" variable nil (reparse-symbol function_parameters) [520 521]))                  )
+                nil [502 733])
+            ("variance" function
+               (:documentation "reduce dimensionality based on low variance"
+                :arguments 
+                  ( ("X" variable nil (reparse-symbol function_parameters) [747 748])
+                    ("threshold" variable nil (reparse-symbol function_parameters) [749 758]))                  )
+                nil [734 1077])
+            ("std" function
+               (:documentation "exclude the low standard deviation variables"
+                :arguments 
+                  ( ("X" variable nil (reparse-symbol function_parameters) [1086 1087])
+                    ("n_tail" variable nil (reparse-symbol function_parameters) [1088 1094]))                  )
+                nil [1078 1339])
+            ("chi2" function
+               (:documentation "chisquare score"
+                :arguments 
+                  ( ("X" variable nil (reparse-symbol function_parameters) [1353 1354])
+                    ("y" variable nil (reparse-symbol function_parameters) [1355 1356]))                  )
+                nil [1344 1515])
+            ("kmeans" function
+               (:documentation "cluster features by kmeans"
+                :arguments 
+                  ( ("X" variable nil (reparse-symbol function_parameters) [1531 1532])
+                    ("n_clust" variable nil (reparse-symbol function_parameters) [1533 1540])
+                    ("isPlot" variable nil (reparse-symbol function_parameters) [1543 1549]))                  )
+                nil [1520 2216])
+            ("treeClas" function
+               (:documentation "feature importance by tree classifier"
+                :arguments 
+                  ( ("X" variable nil (reparse-symbol function_parameters) [2230 2231])
+                    ("y" variable nil (reparse-symbol function_parameters) [2232 2233]))                  )
+                nil [2217 2515])
+            ("regression" function
+               (:documentation "evaluate feature importance with regression coefficients"
+                :arguments 
+                  ( ("X" variable nil (reparse-symbol function_parameters) [2531 2532])
+                    ("y" variable nil (reparse-symbol function_parameters) [2533 2534])
+                    ("isPlot" variable nil (reparse-symbol function_parameters) [2535 2541]))                  )
+                nil [2516 2975])
+            ("regQuadratic" function
+               (:documentation "regression with a 4th grade polynomial"
+                :arguments 
+                  ( ("y" variable nil (reparse-symbol function_parameters) [2993 2994]))                  )
+                nil [2976 3413])
+            ("clustLib" type
+               (:members 
+                  ( ("__init__" function
+                       (:suite 
+                          ( ("return" code nil (reparse-symbol indented_block_body) [3386 3392]))                          
+                        :parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [3449 3453]))                          
+                        :constructor-flag t)
+                        (reparse-symbol indented_block_body) [3436 3471])
+                    ("group2Nei" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [3490 3494])
+                            ("X1" variable nil (reparse-symbol function_parameters) [3495 3497])
+                            ("X2" variable nil (reparse-symbol function_parameters) [3498 3500])
+                            ("max_d" variable nil (reparse-symbol function_parameters) [3501 3506])
+                            ("max_nei" variable nil (reparse-symbol function_parameters) [3511 3518]))                          )
+                        (reparse-symbol indented_block_body) [3476 4099])
+                    ("groupNei" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [4117 4121])
+                            ("X1" variable nil (reparse-symbol function_parameters) [4122 4124])
+                            ("max_d" variable nil (reparse-symbol function_parameters) [4125 4130])
+                            ("max_nei" variable nil (reparse-symbol function_parameters) [4135 4142]))                          )
+                        (reparse-symbol indented_block_body) [4104 4261])
+                    ("cluster" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [4749 4753])
+                            ("mact" variable nil (reparse-symbol function_parameters) [4754 4758]))                          
+                        :documentation "spectral clustering and area sorting")
+                        (reparse-symbol indented_block_body) [4737 6047]))                  
+                :type "class")
+                nil [3414 6047])
+            ("featureRegularisation" function
+               (:documentation "swithces between ridge and lasso regression"
+                :arguments 
+                  ( ("X" variable nil (reparse-symbol function_parameters) [6082 6083])
+                    ("y" variable nil (reparse-symbol function_parameters) [6084 6085])
+                    ("method" variable nil (reparse-symbol function_parameters) [6086 6092])
+                    ("isPlot" variable nil (reparse-symbol function_parameters) [6101 6107]))                  )
+                nil [6056 7253])
+            ("featureImportance" function (:arguments 
+              ( ("X" variable nil (reparse-symbol function_parameters) [7276 7277])
+                ("y" variable nil (reparse-symbol function_parameters) [7278 7279])
+                ("tL" variable nil (reparse-symbol function_parameters) [7280 7282])
+                ("method" variable nil (reparse-symbol function_parameters) [7283 7289]))              ) nil [7254 9417])
+            ("plotFeatImp" function
+               (:documentation "plot all feature importance"
+                :arguments 
+                  ( ("X" variable nil (reparse-symbol function_parameters) [9434 9435])
+                    ("y" variable nil (reparse-symbol function_parameters) [9436 9437])
+                    ("tL" variable nil (reparse-symbol function_parameters) [9438 9440])
+                    ("ax" variable nil (reparse-symbol function_parameters) [9441 9443]))                  )
+                nil [9418 9733]))          
+      :file "train_feature.py"
+      :pointmax 9734
+      :fsize 9733
+      :lastmodtime '(24381 16206 851677 663000)
+      :unmatched-syntax nil)
+    (semanticdb-table "semanticdb-table"
+      :major-mode python-mode
+      :tags 
+        '( ("\"\"\"
+train_viz:
+utils for plotting feature/KPI distribution.
+\"\"\"" code nil nil [1 64])
+            ("re" include nil nil [66 99])
+            ("datetime" include nil nil [66 99])
+            ("json" include nil nil [66 99])
+            ("random" include nil nil [66 99])
+            ("numpy" include nil nil [100 118])
+            ("pandas" include nil nil [119 138])
+            ("scipy" include nil nil [139 157])
+            ("seaborn" include nil nil [158 179])
+            ("matplotlib" include nil nil [180 204])
+            ("matplotlib.pyplot" include nil nil [205 236])
+            ("geomadi.lib_graph" include nil nil [237 268])
+            ("sklearn.metrics" include nil nil [269 313])
+            ("albio" include nil nil [314 326])
+            ("albio.series_stat" include nil nil [327 358])
+            ("lernia" include nil nil [359 372])
+            ("lernia.train_reshape" include nil nil [373 407])
+            ("lernia.train_score" include nil nil [408 440])
+            ("matplotlib" include nil nil [441 458])
+            ("colorL" variable nil nil [460 1039])
+            ("plotHist" function
+               (:documentation "plot histogram and its binning"
+                :arguments 
+                  ( ("y" variable nil (reparse-symbol function_parameters) [1467 1468])
+                    ("nBin" variable nil (reparse-symbol function_parameters) [1469 1473])
+                    ("threshold" variable nil (reparse-symbol function_parameters) [1476 1485])
+                    ("lab" variable nil (reparse-symbol function_parameters) [1490 1493])
+                    ("isLog" variable nil (reparse-symbol function_parameters) [1497 1502])
+                    ("ax" variable nil (reparse-symbol function_parameters) [1509 1511]))                  )
+                nil [1454 2233])
+            ("featureImportance" function
+               (:documentation "display feature importance"
+                :arguments 
+                  ( ("X" variable nil (reparse-symbol function_parameters) [2256 2257])
+                    ("y" variable nil (reparse-symbol function_parameters) [2258 2259])
+                    ("ax" variable nil (reparse-symbol function_parameters) [2260 2262]))                  )
+                nil [2234 2997])
+            ("plotPairGrid" function
+               (:documentation "plot a pair grid"
+                :arguments 
+                  ( ("X" variable nil (reparse-symbol function_parameters) [3015 3016]))                  )
+                nil [2998 3557])
+            ("plotRelevanceTree" function
+               (:documentation "feature importance by extra tree classifier"
+                :arguments 
+                  ( ("X" variable nil (reparse-symbol function_parameters) [3580 3581])
+                    ("y" variable nil (reparse-symbol function_parameters) [3582 3583])
+                    ("isPlot" variable nil (reparse-symbol function_parameters) [3584 3590]))                  )
+                nil [3558 3900])
+            ("plotBoxFeat" function
+               (:documentation "plot boxplot of features"
+                :arguments 
+                  ( ("c_M" variable nil (reparse-symbol function_parameters) [3921 3924])
+                    ("y" variable nil (reparse-symbol function_parameters) [3925 3926]))                  )
+                nil [3905 4489])
+            ("plotFeatCorr" function (:arguments 
+              ( ("t_M" variable nil (reparse-symbol function_parameters) [4507 4510])
+                ("ax" variable nil (reparse-symbol function_parameters) [4511 4513]))              ) nil [4490 4991])
+            ("plotFeatCorrScatter" function
+               (:documentation "plot correlation + scatter matrix"
+                :arguments 
+                  ( ("t_M" variable nil (reparse-symbol function_parameters) [5016 5019]))                  )
+                nil [4992 5212])
+            ("plotMatrixCorr" function
+               (:documentation "plot cross correlation"
+                :arguments 
+                  ( ("X1" variable nil (reparse-symbol function_parameters) [5236 5238])
+                    ("X2" variable nil (reparse-symbol function_parameters) [5239 5241]))                  )
+                nil [5217 5914])
+            ("plotPerfHeat" function
+               (:documentation " plot performance heatmap"
+                :arguments 
+                  ( ("scorL" variable nil (reparse-symbol function_parameters) [6074 6079]))                  )
+                nil [6057 7560])
+            ("plotPerfHeatDouble" function
+               (:documentation "plot double sided performance heatmap"
+                :arguments 
+                  ( ("scorP" variable nil (reparse-symbol function_parameters) [7584 7589])
+                    ("scorL" variable nil (reparse-symbol function_parameters) [7590 7595]))                  )
+                nil [7561 9067])
+            ("plotPCA" function
+               (:documentation "calculates and plot a PCA"
+                :arguments 
+                  ( ("X" variable nil (reparse-symbol function_parameters) [9080 9081]))                  )
+                nil [9068 9568])
+            ("plotImg" function
+               (:documentation "plot images on multiple columns"
+                :arguments 
+                  ( ("X" variable nil (reparse-symbol function_parameters) [9581 9582])
+                    ("nCol" variable nil (reparse-symbol function_parameters) [9583 9587]))                  )
+                nil [9569 9782])
+            ("kpiDis" function
+               (:documentation "plot cumulative histogram of KPI: standard deviation and correlation"
+                :arguments 
+                  ( ("scor" variable nil (reparse-symbol function_parameters) [9794 9798])
+                    ("tLab" variable nil (reparse-symbol function_parameters) [9799 9803])
+                    ("saveF" variable nil (reparse-symbol function_parameters) [9807 9812])
+                    ("col_cor" variable nil (reparse-symbol function_parameters) [9818 9825])
+                    ("col_dif" variable nil (reparse-symbol function_parameters) [9834 9841])
+                    ("col_sum" variable nil (reparse-symbol function_parameters) [9850 9857])
+                    ("isRel" variable nil (reparse-symbol function_parameters) [9864 9869])
+                    ("ax" variable nil (reparse-symbol function_parameters) [9875 9877]))                  )
+                nil [9783 11798])
+            ("plotHistogram" function
+               (:documentation "plot histogram and cumulative distribution"
+                :arguments 
+                  ( ("y" variable nil (reparse-symbol function_parameters) [11817 11818])
+                    ("nbin" variable nil (reparse-symbol function_parameters) [11819 11823])
+                    ("label" variable nil (reparse-symbol function_parameters) [11827 11832])
+                    ("ax" variable nil (reparse-symbol function_parameters) [11842 11844])
+                    ("isLog" variable nil (reparse-symbol function_parameters) [11850 11855])
+                    ("bins" variable nil (reparse-symbol function_parameters) [11862 11866]))                  )
+                nil [11799 12875])
+            ("plotTimeSeries" function
+               (:documentation "plot all time series in a data frame on different rows"
+                :arguments 
+                  ( ("g" variable nil (reparse-symbol function_parameters) [12895 12896])
+                    ("ax" variable nil (reparse-symbol function_parameters) [12897 12899])
+                    ("t" variable nil (reparse-symbol function_parameters) [12905 12906])
+                    ("mode" variable nil (reparse-symbol function_parameters) [12914 12918]))                  )
+                nil [12876 13679])
+            ("plotConfidenceInterval" function
+               (:documentation "plot a confidence interval and scatter points"
+                :arguments 
+                  ( ("y" variable nil (reparse-symbol function_parameters) [13707 13708])
+                    ("ax" variable nil (reparse-symbol function_parameters) [13709 13711])
+                    ("label" variable nil (reparse-symbol function_parameters) [13717 13722])
+                    ("nInt" variable nil (reparse-symbol function_parameters) [13731 13735])
+                    ("color" variable nil (reparse-symbol function_parameters) [13738 13743]))                  )
+                nil [13680 14272])
+            ("plotBinned" function
+               (:documentation "plot average and confindence interval on bins"
+                :arguments 
+                  ( ("t" variable nil (reparse-symbol function_parameters) [14288 14289])
+                    ("y" variable nil (reparse-symbol function_parameters) [14290 14291])
+                    ("ax" variable nil (reparse-symbol function_parameters) [14292 14294])
+                    ("isScatter" variable nil (reparse-symbol function_parameters) [14300 14309])
+                    ("color" variable nil (reparse-symbol function_parameters) [14316 14321])
+                    ("label" variable nil (reparse-symbol function_parameters) [14329 14334])
+                    ("alpha" variable nil (reparse-symbol function_parameters) [14344 14349]))                  )
+                nil [14273 14921])
+            ("plotOccurrence" function
+               (:documentation "plot histogram of occurrences of values"
+                :arguments 
+                  ( ("y" variable nil (reparse-symbol function_parameters) [14946 14947])
+                    ("ax" variable nil (reparse-symbol function_parameters) [14948 14950]))                  )
+                nil [14927 15204])
+            ("plotHeatmap" function
+               (:documentation "plot a correlation heatmap"
+                :arguments 
+                  ( ("X" variable nil (reparse-symbol function_parameters) [15225 15226])
+                    ("labV" variable nil (reparse-symbol function_parameters) [15227 15231])
+                    ("ax" variable nil (reparse-symbol function_parameters) [15239 15241])
+                    ("vmin" variable nil (reparse-symbol function_parameters) [15247 15251])
+                    ("vmax" variable nil (reparse-symbol function_parameters) [15255 15259])
+                    ("cmap" variable nil (reparse-symbol function_parameters) [15262 15266]))                  )
+                nil [15209 15696])
+            ("plotCorr" function
+               (:documentation "plot a correlation heatmap"
+                :arguments 
+                  ( ("X" variable nil (reparse-symbol function_parameters) [15711 15712])
+                    ("labV" variable nil (reparse-symbol function_parameters) [15713 15717])
+                    ("ax" variable nil (reparse-symbol function_parameters) [15723 15725]))                  )
+                nil [15698 16153])
+            ("plotCrossMatrix" function
+               (:documentation "produce a plot of four different cross information kpi"
+                :arguments 
+                  ( ("X" variable nil (reparse-symbol function_parameters) [16183 16184])
+                    ("ax" variable nil (reparse-symbol function_parameters) [16185 16187]))                  )
+                nil [16163 18151])
+            ("plotConfMat" function
+               (:documentation "plot confusion matrix"
+                :arguments 
+                  ( ("y" variable nil (reparse-symbol function_parameters) [18172 18173])
+                    ("y_pred" variable nil (reparse-symbol function_parameters) [18174 18180]))                  )
+                nil [18156 18381])
+            ("plotHyperPerf" function
+               (:documentation "plot a double boxplot showing the performances per hyperparameter"
+                :arguments 
+                  ( ("scorV" variable nil (reparse-symbol function_parameters) [18400 18405]))                  )
+                nil [18382 18989])
+            ("plotParallel" function
+               (:documentation "plot a parallel representation"
+                :arguments 
+                  ( ("frame" variable nil (reparse-symbol function_parameters) [19007 19012])
+                    ("class_column" variable nil (reparse-symbol function_parameters) [19014 19026])
+                    ("cols" variable nil (reparse-symbol function_parameters) [19028 19032])
+                    ("ax" variable nil (reparse-symbol function_parameters) [19039 19041])
+                    ("color" variable nil (reparse-symbol function_parameters) [19048 19053])
+                    ("use_columns" variable nil (reparse-symbol function_parameters) [19060 19071])
+                    ("xticks" variable nil (reparse-symbol function_parameters) [19079 19085])
+                    ("colormap" variable nil (reparse-symbol function_parameters) [19092 19100])
+                    ("kwds" variable nil (reparse-symbol function_parameters) [19106 19112]))                  )
+                nil [18990 20615])
+            ("plotSankey" function
+               (:documentation "plot a sankey diagram"
+                :arguments 
+                  ( ("df" variable nil (reparse-symbol function_parameters) [20631 20633])
+                    ("col_1" variable nil (reparse-symbol function_parameters) [20634 20639])
+                    ("col_2" variable nil (reparse-symbol function_parameters) [20644 20649])
+                    ("title" variable nil (reparse-symbol function_parameters) [20654 20659]))                  )
+                nil [20616 20838])
+            ("plotSankeyFlow" function (:arguments 
+              ( ("df" variable nil (reparse-symbol function_parameters) [20858 20860])
+                ("col_1" variable nil (reparse-symbol function_parameters) [20861 20866])
+                ("col_2" variable nil (reparse-symbol function_parameters) [20871 20876]))              ) nil [20839 21812])
+            ("plotRadar" function
+               (:documentation "radar plot"
+                :arguments 
+                  ( ("poi" variable nil (reparse-symbol function_parameters) [21827 21830])
+                    ("tL" variable nil (reparse-symbol function_parameters) [21831 21833])
+                    ("idField" variable nil (reparse-symbol function_parameters) [21834 21841]))                  )
+                nil [21813 22717])
+            ("singleRadar" function
+               (:documentation "single radar plot"
+                :arguments 
+                  ( ("x" variable nil (reparse-symbol function_parameters) [22734 22735])
+                    ("y1" variable nil (reparse-symbol function_parameters) [22736 22738])
+                    ("ax" variable nil (reparse-symbol function_parameters) [22739 22741])
+                    ("color" variable nil (reparse-symbol function_parameters) [22747 22752])
+                    ("label" variable nil (reparse-symbol function_parameters) [22763 22768]))                  )
+                nil [22718 23682])
+            ("radarGrid" function
+               (:documentation "radar plots in a grid from a matrix"
+                :arguments 
+                  ( ("X" variable nil (reparse-symbol function_parameters) [23701 23702])
+                    ("cL" variable nil (reparse-symbol function_parameters) [23703 23705])
+                    ("labL" variable nil (reparse-symbol function_parameters) [23706 23710]))                  )
+                nil [23687 24519])
+            ("plotJoin" function
+               (:documentation "produce a join plot"
+                :arguments 
+                  ( ("vist" variable nil (reparse-symbol function_parameters) [24533 24537])
+                    ("col_ref" variable nil (reparse-symbol function_parameters) [24538 24545])
+                    ("col1" variable nil (reparse-symbol function_parameters) [24553 24557])
+                    ("col2" variable nil (reparse-symbol function_parameters) [24564 24568]))                  )
+                nil [24520 25448])
+            ("showPredicted" function (:arguments 
+              ( ("g" variable nil (reparse-symbol function_parameters) [25467 25468])
+                ("model" variable nil (reparse-symbol function_parameters) [25469 25474])
+                ("X1" variable nil (reparse-symbol function_parameters) [25475 25477])
+                ("isPlot" variable nil (reparse-symbol function_parameters) [25495 25501])
+                ("idField" variable nil (reparse-symbol function_parameters) [25508 25515]))              ) nil [25449 27363])
+            ("plotPie" function
+               (:documentation "plot a double pie chart (e.g. age&gender)"
+                :arguments 
+                  ( ("df" variable nil (reparse-symbol function_parameters) [27376 27378])
+                    ("gL" variable nil (reparse-symbol function_parameters) [27379 27381])
+                    ("isValue" variable nil (reparse-symbol function_parameters) [27382 27389])
+                    ("ax" variable nil (reparse-symbol function_parameters) [27395 27397]))                  )
+                nil [27364 28123])
+            ("boxplotOverlap" function (:arguments 
+              ( ("X1" variable nil (reparse-symbol function_parameters) [28143 28145])
+                ("X2" variable nil (reparse-symbol function_parameters) [28146 28148])
+                ("cL" variable nil (reparse-symbol function_parameters) [28149 28151])
+                ("by" variable nil (reparse-symbol function_parameters) [28152 28154])
+                ("lab1" variable nil (reparse-symbol function_parameters) [28160 28164])
+                ("lab2" variable nil (reparse-symbol function_parameters) [28171 28175])
+                ("ax" variable nil (reparse-symbol function_parameters) [28183 28185]))              ) nil [28124 29455]))          
+      :file "train_viz.py"
+      :pointmax 29457
+      :fsize 29456
+      :lastmodtime '(24424 28474 354404 702000)
+      :unmatched-syntax nil)
+    (semanticdb-table "semanticdb-table"
+      :major-mode python-mode
+      :tags 
+        '( ("\"\"\"
+train_model:
+iterate and tune over different models for prediction and regression
+\"\"\"" code nil nil [1 90])
+            ("time" include nil nil [92 131])
+            ("re" include nil nil [92 131])
+            ("datetime" include nil nil [92 131])
+            ("json" include nil nil [92 131])
+            ("random" include nil nil [92 131])
+            ("matplotlib.pyplot" include nil nil [132 163])
+            ("numpy" include nil nil [164 182])
+            ("pandas" include nil nil [183 202])
+            ("scipy" include nil nil [203 221])
+            ("lernia.train_reshape" include nil nil [222 256])
+            ("lernia.train_modelList" include nil nil [257 294])
+            ("lernia.train_score" include nil nil [295 327])
+            ("sklearn.preprocessing" include nil nil [328 406])
+            ("sklearn" include nil nil [407 427])
+            ("trainMod" type
+               (:documentation "
+    Routine to iterate over different predictors and regressors, tune and compare models
+    Args:
+        X: Data set for prediction
+        y: reference data
+
+    "
+                :members 
+                  ( ("__init__" function
+                       (:suite 
+                          ( ("\"\"\"load matrices and split test and train sets\"\"\"" code nil (reparse-symbol indented_block_body) [658 707])
+                            ("if" code nil (reparse-symbol indented_block_body) [716 824])
+                            ("self" variable nil (reparse-symbol indented_block_body) [863 873])
+                            ("self" variable nil (reparse-symbol indented_block_body) [882 892]))                          
+                        :parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [639 643])
+                            ("X" variable nil (reparse-symbol function_parameters) [644 645])
+                            ("y" variable nil (reparse-symbol function_parameters) [646 647]))                          
+                        :documentation "load matrices and split test and train sets"
+                        :constructor-flag t)
+                        (reparse-symbol indented_block_body) [626 893])
+                    ("factorize" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [912 916])
+                            ("X" variable nil (reparse-symbol function_parameters) [917 918]))                          
+                        :documentation "factorize all string fields")
+                        (reparse-symbol indented_block_body) [898 995])
+                    ("setMatrix" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [1026 1030])
+                            ("X" variable nil (reparse-symbol function_parameters) [1031 1032]))                          
+                        :documentation "set a new matrix")
+                        (reparse-symbol indented_block_body) [1012 1139])
+                    ("setScore" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [1165 1169])
+                            ("y" variable nil (reparse-symbol function_parameters) [1170 1171]))                          
+                        :documentation "set a new score")
+                        (reparse-symbol indented_block_body) [1152 1245])
+                    ("getX" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [1259 1263]))                          
+                        :documentation "return data set")
+                        (reparse-symbol indented_block_body) [1250 1318])
+                    ("gety" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [1332 1336]))                          
+                        :documentation "return score set")
+                        (reparse-symbol indented_block_body) [1323 1392])
+                    ("getModel" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [1410 1414]))                          
+                        :documentation "return trained model")
+                        (reparse-symbol indented_block_body) [1397 1571])
+                    ("modFirst" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [1593 1597])
+                            ("paramF" variable nil (reparse-symbol function_parameters) [1598 1604]))                          
+                        :documentation "returns the default model")
+                        (reparse-symbol indented_block_body) [1580 1842])
+                    ("modPick" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [1859 1863])
+                            ("clf" variable nil (reparse-symbol function_parameters) [1864 1867]))                          
+                        :documentation "pick a random configuration set from the grid")
+                        (reparse-symbol indented_block_body) [1847 2539])
+                    ("perfReg" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [2556 2560])
+                            ("clf" variable nil (reparse-symbol function_parameters) [2561 2564])
+                            ("X_train" variable nil (reparse-symbol function_parameters) [2565 2572])
+                            ("X_test" variable nil (reparse-symbol function_parameters) [2573 2579])
+                            ("y_train" variable nil (reparse-symbol function_parameters) [2580 2587])
+                            ("y_test" variable nil (reparse-symbol function_parameters) [2588 2594]))                          
+                        :documentation "a single regressor run")
+                        (reparse-symbol indented_block_body) [2544 2895])
+                    ("regMatrix" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [2914 2918])
+                            ("clf" variable nil (reparse-symbol function_parameters) [2919 2922])
+                            ("trainL" variable nil (reparse-symbol function_parameters) [2923 2929])
+                            ("testL" variable nil (reparse-symbol function_parameters) [2930 2935]))                          
+                        :documentation "iterate regressor over location list")
+                        (reparse-symbol indented_block_body) [2900 3550])
+                    ("runReg" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [3566 3570])
+                            ("trainL" variable nil (reparse-symbol function_parameters) [3571 3577])
+                            ("testL" variable nil (reparse-symbol function_parameters) [3578 3583])
+                            ("paramF" variable nil (reparse-symbol function_parameters) [3584 3590]))                          
+                        :documentation "iterate and score over different parameters")
+                        (reparse-symbol indented_block_body) [3555 4118])
+                    ("tuneReg" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [4139 4143])
+                            ("trainL" variable nil (reparse-symbol function_parameters) [4144 4150])
+                            ("testL" variable nil (reparse-symbol function_parameters) [4151 4156])
+                            ("nIter" variable nil (reparse-symbol function_parameters) [4157 4162])
+                            ("paramF" variable nil (reparse-symbol function_parameters) [4166 4172]))                          
+                        :documentation "iterate and score over different parameters")
+                        (reparse-symbol indented_block_body) [4127 5005])
+                    ("perfCla" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [5026 5030])
+                            ("clf" variable nil (reparse-symbol function_parameters) [5031 5034])
+                            ("trainL" variable nil (reparse-symbol function_parameters) [5035 5041])
+                            ("testL" variable nil (reparse-symbol function_parameters) [5042 5047]))                          
+                        :documentation "perform a single classification")
+                        (reparse-symbol indented_block_body) [5014 6982])
+                    ("loopMod" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [7003 7007])
+                            ("paramF" variable nil (reparse-symbol function_parameters) [7008 7014])
+                            ("test_size" variable nil (reparse-symbol function_parameters) [7028 7037]))                          
+                        :documentation "loop over all avaiable models")
+                        (reparse-symbol indented_block_body) [6991 8766])
+                    ("plotRoc" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [8784 8788]))                          
+                        :documentation "plot roc curve")
+                        (reparse-symbol indented_block_body) [8772 9601])
+                    ("save" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [9615 9619])
+                            ("mod" variable nil (reparse-symbol function_parameters) [9620 9623])
+                            ("fName" variable nil (reparse-symbol function_parameters) [9624 9629]))                          
+                        :documentation "save the model")
+                        (reparse-symbol indented_block_body) [9606 9693])
+                    ("load" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [9707 9711])
+                            ("fName" variable nil (reparse-symbol function_parameters) [9712 9717]))                          
+                        :documentation "load a model")
+                        (reparse-symbol indented_block_body) [9698 9799])
+                    ("tune" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [9813 9817])
+                            ("paramF" variable nil (reparse-symbol function_parameters) [9818 9824])
+                            ("tuneF" variable nil (reparse-symbol function_parameters) [9838 9843]))                          
+                        :documentation "tune all avaiable models")
+                        (reparse-symbol indented_block_body) [9804 10552]))                  
+                :type "class")
+                nil [429 10552])
+            ("regName" type
+               (:documentation "
+    overload class trainMod picking one model from train_modelList and its tuning grid
+    "
+                :superclasses ("trainMod")
+                :members 
+                  ( ("__init__" function
+                       (:suite 
+                          ( ("\"\"\"call trainKeras constructor\"\"\"" code nil (reparse-symbol indented_block_body) [10733 10766])
+                            ("trainMod" code nil (reparse-symbol indented_block_body) [10775 10802])
+                            ("self" variable nil (reparse-symbol indented_block_body) [10811 10833]))                          
+                        :parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [10698 10702])
+                            ("X" variable nil (reparse-symbol function_parameters) [10703 10704])
+                            ("y" variable nil (reparse-symbol function_parameters) [10705 10706])
+                            ("modName" variable nil (reparse-symbol function_parameters) [10707 10714]))                          
+                        :documentation "call trainKeras constructor"
+                        :constructor-flag t)
+                        (reparse-symbol indented_block_body) [10685 10834])
+                    ("modFirst" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [10852 10856])
+                            ("paramF" variable nil (reparse-symbol function_parameters) [10857 10863]))                          
+                        :documentation "returns the default model")
+                        (reparse-symbol indented_block_body) [10839 11117])
+                    ("modPick" function
+                       (:parent "dummy"
+                        :arguments 
+                          ( ("self" variable nil (reparse-symbol function_parameters) [11134 11138])
+                            ("clf" variable nil (reparse-symbol function_parameters) [11139 11142]))                          
+                        :documentation "pick a random configuration set from the grid")
+                        (reparse-symbol indented_block_body) [11122 11466]))                  
+                :type "class")
+                nil [10553 11466])
+            ("regressor" function
+               (:documentation "apply a regressor"
+                :arguments 
+                  ( ("X" variable nil (reparse-symbol function_parameters) [11481 11482])
+                    ("vf" variable nil (reparse-symbol function_parameters) [11483 11485])
+                    ("vg" variable nil (reparse-symbol function_parameters) [11486 11488])
+                    ("nXval" variable nil (reparse-symbol function_parameters) [11489 11494])
+                    ("isShuffle" variable nil (reparse-symbol function_parameters) [11501 11510])
+                    ("paramF" variable nil (reparse-symbol function_parameters) [11516 11522]))                  )
+                nil [11467 12785])
+            ("regressorSingle" function
+               (:documentation "apply a regressor"
+                :arguments 
+                  ( ("X" variable nil (reparse-symbol function_parameters) [12806 12807])
+                    ("y" variable nil (reparse-symbol function_parameters) [12808 12809])
+                    ("nXval" variable nil (reparse-symbol function_parameters) [12810 12815])
+                    ("isShuffle" variable nil (reparse-symbol function_parameters) [12818 12827])
+                    ("paramF" variable nil (reparse-symbol function_parameters) [12833 12839]))                  )
+                nil [12786 13942])
+            ("saveModel" function
+               (:documentation "save a model"
+                :arguments 
+                  ( ("fit" variable nil (reparse-symbol function_parameters) [13957 13960])
+                    ("fName" variable nil (reparse-symbol function_parameters) [13961 13966]))                  )
+                nil [13943 14019])
+            ("loadModel" function
+               (:documentation "load a model"
+                :arguments 
+                  ( ("fName" variable nil (reparse-symbol function_parameters) [14034 14039]))                  )
+                nil [14020 14095]))          
+      :file "train_model.py"
+      :pointmax 14096
+      :fsize 14095
+      :lastmodtime '(24372 4769 188554 614000)
+      :unmatched-syntax nil)
+    (semanticdb-table "semanticdb-table"
+      :major-mode python-mode
+      :tags 
+        '( ("\"\"\"
+train_reshape:
+reshape dataframes and time series in preparation for training.
+\"\"\"" code nil nil [1 87])
+            ("os" include nil nil [89 125])
+            ("re" include nil nil [89 125])
+            ("datetime" include nil nil [89 125])
+            ("csv" include nil nil [89 125])
+            ("random" include nil nil [89 125])
+            ("numpy" include nil nil [126 144])
+            ("pandas" include nil nil [145 164])
+            ("scipy" include nil nil [165 183])
+            ("matplotlib.pyplot" include nil nil [184 215])
+            ("geomadi.lib_graph" include nil nil [216 247])
+            ("albio.series_stat" include nil nil [248 279])
+            ("day2time" function
+               (:documentation "transform day format into datetime (for plotting)"
+                :arguments 
+                  ( ("hL" variable nil (reparse-symbol function_parameters) [294 296])
+                    ("date_format" variable nil (reparse-symbol function_parameters) [297 308]))                  )
+                nil [281 450])
+            ("hour2time" function
+               (:documentation "transform time format into datetime (for plotting)"
+                :arguments 
+                  ( ("hL" variable nil (reparse-symbol function_parameters) [465 467])
+                    ("date_format" variable nil (reparse-symbol function_parameters) [468 479]))                  )
+                nil [451 611])
+            ("timeCol" function
+               (:documentation "returns all the columns with time format"
+                :arguments 
+                  ( ("g" variable nil (reparse-symbol function_parameters) [624 625]))                  )
+                nil [612 747])
+            ("overlap" function
+               (:documentation "return only the overlapping values"
+                :arguments 
+                  ( ("hL" variable nil (reparse-symbol function_parameters) [760 762])
+                    ("hL1" variable nil (reparse-symbol function_parameters) [763 766]))                  )
+                nil [748 858])
+            ("list_diff" function
+               (:documentation "return only the overlapping values"
+                :arguments 
+                  ( ("hL" variable nil (reparse-symbol function_parameters) [873 875])
+                    ("hL1" variable nil (reparse-symbol function_parameters) [876 879]))                  )
+                nil [859 962])
+            ("date2isocal" function
+               (:documentation "transform a date into a isocalendar"
+                :arguments 
+                  ( ("hL" variable nil (reparse-symbol function_parameters) [979 981])
+                    ("date_format" variable nil (reparse-symbol function_parameters) [982 993]))                  )
+                nil [963 1403])
+            ("nonnull" function
+               (:documentation "return only non null numbers"
+                :arguments 
+                  ( ("y" variable nil (reparse-symbol function_parameters) [1416 1417]))                  )
+                nil [1404 1505])
+            ("mergeDataframe" function
+               (:documentation "merge a list of dataframes into a single dataframe"
+                :arguments 
+                  ( ("dfL" variable nil (reparse-symbol function_parameters) [1525 1528])
+                    ("idField" variable nil (reparse-symbol function_parameters) [1529 1536]))                  )
+                nil [1506 1954])
+            ("mergeFiles" function
+               (:documentation "merge files into a dataframe"
+                :arguments 
+                  ( ("projD" variable nil (reparse-symbol function_parameters) [1970 1975])
+                    ("fL" variable nil (reparse-symbol function_parameters) [1976 1978])
+                    ("idField" variable nil (reparse-symbol function_parameters) [1979 1986]))                  )
+                nil [1955 2202])
+            ("mergeDir" function
+               (:documentation "merge all files in a directory"
+                :arguments 
+                  ( ("projDir" variable nil (reparse-symbol function_parameters) [2216 2223])
+                    ("idField" variable nil (reparse-symbol function_parameters) [2224 2231]))                  )
+                nil [2203 2355])
+            ("normPercentile" function
+               (:documentation "normalize the function within the first and the last percentile"
+                :arguments 
+                  ( ("y" variable nil (reparse-symbol function_parameters) [2375 2376])
+                    ("perc" variable nil (reparse-symbol function_parameters) [2377 2381]))                  )
+                nil [2356 2662])
+            ("normDf" function
+               (:documentation "normalize the dataframe within the first and the last percentile and interpolate"
+                :arguments 
+                  ( ("X" variable nil (reparse-symbol function_parameters) [2674 2675])
+                    ("perc" variable nil (reparse-symbol function_parameters) [2676 2680])
+                    ("lim" variable nil (reparse-symbol function_parameters) [2688 2691])
+                    ("tL" variable nil (reparse-symbol function_parameters) [2698 2700]))                  )
+                nil [2663 3561])
+            ("diffDf" function
+               (:documentation "step difference of data frame"
+                :arguments 
+                  ( ("X1" variable nil (reparse-symbol function_parameters) [3574 3576])
+                    ("tL" variable nil (reparse-symbol function_parameters) [3577 3579]))                  )
+                nil [3563 3801])
+            ("integralDf" function
+               (:documentation "step difference of data frame"
+                :arguments 
+                  ( ("X1" variable nil (reparse-symbol function_parameters) [3818 3820])
+                    ("tL" variable nil (reparse-symbol function_parameters) [3821 3823]))                  )
+                nil [3803 4045])
+            ("norm" function
+               (:documentation "normalize the function within the min and max"
+                :arguments 
+                  ( ("y" variable nil (reparse-symbol function_parameters) [4060 4061]))                  )
+                nil [4051 4277])
+            ("binOutlier" function
+               (:documentation "bin with special treatment for the outliers"
+                :arguments 
+                  ( ("y" variable nil (reparse-symbol function_parameters) [4293 4294])
+                    ("nBin" variable nil (reparse-symbol function_parameters) [4295 4299])
+                    ("threshold" variable nil (reparse-symbol function_parameters) [4302 4311])
+                    ("isLabel" variable nil (reparse-symbol function_parameters) [4316 4323]))                  )
+                nil [4278 5118])
+            ("binMatrix" function
+               (:documentation "bin a continuum parametric matrix"
+                :arguments 
+                  ( ("X" variable nil (reparse-symbol function_parameters) [5133 5134])
+                    ("nBin" variable nil (reparse-symbol function_parameters) [5135 5139])
+                    ("threshold" variable nil (reparse-symbol function_parameters) [5142 5151]))                  )
+                nil [5119 5451])
+            ("binVector" function
+               (:documentation "bin a continuum parametric vector"
+                :arguments 
+                  ( ("y" variable nil (reparse-symbol function_parameters) [5470 5471])
+                    ("nBin" variable nil (reparse-symbol function_parameters) [5472 5476])
+                    ("threshold" variable nil (reparse-symbol function_parameters) [5479 5488]))                  )
+                nil [5456 5648])
+            ("binMask" function
+               (:documentation "turn a comma separated list into a mask integer"
+                :arguments 
+                  ( ("typeV" variable nil (reparse-symbol function_parameters) [5661 5666]))                  )
+                nil [5649 6198])
+            ("id2dim" function
+               (:documentation "partition a dataset in learning matrices and reference data"
+                :arguments 
+                  ( ("tist" variable nil (reparse-symbol function_parameters) [6210 6214])
+                    ("sL" variable nil (reparse-symbol function_parameters) [6215 6217])
+                    ("idField" variable nil (reparse-symbol function_parameters) [6218 6225]))                  )
+                nil [6199 6518])
+            ("id2group" function
+               (:documentation "from two datasets create a learning matrix and reference data"
+                :arguments 
+                  ( ("sact" variable nil (reparse-symbol function_parameters) [6532 6536])
+                    ("mist" variable nil (reparse-symbol function_parameters) [6537 6541])
+                    ("hL" variable nil (reparse-symbol function_parameters) [6542 6544])
+                    ("idField" variable nil (reparse-symbol function_parameters) [6545 6552]))                  )
+                nil [6519 7145])
+            ("factorize" function
+               (:documentation "factorize all string fields"
+                :arguments 
+                  ( ("X" variable nil (reparse-symbol function_parameters) [7160 7161]))                  )
+                nil [7146 7389])
+            ("categorize" function
+               (:documentation "from categories to matrix"
+                :arguments 
+                  ( ("y" variable nil (reparse-symbol function_parameters) [7405 7406]))                  )
+                nil [7390 7706])
+            ("applyBackfold" function
+               (:documentation "add the margin to the matrix mirroring the boundary"
+                :arguments 
+                  ( ("X" variable nil (reparse-symbol function_parameters) [7725 7726]))                  )
+                nil [7707 8074])
+            ("removeBackfold" function
+               (:documentation "remove the margins from the image"
+                :arguments 
+                  ( ("X" variable nil (reparse-symbol function_parameters) [8094 8095]))                  )
+                nil [8075 8191])
+            ("applyInterp" function
+               (:documentation "interpolate betwen the steps"
+                :arguments 
+                  ( ("X" variable nil (reparse-symbol function_parameters) [8208 8209])
+                    ("step" variable nil (reparse-symbol function_parameters) [8210 8214]))                  )
+                nil [8192 8605])
+            ("removeInterp" function
+               (:documentation "interpolate betwen the steps"
+                :arguments 
+                  ( ("X" variable nil (reparse-symbol function_parameters) [8627 8628])
+                    ("step" variable nil (reparse-symbol function_parameters) [8629 8633]))                  )
+                nil [8610 8705])
+            ("applyRandom" function
+               (:documentation "apply random number to the matrix"
+                :arguments 
+                  ( ("X" variable nil (reparse-symbol function_parameters) [8726 8727])
+                    ("delta" variable nil (reparse-symbol function_parameters) [8728 8733]))                  )
+                nil [8710 8869])
+            ("weekMatrix" function
+               (:documentation "define a week as a 7x24 matrix"
+                :arguments 
+                  ( ("g" variable nil (reparse-symbol function_parameters) [8885 8886])
+                    ("isBackfold" variable nil (reparse-symbol function_parameters) [8887 8897])
+                    ("roll" variable nil (reparse-symbol function_parameters) [8903 8907])
+                    ("col" variable nil (reparse-symbol function_parameters) [8910 8913])
+                    ("isInterp" variable nil (reparse-symbol function_parameters) [8922 8930]))                  )
+                nil [8870 9390])
+            ("isocalInWeek" function
+               (:documentation "transform a dataframe with isocalendar into a series of images with 7(d)x24(h) pixels"
+                :arguments 
+                  ( ("df" variable nil (reparse-symbol function_parameters) [9412 9414])
+                    ("idField" variable nil (reparse-symbol function_parameters) [9415 9422])
+                    ("isBackfold" variable nil (reparse-symbol function_parameters) [9432 9442])
+                    ("roll" variable nil (reparse-symbol function_parameters) [9448 9452])
+                    ("col" variable nil (reparse-symbol function_parameters) [9455 9458])
+                    ("isInterp" variable nil (reparse-symbol function_parameters) [9467 9475]))                  )
+                nil [9395 10147])
+            ("splitInWeek" function
+               (:documentation "morph a time series into an image representing a week (7x24) for convolutional neural network training"
+                :arguments 
+                  ( ("df" variable nil (reparse-symbol function_parameters) [10164 10166])
+                    ("idField" variable nil (reparse-symbol function_parameters) [10167 10174])
+                    ("isBackfold" variable nil (reparse-symbol function_parameters) [10184 10194])
+                    ("roll" variable nil (reparse-symbol function_parameters) [10200 10204])
+                    ("col" variable nil (reparse-symbol function_parameters) [10207 10210])
+                    ("isInterp" variable nil (reparse-symbol function_parameters) [10219 10227]))                  )
+                nil [10148 11220])
+            ("dayInWeek" function
+               (:documentation "morph a time series into an image representing a week (7xN) for convolutional neural network training"
+                :arguments 
+                  ( ("df" variable nil (reparse-symbol function_parameters) [11235 11237])
+                    ("idField" variable nil (reparse-symbol function_parameters) [11238 11245]))                  )
+                nil [11221 12056])
+            ("loadMnist" function (:documentation "download mnist digit dataset for testing") nil [12057 12543])
+            ("splitLearningSet" function
+               (:documentation "split a learning set"
+                :arguments 
+                  ( ("X" variable nil (reparse-symbol function_parameters) [12565 12566])
+                    ("y" variable nil (reparse-symbol function_parameters) [12567 12568])
+                    ("f_train" variable nil (reparse-symbol function_parameters) [12569 12576])
+                    ("f_valid" variable nil (reparse-symbol function_parameters) [12582 12589]))                  )
+                nil [12544 13246])
+            ("day2isocal" function
+               (:documentation "convert a series of time over multiple years into a isocalendar time"
+                :arguments 
+                  ( ("df" variable nil (reparse-symbol function_parameters) [13262 13264])
+                    ("idField" variable nil (reparse-symbol function_parameters) [13265 13272])
+                    ("isDay" variable nil (reparse-symbol function_parameters) [13282 13287]))                  )
+                nil [13247 14050])
+            ("hour2day" function
+               (:documentation "remove time and add up to days"
+                :arguments 
+                  ( ("g" variable nil (reparse-symbol function_parameters) [14064 14065]))                  )
+                nil [14051 14437])
+            ("isocal2day" function
+               (:documentation "express isocalendar columns into days from a reference list"
+                :arguments 
+                  ( ("g" variable nil (reparse-symbol function_parameters) [14457 14458])
+                    ("dateL" variable nil (reparse-symbol function_parameters) [14459 14464])
+                    ("idField" variable nil (reparse-symbol function_parameters) [14465 14472]))                  )
+                nil [14442 14927])
+            ("ical2date" function
+               (:documentation "return a look up list with date and isocalendar"
+                :arguments 
+                  ( ("hL" variable nil (reparse-symbol function_parameters) [14942 14944])
+                    ("year" variable nil (reparse-symbol function_parameters) [14945 14949]))                  )
+                nil [14928 15633])
+            ("dateFromIso" function
+               (:documentation "date from isocalendar, 4th of January avoids calendar week 53 like in Gregorian calendar"
+                :arguments 
+                  ( ("iso_year" variable nil (reparse-symbol function_parameters) [15651 15659])
+                    ("iso_week" variable nil (reparse-symbol function_parameters) [15660 15668])
+                    ("iso_day" variable nil (reparse-symbol function_parameters) [15669 15676]))                  )
+                nil [15635 15959]))          
+      :file "train_reshape.py"
+      :pointmax 15959
+      :fsize 15958
+      :lastmodtime '(24435 21007 882145 200000)
+      :unmatched-syntax nil)
+    (semanticdb-table "semanticdb-table"
+      :major-mode python-mode
+      :tags 
+        '( ("\"\"\"
+train_score:
+calculate scores for model training
+\"\"\"" code nil nil [1 57])
+            ("re" include nil nil [59 92])
+            ("datetime" include nil nil [59 92])
+            ("json" include nil nil [59 92])
+            ("random" include nil nil [59 92])
+            ("numpy" include nil nil [93 111])
+            ("pandas" include nil nil [112 131])
+            ("scipy" include nil nil [132 150])
+            ("matplotlib.pyplot" include nil nil [151 182])
+            ("geomadi.lib_graph" include nil nil [183 214])
+            ("albio.series_stat" include nil nil [215 246])
+            ("sklearn" include nil nil [247 267])
+            ("scipy.optimize" include nil nil [268 319])
+            ("relErr" function
+               (:documentation "compute the relative error"
+                :arguments 
+                  ( ("y1" variable nil (reparse-symbol function_parameters) [332 334])
+                    ("y2" variable nil (reparse-symbol function_parameters) [335 337]))                  )
+                nil [321 509])
+            ("calcMetrics" function (:arguments 
+              ( ("y1" variable nil (reparse-symbol function_parameters) [526 528])
+                ("y2" variable nil (reparse-symbol function_parameters) [529 531]))              ) nil [510 945])
+            ("scorPerf" function (:arguments 
+              ( ("act" variable nil (reparse-symbol function_parameters) [959 962])
+                ("step" variable nil (reparse-symbol function_parameters) [963 967])
+                ("idField" variable nil (reparse-symbol function_parameters) [976 983])
+                ("col1" variable nil (reparse-symbol function_parameters) [993 997])
+                ("col2" variable nil (reparse-symbol function_parameters) [1004 1008]))              ) nil [946 1535])
+            ("scorStat" function
+               (:documentation "return a scoring based on correlation and regression"
+                :arguments 
+                  ( ("X" variable nil (reparse-symbol function_parameters) [1549 1550])
+                    ("y" variable nil (reparse-symbol function_parameters) [1551 1552]))                  )
+                nil [1536 2502])
+            ("score" function
+               (:documentation "return a scoring based on correlation and regression"
+                :arguments 
+                  ( ("X1" variable nil (reparse-symbol function_parameters) [2513 2515])
+                    ("X2" variable nil (reparse-symbol function_parameters) [2516 2518])
+                    ("hL" variable nil (reparse-symbol function_parameters) [2519 2521])
+                    ("idField" variable nil (reparse-symbol function_parameters) [2525 2532])
+                    ("idFeat" variable nil (reparse-symbol function_parameters) [2542 2548]))                  )
+                nil [2503 3239]))          
+      :file "train_score.py"
+      :pointmax 3241
+      :fsize 3240
+      :lastmodtime '(24128 3280 270408 0)
+      :unmatched-syntax nil)
+    (semanticdb-table "semanticdb-table"
+      :file "train_modelList.py"
+      :fsize 12603
+      :lastmodtime '(24344 21586 727467 163000)))
+  :file "!home!sabeiro!lav!src!lernia!lernia!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

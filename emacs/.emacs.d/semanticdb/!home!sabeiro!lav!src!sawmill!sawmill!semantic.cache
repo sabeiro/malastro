@@ -1,0 +1,112 @@
+;; Object semanticdb-project-database-file
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "semanticdb-project-database-file"
+  :tables
+  (list
+    (semanticdb-table "semanticdb-table"
+      :major-mode python-mode
+      :tags 
+        '( ("io" include nil nil [184 236])
+            ("re" include nil nil [184 236])
+            ("datetime" include nil nil [184 236])
+            ("json" include nil nil [184 236])
+            ("random" include nil nil [184 236])
+            ("gzip" include nil nil [184 236])
+            ("sys" include nil nil [184 236])
+            ("os" include nil nil [184 236])
+            ("pandas" include nil nil [237 256])
+            ("pathlib" include nil nil [257 281])
+            ("scipy" include nil nil [282 311])
+            ("dL" variable nil nil [396 442])
+            ("sys" variable nil nil [443 521])
+            ("baseDir" variable nil nil [522 553])
+            ("projDir" code nil nil [554 597])
+            ("os" variable nil nil [749 814])
+            ("pyspark" include nil nil [815 829])
+            ("pyspark" include nil nil [830 873])
+            ("pyspark.sql" include nil nil [874 908])
+            ("pyspark.sql.types" include nil nil [909 940])
+            ("pyspark.sql.functions" include nil nil [941 978])
+            ("pyspark.sql.functions" include nil nil [979 1049])
+            ("pyspark.sql.functions" include nil nil [1050 1095])
+            ("pyspark.sql" include nil nil [1096 1137])
+            ("pyspark.sql.functions" include nil nil [1138 1175])
+            ("pyspark.sql.window" include nil nil [1176 1213])
+            ("conf" variable nil nil [1215 1338])
+            ("conf" code nil nil [1339 1379])
+            ("conf" code nil nil [1380 1418])
+            ("conf" code nil nil [1419 1460])
+            ("conf" code nil nil [1461 1506])
+            ("conf" code nil nil [1507 1545])
+            ("conf" code nil nil [1546 1593])
+            ("sc" variable nil nil [1595 1626])
+            ("sqlContext" variable nil nil [1627 1654])
+            ("sc" code nil nil [1655 1678])
+            ("timeFmt" variable nil nil [1680 1715])
+            ("df" variable nil nil [1782 1847])
+            ("df" variable nil nil [1848 1894])
+            ("df" code nil nil [1895 1911])
+            ("df" variable nil nil [1978 2063])
+            ("ddf" variable nil nil [2064 2151])
+            ("ddf" code nil nil [2152 2163])
+            ("window" variable nil nil [2164 2240])
+            ("window" variable nil nil [2241 2301])
+            ("tL" variable nil nil [2302 2320])
+            ("for" code nil nil [2321 2393])
+            ("ddf" code nil nil [2393 2404])
+            ("replace_null" function (:arguments 
+              ( ("orig" variable nil (reparse-symbol function_parameters) [2423 2427])
+                ("ma" variable nil (reparse-symbol function_parameters) [2429 2431]))              ) nil [2406 2490])
+            ("ddf" variable nil nil [2490 2571])
+            ("ddf" code nil nil [2572 2583])
+            ("ddf1" variable nil nil [2585 2615])
+            ("ddf1" code nil nil [2616 2644])
+            ("sec_delta" variable nil nil [2646 2673])
+            ("w" variable nil nil [2674 2764])
+            ("ddf" variable nil nil [2765 2819])
+            ("ddf" code nil nil [2821 2851])
+            ("get_sub" function (:arguments 
+              ( ("row" variable nil (reparse-symbol function_parameters) [2865 2868]))              ) nil [2853 2901])
+            ("udf_sub" variable nil nil [2902 2935])
+            ("udf1" variable nil nil [2936 2984])
+            ("ddf" variable nil nil [2985 3039])
+            ("df" code nil nil [3040 3053]))          
+      :file "spark_utils.py"
+      :pointmax 3054
+      :fsize 3053
+      :lastmodtime '(24368 64155 921333 575000)
+      :unmatched-syntax nil)
+    (semanticdb-table "semanticdb-table"
+      :major-mode python-mode
+      :tags 
+        '( ("\"\"\"
+aws_utils: collection functions to interact with aws. More as a remainder of the function usage.
+
+\"\"\"" code nil nil [1 106])
+            ("pandas" include nil nil [108 127])
+            ("time" include nil nil [128 139])
+            ("boto3" include nil nil [140 152])
+            ("athena2pandas" function (:arguments 
+              ( ("result" variable nil (reparse-symbol function_parameters) [172 178]))              ) nil [154 412])
+            ("exec_athena" function
+               (:documentation "execute an athena query"
+                :arguments 
+                  ( ("athena" variable nil (reparse-symbol function_parameters) [429 435])
+                    ("query" variable nil (reparse-symbol function_parameters) [436 441])
+                    ("params" variable nil (reparse-symbol function_parameters) [442 448]))                  )
+                nil [413 1500])
+            ("download_s3_subdir" function
+               (:documentation "download content of a subdirectory"
+                :arguments 
+                  ( ("bucketN" variable nil (reparse-symbol function_parameters) [1524 1531])
+                    ("fileN" variable nil (reparse-symbol function_parameters) [1532 1537])
+                    ("download_path" variable nil (reparse-symbol function_parameters) [1538 1551]))                  )
+                nil [1501 1905]))          
+      :file "aws_utils.py"
+      :pointmax 1907
+      :fsize 1906
+      :lastmodtime '(24353 35438 573572 919000)
+      :unmatched-syntax nil))
+  :file "!home!sabeiro!lav!src!sawmill!sawmill!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

@@ -1,0 +1,41 @@
+GCP, Google Cloud Platform (tipo AWS)
+NRC,Net Revenue Change (main KPI che usano sulla coda su cui stiamo costruendo l'optimization metric)
+DG2,data feed contenente tutti i product movement di Sky
+SCD,Slowly changing dimension, ma non mi sembra sia statao citato? O magari l'ho mancato
+PPH,Previous holding feed: Nuovo data feed con product movement di alto livello e informazioni
+DTV,TV subscription
+BBAND,connessione internet da casa (ADSL/FIBRA/Etc.)
+SCT,  (Service Call Type) code genesys - questo è un concetto associato al routing delle chiamate. Ogni chiamata che arriva al Call Center viene instradata verso una coda secondo alcune regole (tipo segmentazione cliente) a cui può rispondere un gruppo di agenti che è in grado di gestire quelle esigenze - Virtual queue on genesys, should give a good hint about call type
+VQ,
+VDN,
+PHO,Ti ho mandato una mail con descrizione di come Sky calcola le Revenue
+Rack Rate,il valore di listino di una subscription/prodotto
+DTA, è il team che si occupa di dati in Sky
+TA,Turnaround, è una coda dove chiamano i clienti che vogliono cancellarsi da Sky (coda di retention) e in cui l'obiettivo è quello di mantenere i clienti nella customer base
+HO,
+IVR, tastierino
+SR, save rate
+SABB, Standalone Broadband (the only product they have, so yes they shouldn’t be in TA but they are)
+TP, Triple Play. They have TV, BB and line rental
+Active Block (AB). Customers service has been blocked as they owe money	
+Pipeline (sometimes called pending cancel) which is customers that have cancelled and are in a pending cancel state as they are on their 30 days notice period
+Dynamic targets, refer to agent compensation schema Sky UK is using
+VQ Genesys = VDN Afiniti,
+CEL’s and SM’s notice 
+TTL, Talk to Logged
+NPS, net promoter scor
+URN,
+Save rate = chiamate con un outcome in cui il cliente è stato mantenuto / chiamate totali
+CR = conversion rate, perciò nel caso di una coda di retention (dove l'obiettivo è quello di "salvare" i clienti) --> SR = CR
+ACA = all calls a... non ricordo A cosa voglio dire
+VACA = View of all calls...
+SID, è il ruolo del system integration engineer interno ad Afiniti che guida l'integrazione con l'infrastruttura telefonica Cosmin è il SID italiano Jahangir è SID su Sky
+
+Anna è colei che gestisce le relazioni c-level con Sky
+Nick gestisce il commercial team UK
+Lavorano molto insieme ovviamente
+Mark Meghezzi è il commercial director e lavora per loro
+Ali Saeed è il general manager technology UK
+Lei e Paul sono Client Services, sostanzialmente gestiscono le relazioni più "operative" con i clienti
+Paul è molto bravo tecnicamente
+è in Afiniti da 12 anni tipo

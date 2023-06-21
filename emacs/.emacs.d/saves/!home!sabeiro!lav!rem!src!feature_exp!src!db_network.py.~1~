@@ -1,0 +1,27 @@
+#--------------------------------------import-------------------------------------
+import os, sys, gzip, random, json, datetime, re, io
+import pandas as pd
+from pathlib import Path
+from scipy import stats as st
+from dotenv import load_dotenv
+import boto3
+from multiprocessing.dummy import Pool as ThreadPool
+
+#-----------------------------------environment------------------------------------
+dL = os.listdir(os.environ['LAV_DIR']+'/src/')
+sys.path = list(set(sys.path + [os.environ['LAV_DIR']+'/src/'+x for x in dL]))
+baseDir = os.environ['LAV_DIR']
+projDir = baseDir + "/rem/src/feature_exp/"
+cred = json.load(open(projDir + "conf/db_table.json"))['latency']
+ENV = os.getenv('ENV', None)
+if not ENV:
+    load_dotenv(baseDir + "rem/credenza/.env")
+#------------------------------------local-import----------------------------------
+from sawmill import aws_utils as a_u
+import importlib
+#---------------------------------session-------------------------------------------
+session = boto3.session.Session()#profile_name='athena')
+athena = boto3.client('athena',region_name='eu-west-1')
+s3 = boto3.client('s3')
+tableL = ['telemetry','network_log','session','incident']
+

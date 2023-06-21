@@ -1,0 +1,2 @@
+install.packages(c("ggplot2","RColorBrewer","gtable","grid","gridExtra","reshape2","plyr","dplyr","magrittr","ggplot2","stringi","RColorBrewer","grDevices","gtable","grid","gridExtra","scales","stringi","stats","devtools"))
+

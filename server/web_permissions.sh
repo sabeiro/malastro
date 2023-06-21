@@ -3,4 +3,7 @@
 sudo chown -R sabeiro:www-data $1
 sudo find $1 -type f -exec chmod 644 {} \;
 sudo find $1 -type d -exec chmod 755 {} \;
+find . -type f -exec chmod 644 {} \;
+find . -type d -exec chmod 755 {} \;
+
 

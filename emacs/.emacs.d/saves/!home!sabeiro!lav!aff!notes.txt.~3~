@@ -1,0 +1,30 @@
+hunting doc -> Julian
+metal access -> Julian
+Sky + Tim
+Finanzamt Charlottenburg, Bismarckstr. 48, 10627 Berlin
+0800 45555 03
+
+GCP, Google Cloud Platform (tipo AWS)
+NRC,Net Revenue Change (main KPI che usano sulla coda su cui stiamo costruendo l'optimization metric)
+DG2,data feed contenente tutti i product movement di Sky
+SCD,Slowly changing dimension, ma non mi sembra sia statao citato? O magari l'ho mancato
+PPH,Previous holding feed: Nuovo data feed con product movement di alto livello e informazioni
+DTV,TV subscription
+BBAND,connessione internet da casa (ADSL/FIBRA/Etc.)
+SCT,code genesys - questo è un concetto associato al routing delle chiamate. Ogni chiamata che arriva al Call Center viene instradata verso una coda secondo alcune regole (tipo segmentazione cliente) a cui può rispondere un gruppo di agenti che è in grado di gestire quelle esigenze
+PHO,Ti ho mandato una mail con descrizione di come Sky calcola le Revenue
+Rack Rate,il valore di listino di una subscription/prodotto
+DTA, è il team che si occupa di dati in Sky
+TA,Turnaround, è una coda dove chiamano i clienti che vogliono cancellarsi da Sky (coda di retention) e in cui l'obiettivo è quello di mantenere i clienti nella customer base
+HO,
+IVR, tastierino
+SR,
+SABB, Standalone Broadband (the only product they have, so yes they shouldn’t be in TA but they are)
+TP, Triple Play. They have TV, BB and line rental
+Active Block (AB). Customers service has been blocked as they owe money	
+Pipeline (sometimes called pending cancel) which is customers that have cancelled and are in a pending cancel state as they are on their 30 days notice period
+ACA,
+VACA,
+Dynamic targets, refer to agent compensation schema Sky UK is using .
+VQ,
+CR,
